@@ -1,0 +1,34 @@
+#!/bin/bash
+# P19 (laptop; OSC read-only): when T1 (8563861, PV-RCNN truck-only) and P1 (8564353, PV-RCNN pedestrian-only) leave the queue, fetch
+# their last checkpoints, infer (batch 1), and score on top of v9: T1 as truck voter x1/x3, P1 as pedestrian voter x1/x3 (with hedging).
+set -uo pipefail
+base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
+P="$HOME/projects/detector-program/env310/bin/python"
+K="-i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60"
+V9="vnx010_all_s1234_ep10:pedestrian,vehicle vnx010_twin_s1_ep12:pedestrian,vehicle vnx010_pv_ft_ep5:vehicle vnx010_pv_ft2_ep5:vehicle vnx010_all_rs2_amp_ep12:pedestrian vnx010_twin_s1_tta_ep12:pedestrian vnx010_all_s1234_tta_ep10:pedestrian canon_all_s1234_ep12:vehicle,truck second_twin_s1_ep12:vehicle,truck canon_relabel_s1234_ep12:vehicle,truck second_twin_s2_ep12:vehicle,truck second_twin_st_s1_ep12:truck second_twin_pv_s1_ep14:truck second_twin_ll_s1_ep12:truck vnx010_pv_ft4_ep4:vehicle pvrcnn_st_osc_ep6:pedestrian,vehicle,truck pvrcnn_st_osc_s2_ep4:pedestrian,vehicle"
+export FUSE_YAW_CIRC=vehicle
+echo "P19_START $(date -Is)"
+for job in "8563861 pvrcnn_truck_T1 pvrcnn_truck.yaml truck" "8564353 pvrcnn_ped_P1 pvrcnn_ped.yaml pedestrian"; do
+  set -- $job; jid=$1; tag=$2; cfg=$3; cls=$4
+  while ssh $K <osc_user>@ascend.osc.edu "source /etc/profile 2>/dev/null; squeue -h -j $jid 2>/dev/null" 2>/dev/null | grep -q "$jid"; do sleep 300; done
+  last=$(ssh $K <osc_user>@ascend.osc.edu "find /fs/scratch/<osc_project>/bdc/code/OpenPCDet/output -path '*/$tag/ckpt/checkpoint_epoch_*.pth'" 2>/dev/null | sed -E 's/.*epoch_([0-9]+).pth/\1/' | sort -n | tail -n 1)
+  echo "$tag finished; last epoch $last $(date -Is)"
+  [ -n "$last" ] || { echo "NO_CKPT $tag"; continue; }
+  bash "$base/osc/fetch_pv_ckpt.sh" "$last" "$tag"
+  while pgrep -f p18_T2.sh > /dev/null; do sleep 60; done
+  BATCH=1 bash "$base/final/run_infer_one.sh" "$tag" "$cfg" claude_canon_all_twin_st_v1 "$last"
+  cd "$base/coop"
+  for s in dev150 dev350; do
+    for w in 1 3; do
+      x=$(for i in $(seq $w); do printf '%s ' "${tag}_ep$last:$cls"; done)
+      # shellcheck disable=SC2086
+      "$P" eval150.py $s ${tag}w${w}_norule $V9 $x norule > /dev/null
+      if [ $cls = pedestrian ]; then
+        "$P" verify_hedge_fn.py $s ${tag}w${w}_norule | tail -n 1 | sed "s/^/x$w /"
+      else
+        "$P" rule_retune.py $s ${tag}w${w}_norule 2 'a 0.5 base 0.1' | grep 'a 0.5' | sed "s/^/$s + $tag x$w: /"
+      fi
+    done
+  done
+done
+echo "P19_DONE $(date -Is)"
