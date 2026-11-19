@@ -1,11 +1,12 @@
 """Truck box sizes: real validation labels by type (box statistics only) vs the synthetic training sets.
 usage: truck_stats.py"""
+import os
 import json
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight')
+W = Path(os.environ['BDC_ROOT'] + '/experiments/claude_carla_overnight')
 D = Path.home() / 'projects/bdc2026-track-b/data'
 q = lambda a: ' '.join(f'{x:5.2f}' for x in np.percentile(a, [10, 50, 90]))
 G = json.loads((W / 'coop/dev350/gt_coop.json').read_text())

@@ -1,12 +1,13 @@
 """How do the 50 test scans (50,000 points) differ from the validation scans (65,536 points)?
 Compares non-zero point share by azimuth sector, elevation band and range band, and where zeros sit in file order.
 usage: density_shape.py <dev set dir>"""
+import os
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import fuse_test as FT  # noqa: E402
 

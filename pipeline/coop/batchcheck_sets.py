@@ -1,11 +1,12 @@
 """Compare batch-1 vs batch-4 predictions as SETS per frame (order-insensitive): for each box in one file, nearest same-class
 box in the other file of the same frame; report the worst mismatch. Also checks frames are not swapped."""
+import os
 import json
 from pathlib import Path
 
 import numpy as np
 
-t = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/coop/batchcheck')
+t = Path(os.environ['BDC_ROOT'] + '/experiments/claude_carla_overnight/coop/batchcheck')
 a, b = json.loads((t / 'b1.json').read_text()), json.loads((t / 'b4.json').read_text())
 worst_box = worst_score = 0.0
 order_same = 0

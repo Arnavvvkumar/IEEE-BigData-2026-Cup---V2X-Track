@@ -3,6 +3,7 @@
  * gate_ped(k): pedestrian score *= min(1, n / k), n = non-ground points inside the predicted box grown 0.1 m.
  * hedge(f): every vehicle box is also emitted as a truck at score*f, every truck as a vehicle at score*f (class-confusion hedge).
 usage: post_tests.py <coop gt json> <calibrated dev predictions.json>"""
+import os
 import importlib.util
 import json
 import sys
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)

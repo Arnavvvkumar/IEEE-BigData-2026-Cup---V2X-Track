@@ -2,4 +2,4 @@
 set -euo pipefail
 df -h "$HOME" /tmp
 echo "---"
-du -sh "$HOME/projects/bdc2026-track-b/data/claude_twin_v1" "$HOME/projects/bdc2026-track-b/data/claude_canon_all_v1"
+du -sh "${BDC_DATA}/claude_twin_v1" "${BDC_DATA}/claude_canon_all_v1"

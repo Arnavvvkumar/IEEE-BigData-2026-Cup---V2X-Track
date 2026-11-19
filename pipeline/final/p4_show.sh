@@ -1,6 +1,6 @@
 #!/bin/bash
 # Show P4 progress, the size-rule grid so far, Lane O standalone result, and job status.
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
 grep -E 'P4_|=== eval|passes|Traceback|Errno|Error|INFER' "$base/final/p4_eval_o.log" | cut -c1-400
 echo "--- size rule"
 grep -E '===|base|DONE|Traceback|Error' "$base/coop/run_size_rule.log"

@@ -1,6 +1,7 @@
 """Retune the truck size rule + de-duplication on the current ensemble (the rule was set for the v3 ensemble).
 Input: calibrated predictions WITHOUT the rule (eval150.py ... norule). Reports vehicle / truck / genuine-truck AP, all / A / B.
 usage: rule_retune.py <set dir> <pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -8,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

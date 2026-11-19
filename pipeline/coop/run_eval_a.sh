@@ -1,7 +1,7 @@
 #!/bin/bash
 # Ensemble comparisons on the 150 validation frames once the twin VoxelNeXt predictions exist.
-cd "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/coop"
-P="$HOME/projects/detector-program/env310/bin/python"
+cd "${BDC_ROOT}/experiments/claude_carla_overnight/coop"
+P="${BDC_PYTHON}"
 while [ ! -f dev150/allpred/vnx010_twin_s1_ep12_allpred.json ]; do sleep 20; done
 sleep 5
 V=vnx010_all_s1234_ep10; V2=vnx010_all_rs2_amp_ep12; VT=vnx010_twin_s1_ep12

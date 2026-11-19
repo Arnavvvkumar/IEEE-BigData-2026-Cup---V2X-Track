@@ -3,11 +3,11 @@
 # synthetic val and the 50 real dev frames (+ halves vs the SECOND mix). Usage: run_pvrcnn_relabel.sh smoke|full
 set -euo pipefail
 mode=${1:?smoke|full}
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
-program="$HOME/projects/detector-program"
+root="${BDC_ROOT}"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
 python="$program/env310/bin/python"
-data="$HOME/projects/bdc2026-track-b/data"
+data="${BDC_DATA}"
 config="$root/experiments/claude_carla_overnight/boxsize/pvrcnn_relabel_b1_v1.yaml"
 dataset="$data/claude_v2carla_relabel_mix6000_v1"
 out="$root/experiments/detector_program/overnight_accuracy_results"
@@ -30,6 +30,6 @@ common=(--repo "$repo" --cfg "$config" --data "$dataset" --checkpoint "$ckpt" --
 "$python" "$root/experiments/detector_program/evaluate_openpcdet.py" "${common[@]}" --out "$out/${tag}_real" \
   --real-kit "$root/experiments/real_reference_audit/real_dev_cw1"
 cd "$root"
-~/projects/bdc2026-track-b/.env/bin/python experiments/claude_carla_overnight/boxsize/score_halves.py \
+${BDC_PYTHON} experiments/claude_carla_overnight/boxsize/score_halves.py \
   "$out/overnight_mix_seed1234_real/predictions.json" "$out/relabel_containers_seed1234_real/predictions.json" \
   "$out/${tag}_real/predictions.json" | tee "$out/${tag}_halves.txt"

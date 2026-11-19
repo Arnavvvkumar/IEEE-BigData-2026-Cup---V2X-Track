@@ -3,8 +3,8 @@
 # Variants: truck voter only; vehicle+truck voter; truck voter together with the fourth fine-tune as a vehicle voter (the v7 candidate).
 # One eval at a time. Baseline v6: dev150 vehicle 81.6 truck 89.5 genuine 74.9 | dev350 81.5 / 87.6 / 72.3.
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 echo "P11_START $(date -Is)"
 bash "$base/final/run_infer_one.sh" second_twin_ll_s1 second_canon_all_v1.yaml claude_canon_all_twin_ll_v1 12
 cd "$base/coop"

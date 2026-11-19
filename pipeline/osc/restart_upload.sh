@@ -1,6 +1,6 @@
 #!/bin/bash
 # Inspect, clean up stale rsync processes, restart the resumable data upload, report what is on OSC.
-cd "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/osc"
+cd "${BDC_ROOT}/experiments/claude_carla_overnight/osc"
 echo "stale rsync procs before: $(pgrep -fc 'rsync -aL')"
 ps -eo pid,etime,args | grep 'rsync -aL' | grep -v grep | head -n 4 | cut -c1-120
 pkill -f upload_rsync.sh; pkill -f 'rsync -aL'; sleep 3

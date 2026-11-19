@@ -2,8 +2,8 @@
 # P9 (laptop only): wait for Lane R (fourth fine-tune), infer (BATCH=1), score it on top of v5 as a vehicle voter and as a
 # pedestrian+vehicle voter, under the v5 truck rule (a 0.5, base 0.1). Pedestrian AP is on the norule line.
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 until grep -q -E 'LANER_DONE|NO_INIT_CKPT' "$base/canon/laneR.log" 2>/dev/null; do sleep 60; done
 echo "P9_START $(date -Is)"
 BATCH=1 bash "$base/final/run_infer_one.sh" vnx010_pv_ft4 vnx010_all.yaml claude_canon_all_twin_pv_v1 4

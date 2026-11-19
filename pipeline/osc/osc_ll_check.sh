@@ -1,6 +1,6 @@
 #!/bin/bash
 # READ-ONLY: is the long-low truck set complete on OSC? Compares file counts with the laptop copy. Also GPU memory of job 1.
-D="$HOME/projects/bdc2026-track-b/data/claude_twin_ll_v1"
+D="${BDC_DATA}/claude_twin_ll_v1"
 echo "laptop: points $(ls $D/points | wc -l) labels $(ls $D/labels | wc -l) | $(ls $D | tr '\n' ' ')"
 ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60 <osc_user>@ascend.osc.edu 'bash -s' 2>&1 << 'EOF' | grep -v -E 'authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$' | cut -c1-200
 R=/fs/scratch/<osc_project>/bdc

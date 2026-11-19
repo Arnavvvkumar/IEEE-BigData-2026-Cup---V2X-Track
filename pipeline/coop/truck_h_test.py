@@ -1,6 +1,7 @@
 """Test: truck boxes are ~0.18 m too low at the top (zh_diag.py). Variants that raise the truck top; scored on truck AP
 (all labels) and genuine-truck AP (TrashCan excluded), all / half A / half B.
 usage: truck_h_test.py <set dir> <pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -8,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 import fuse_test as FT  # noqa: E402

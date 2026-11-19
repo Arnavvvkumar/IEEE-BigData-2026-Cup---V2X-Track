@@ -4,13 +4,14 @@
  B. prediction vs label: for each label, the best-scoring pedestrian prediction within 0.6 m: offset (radial, tangential, z),
     size difference; medians and robust spreads, also by range band.
 usage: ped_points.py <predictions.json>"""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'
 gt = json.loads((KIT / 'ground_truth.json').read_text())
 ids = json.loads((KIT / 'detection_test_frame_ids.json').read_text())

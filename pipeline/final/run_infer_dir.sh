@@ -3,12 +3,12 @@
 # usage: run_infer_dir.sh <scans dir> <out dir>
 set -uo pipefail
 scans=$1; outdir=$2
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight/final"
 canon="$root/experiments/claude_carla_overnight/canon"
-program="$HOME/projects/detector-program"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
-D="$HOME/projects/bdc2026-track-b/data"
+D="${BDC_DATA}"
 G='-3.15 -3.075 -3.0 -2.925 -2.85 -2.775'
 mkdir -p "$outdir"
 run() {  # tag cfg dataset epoch

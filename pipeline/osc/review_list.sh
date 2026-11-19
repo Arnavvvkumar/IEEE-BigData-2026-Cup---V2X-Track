@@ -1,6 +1,6 @@
 #!/bin/bash
 # READ-ONLY: files created/modified recently by Cursor (since 17:30 today), plus process state.
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+base="${BDC_ROOT}"
 cd "$base"
 date
 echo "== files modified since 17:30 (excluding big data / checkpoints)"
@@ -12,6 +12,6 @@ echo "== processes"
 pgrep -fa 'train.py' | grep -o 'extra_tag [a-z0-9_]*' | sort -u | tr '\n' ' '; echo
 echo "gpu: $(nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader)"
 echo "rsync shards: $(pgrep -fc 'rsync -aL --partial --size-only --files-from')  other infer/eval: $(pgrep -fa 'infer_test|infer_tta|eval150|build_cand|run_tta|run_infer' | wc -l)"
-ls ~/projects/bdc2026-track-b/upload_stage 2>/dev/null | head -n 5
-echo "upload_stage files: $(ls ~/projects/bdc2026-track-b/upload_stage 2>/dev/null | wc -l)"
-ls -la ~/projects/bdc2026-track-b/ | grep -i -E 'upload|osc|log' | head
+ls ${BDC_ROOT}/bdc2026-track-b/upload_stage 2>/dev/null | head -n 5
+echo "upload_stage files: $(ls ${BDC_ROOT}/bdc2026-track-b/upload_stage 2>/dev/null | wc -l)"
+ls -la ${BDC_ROOT}/bdc2026-track-b/ | grep -i -E 'upload|osc|log' | head

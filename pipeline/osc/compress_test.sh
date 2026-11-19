@@ -1,6 +1,6 @@
 #!/bin/bash
 # Compression ratio on a sample of each dataset's point files (what would travel over the slow uplink).
-D="$HOME/projects/bdc2026-track-b/data"
+D="${BDC_DATA}"
 for ds in claude_twin_v1 claude_canon_all_v1; do
   files=$(ls -L "$D/$ds/points" | head -n 3000 | awk 'NR%30==0' | head -n 60)
   raw=0; gz=0; zs=0
@@ -14,7 +14,7 @@ for ds in claude_twin_v1 claude_canon_all_v1; do
 done
 python3 - <<'EOF'
 import numpy as np, glob, os
-D = os.path.expanduser('~/projects/bdc2026-track-b/data')
+D = os.environ['BDC_DATA']
 for ds in ('claude_twin_v1', 'claude_canon_all_v1'):
     f = sorted(glob.glob(f'{D}/{ds}/points/*.npy'))[7]
     a = np.load(f)

@@ -7,8 +7,8 @@ from pathlib import Path
 
 import numpy as np
 
-DL = Path('/mnt/c/Users/arnav/Downloads')
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+DL = Path(os.environ['BDC_OUT'])
+W = Path(os.environ['BDC_ROOT'])
 name = sys.argv[1]; ref = sys.argv[2] if len(sys.argv) > 2 else 'bdc2026_trackB_submission_v9.zip'
 z = zipfile.ZipFile(DL / name)
 names = z.namelist()

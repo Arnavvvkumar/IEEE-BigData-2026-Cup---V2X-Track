@@ -2,9 +2,9 @@
 # Lane Q (vehicle voter): third fine-grid VoxelNeXt fine-tune on the full merged set, initialised from our own
 # synthetic-trained vnx010_twin_s2 (epoch 12). Lane N showed such a fine-tune adds vehicle AP as an extra voter.
 # Synthetic-only: the initial weights were trained on synthetic data only, and so is this run.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
-repo="$HOME/projects/detector-program/OpenPCDet"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
+repo="${BDC_PROGRAM}/OpenPCDet"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 init=$(find "$repo/output" -path "*/vnx010_twin_s2/ckpt/checkpoint_epoch_12.pth" -print -quit)

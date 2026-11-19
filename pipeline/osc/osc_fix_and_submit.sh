@@ -1,8 +1,8 @@
 #!/bin/bash
 # Re-send the truncated files listed in bad_files.txt (synthetic training frames only), verify them, then submit the full PV-RCNN job.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/osc"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/osc"
 F='authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$'
-cd ~/projects/bdc2026-track-b/data || exit 1
+cd ${BDC_DATA} || exit 1
 rsync -aL --files-from="$here/bad_files.txt" -e "ssh -i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=40" . <osc_user>@ascend.osc.edu:/fs/scratch/<osc_project>/bdc/data/ 2>&1 | grep -v -E "$F"
 echo "rsync rc ${PIPESTATUS[0]}"
 for f in $(cat "$here/bad_files.txt"); do echo "$(stat -L -c %s "$f") $f"; done > /tmp/bad_sizes.txt

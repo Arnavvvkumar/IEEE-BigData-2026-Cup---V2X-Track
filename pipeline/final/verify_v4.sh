@@ -1,8 +1,8 @@
 #!/bin/bash
 # Verify the v4 zip and compare its predictions with v3 (box counts by class at score thresholds).
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final"
-P="$HOME/projects/detector-program/env310/bin/python"
-"$P" "$here/verify_zip.py" "/mnt/c/Users/arnav/Downloads/bdc2026_trackB_submission_v4.zip"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/final"
+P="${BDC_PYTHON}"
+"$P" "$here/verify_zip.py" "${BDC_OUT}/bdc2026_trackB_submission_v4.zip"
 echo "verify exit $?"
 "$P" - "$here" << 'PY'
 import json, sys

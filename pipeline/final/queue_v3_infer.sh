@@ -2,14 +2,14 @@
 # One GPU inference at a time. Leaves vnx010_twin_s2 training alone.
 # Test TTA, then dev350 six-height members, then the two dev350 TTA files.
 set -uo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight/final"
 coop="$root/experiments/claude_carla_overnight/coop"
 test_scans="$root/starting_kit/track_b/detection_test_frames"
 test_out="$here/test_allpred"
 dev_scans="$coop/dev350/scans"
 dev_out="$coop/dev350/allpred"
-P="$HOME/projects/detector-program/env310/bin/python"
+P="${BDC_PYTHON}"
 log="$here/queue_v3_infer.log"
 exec >> "$log" 2>&1
 echo "QUEUE_START $(date -Is)"

@@ -2,10 +2,10 @@
 # Same fuse -> static -> calibrate -> truck_rule path as candidate v3, on dev150.
 # Confirms the AP of coop/dev150/pred_j_ttaBothPed.json.
 set -euo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight/final"
 coop="$root/experiments/claude_carla_overnight/coop"
-P="$HOME/projects/detector-program/env310/bin/python"
+P="${BDC_PYTHON}"
 A="$coop/dev150/allpred"
 scans="$coop/dev150/scans"
 fused="$coop/dev150/pred_v3_pipeline_fused.json"
@@ -26,7 +26,7 @@ echo "reference $( "$P" "$here/score_coop.py" "$coop/dev150" "$coop/dev150/pred_
 "$P" - << 'PY'
 import json
 from pathlib import Path
-coop = Path("/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/coop/dev150")
+coop = Path(__import__('os').environ['BDC_ROOT'] + "/experiments/claude_carla_overnight/coop/dev150")
 a = json.loads((coop / "pred_v3_pipeline.json").read_text())
 b = json.loads((coop / "pred_j_ttaBothPed.json").read_text())
 print("frames", len(a), len(b), "same_ids", set(a) == set(b))
@@ -45,7 +45,7 @@ for f in a:
         max_score = max(max_score, abs(x["score"] - y["score"]))
         max_box = max(max_box, max(abs(p - q) for p, q in zip(x["box"], y["box"])))
 print("frames_with_count_or_class_diff", n, "max_score_diff", max_score, "max_box_diff", max_box)
-stamp = Path("/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final/dev150_v3_ok")
+stamp = Path(__import__('os').environ['BDC_ROOT'] + "/experiments/claude_carla_overnight/final/dev150_v3_ok")
 if n == 0 and max_score < 1e-6 and max_box < 1e-6:
     stamp.write_text("match\n")
     print("DEV150_MATCH")

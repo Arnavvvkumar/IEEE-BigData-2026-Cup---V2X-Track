@@ -1,5 +1,6 @@
 """Pedestrian AP at the CURRENT build recipe: cached norule predictions -> calib.ped_min_points (v17) -> calib.hedge_pedestrians; 3 decimals.
 usage: ped_ap3.py <set dir> <norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -7,7 +8,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

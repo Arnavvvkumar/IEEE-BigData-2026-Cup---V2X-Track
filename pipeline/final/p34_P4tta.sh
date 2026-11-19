@@ -2,9 +2,9 @@
 # P34: P4 TTA (P4 x1 passed on v14s). Dev150/dev350 TTA, then test export (per-scan, batch fixed), same variants as P1/P3 TTA.
 # Gate afterwards: v15s list + P4tta x1 / x3 (pedestrian).
 set -uo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 base="$root/experiments/claude_carla_overnight"; canon="$base/canon"
-program="$HOME/projects/detector-program"; repo="$program/OpenPCDet"; D="$HOME/projects/bdc2026-track-b/data"
+program="${BDC_PROGRAM}"; repo="$program/OpenPCDet"; D="${BDC_DATA}"
 P="$program/env310/bin/python"; scans="$root/starting_kit/track_b/detection_test_frames"; out="$base/final/test_allpred_ps1"
 V="0.05,0.05,0 0.05,0,7 0,0.05,-7 0.025,0.075,14 0.075,0.025,-14"
 CFG="$canon/pvrcnn_ped_aug.yaml"; DATA="$D/claude_canon_all_twin_st_v1"

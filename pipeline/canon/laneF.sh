@@ -1,8 +1,8 @@
 #!/bin/bash
 # Lane F: when lane C2 moves on to PV-RCNN (estimated 25 h for 8 epochs; PV-RCNN was the weakest levelled model earlier),
 # stop that step and use the GPU lane for a third SECOND full-set seed with mixed precision (--use_amp) instead.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 while ! pgrep -f 'extra_tag pvrcnn_all_s1234' > /dev/null; do sleep 30; done

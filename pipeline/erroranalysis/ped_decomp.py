@@ -2,6 +2,7 @@
 Oracle variants replace ONE component of each matched pedestrian prediction with the label's value (never submitted);
 label-free variants test simple conventions (yaw, radial / vertical shift, size scale).
 usage: ped_decomp.py <predictions.json> <out.json>"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)

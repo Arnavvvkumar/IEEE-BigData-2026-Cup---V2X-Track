@@ -2,9 +2,9 @@
 # Early look at the fine-grid VoxelNeXt (epoch given as $1) for pedestrians: dump at six heights, fuse alone and with the SECOND models.
 set -uo pipefail
 e=${1:-10}
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
-P="$HOME/projects/detector-program/env310/bin/python"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
+P="${BDC_PYTHON}"
 G='-3.15 -3.075 -3.0 -2.925 -2.85 -2.775'
 cd "$here"
 bash dump_arm.sh vnx010_all_s1234 "$here/vnx010_all.yaml" "$D/claude_canon_all_v1" "$e" "$G"

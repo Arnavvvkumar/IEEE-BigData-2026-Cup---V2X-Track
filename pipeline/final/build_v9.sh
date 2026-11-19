@@ -2,12 +2,12 @@
 # Candidate v9 (probe) = v8 (v7 + PV-RCNN epoch 2 for pedestrian/vehicle) + truck boost/hedge (calib.truck_boost_hedge).
 # candidate_v7 / v8 and their zips are NOT touched: the build writes to candidate_v9. Declaration tag set for v9.
 set -euo pipefail
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final"
-dl="/mnt/c/Users/arnav/Downloads"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/final"
+dl="${BDC_OUT}"
 sed -i 's/^Submission tag:.*/Submission tag:         v9-pvrcnn2-realism-2026-11-13/' "$dl/declaration.txt"
 EXTRA="${EXTRA:-pvrcnn_st_osc_ep2:pedestrian,vehicle}" TRUCKPP=1 bash "$here/build_candidate_v7.sh" candidate_v9 bdc2026_trackB_submission_v9.zip 1
 sed -i 's/^Submission tag:.*/Submission tag:         v8-hedge-pvrcnn-2026-11-12/' "$dl/declaration.txt"   # restore v8's tag for the file's resting state
-~/projects/detector-program/env310/bin/python - "$dl" << 'PY'
+${BDC_PYTHON} - "$dl" << 'PY'
 import json, sys, zipfile
 for v in ('v7', 'v8', 'v9'):
     z = zipfile.ZipFile(f'{sys.argv[1]}/bdc2026_trackB_submission_{v}.zip'); p = json.loads(z.read('predictions.json'))

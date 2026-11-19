@@ -2,8 +2,8 @@
 # P6: wait for Lane P (second size-aware VoxelNeXt fine-tune), infer (BATCH=1), score as vehicle voter / pedestrian voter
 # on top of candidate v4 (o_truck: dev150 69.43, dev350 68.73). One eval at a time.
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 until grep -q -E 'LANEP_DONE|NO_INIT_CKPT' "$base/canon/laneP.log" 2>/dev/null; do sleep 60; done
 echo "P6_START $(date -Is)"
 BATCH=1 bash "$base/final/run_infer_one.sh" vnx010_pv_ft2 vnx010_all.yaml claude_canon_all_twin_pv_v1 5

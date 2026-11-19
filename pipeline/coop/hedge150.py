@@ -2,6 +2,7 @@
 reverse at score*g). Reports vehicle / truck AP, and truck AP on 'genuine' trucks only (TrashCan boxes and the predictions
 that hit them removed), since the test set has about twice as many genuine trucks per frame as our validation frames.
 usage: hedge150.py <set dir>"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ev)

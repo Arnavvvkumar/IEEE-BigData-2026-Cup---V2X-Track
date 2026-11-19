@@ -3,7 +3,7 @@
 #   T1: PV-RCNN truck-only, 5 epochs, batch 4, 1 A100, 8 cores, 32 GB, 7 h, nextgen
 #   T2: SECOND truck-only, 12 epochs, batch 8, 1 A100, 8 cores, 32 GB, 4 h, nextgen
 set -uo pipefail
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
+here="${BDC_ROOT}/experiments/claude_carla_overnight"
 K="-i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60"
 S="ssh $K <osc_user>@ascend.osc.edu"
 F='authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$'

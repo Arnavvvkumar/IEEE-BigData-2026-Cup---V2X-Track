@@ -3,6 +3,7 @@ Synthetic: claude_canon_all_twin_st_v1 train frames (points/*.npy, labels/*.txt)
 Real: dev150 scans + gt_coop.json boxes (>= 5 sensor points), points inside each box (all points, no zeros).
 Prints median / quartile in-box point counts per range band, and the ratio synthetic / real.
 usage: density_gap.py [n_synthetic_frames=1500]"""
+import os
 import glob
 import json
 import sys
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 D = Path.home() / 'projects/bdc2026-track-b/data/claude_canon_all_twin_st_v1'
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 1500
 BANDS = [(0, 10), (10, 15), (15, 20), (20, 30), (30, 45)]

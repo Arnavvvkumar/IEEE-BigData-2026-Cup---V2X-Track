@@ -2,8 +2,8 @@
 # P3: wait for Lane N (size-aware pedestrian fine-tune), run its inference frame by frame (BATCH=1), then score it in the ensemble.
 # Baseline to beat = st_truckonly (dev150 69.0, dev350 68.23; pedestrian 38.7 / 37.3). One eval at a time (11 GB RAM).
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 echo "P3_WAIT $(date -Is)"
 until grep -q -E 'LANEN_DONE|NO_INIT_CKPT' "$base/canon/laneN.log" 2>/dev/null; do sleep 60; done
 echo "P3_START $(date -Is)"

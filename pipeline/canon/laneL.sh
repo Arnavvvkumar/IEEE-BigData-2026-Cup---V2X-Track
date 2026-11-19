@@ -1,7 +1,7 @@
 #!/bin/bash
 # Lane L: second seed of the fine-grid VoxelNeXt on the merged twin set (the first seed is the strongest single model), AMP.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 sleep 240

@@ -2,13 +2,14 @@
 Levels each real scan with the median ground plane, voxelises at 0.25 m, and counts in how many scans each voxel is occupied.
 Voxels occupied in >= FRAC of the scans form the static map. Reports static-point fraction per range band and saves the map.
 Use of real data to disclose: unlabelled real clouds, used for site/sensor calibration only."""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/erroranalysis'))
 from groundplane import fit_ground, level_transform  # noqa: E402
 

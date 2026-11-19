@@ -1,11 +1,11 @@
 #!/bin/bash
 # CPU only: PV-RCNN scratch batch-1 config on the relabelled mix (anchors = relabelled training medians), then CPU preflight.
 set -euo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight"
-program="$HOME/projects/detector-program"
+program="${BDC_PROGRAM}"
 py="$program/env310/bin/python"
-data="$HOME/projects/bdc2026-track-b/data/claude_v2carla_relabel_mix6000_v1"
+data="${BDC_DATA}/claude_v2carla_relabel_mix6000_v1"
 cfg="$here/boxsize/pvrcnn_relabel_b1_v1.yaml"
 cd "$here/pvrcnn"
 [ -f "$cfg" ] || "$py" make_pvrcnn_config.py --repo "$program/OpenPCDet" --shared "$root/experiments/detector_program/second_control_v1.yaml" \

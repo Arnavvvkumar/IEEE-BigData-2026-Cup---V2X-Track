@@ -1,6 +1,7 @@
 """Re-tune pedestrian hedging on the CURRENT ensemble (PED_HEDGE was set on a v3-era ensemble at AP 38.5; now ~45.4).
 Pre-registered grid. Pedestrian AP only (hedging touches nothing else). Halves reported.
 usage: ped_retune.py <set dir> <norule pred name> [workers]"""
+import os
 import importlib.util
 import json
 import sys
@@ -8,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

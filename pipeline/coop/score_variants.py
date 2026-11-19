@@ -1,11 +1,12 @@
 """Score uncalibrated vs calibrated predictions against sensor-only labels and cooperative labels (all / >=5 sensor points).
 usage: score_variants.py <coop gt json> <uncalibrated dev predictions> <calibrated dev predictions>"""
+import os
 import importlib.util
 import json
 import sys
 from pathlib import Path
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ev)

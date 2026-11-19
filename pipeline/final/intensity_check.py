@@ -1,7 +1,7 @@
 """Compare point intensity of real dev scans (coop/dev150/scans) with synthetic training scans (twin_st, all_v1). Dev data only."""
 import glob, numpy as np, os, sys
-base = '/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight'
-D = os.path.expanduser('~/projects/bdc2026-track-b/data')
+base = os.environ['BDC_ROOT'] + '/experiments/claude_carla_overnight'
+D = os.environ['BDC_DATA']
 def load(f):
     if f.endswith('.npy'):
         a = np.load(f)

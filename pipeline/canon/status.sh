@@ -1,6 +1,6 @@
 #!/bin/bash
 # Read-only status of the training lanes.
-cd "$HOME/projects/detector-program"
+cd "${BDC_PROGRAM}"
 for f in "$@"; do
   echo "== $f"
   tail -c 3000 "$f.log" | tr '\r' '\n' | grep -E 'epochs:|Traceback|Error|Killed' | tail -n 2 | cut -c1-160

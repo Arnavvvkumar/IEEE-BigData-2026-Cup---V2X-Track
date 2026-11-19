@@ -2,11 +2,11 @@
 # Does the VoxelNeXt detection cap (class-agnostic NMS 0.2, max 83 boxes/frame, score>=0.05) cost pedestrian AP?
 # Variants of the same checkpoint (vnx010_all_s1234 ep10); only post-processing changes. Evaluation on the real dev frames only.
 set -uo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight/canon"
-program="$HOME/projects/detector-program"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
-D="$HOME/projects/bdc2026-track-b/data"
+D="${BDC_DATA}"
 G='-3.075 -3.0 -2.925 -2.85'
 mkdir -p "$here/nms"
 mk() {  # name post thresh score maxobj

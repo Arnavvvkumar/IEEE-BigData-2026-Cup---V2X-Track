@@ -1,3 +1,4 @@
+import os
 ﻿"""Pedestrian error decomposition on a staged validation set (diagnostic only; nothing here is submitted).
 For every predicted pedestrian box with a labelled pedestrian within 1 m (BEV), replace ONE component of the box by the label's
 (size / z+height / xy centre / yaw / all) and re-score. The AP gain of each oracle says which part of the box costs the AP.
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ev)

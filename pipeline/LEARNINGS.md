@@ -2,7 +2,7 @@
 
 Everything we learned, from the foundations through v7 and on to v17s: what worked, what did not, what wasted time, and why.
 Written Nov 15 2026 (about 02:25 EST), deadline Nov 15 23:59 EST. Account: arnav007 (Codabench competition 16685).
-Work root: `C:\Users\arnav\Downloads\BIG DATA IEEE\experiments\claude_carla_overnight\` (WSL: `/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/...`).
+Work root: `C:\Users\arnav\Downloads\BIG DATA IEEE\experiments\claude_carla_overnight\` (WSL: `${BDC_ROOT}/...`).
 
 How to read it: section 1 is the cheat-sheet, section 2 the official scores, sections 4-7 the experiment log, section 8 the mistakes, section 9 the general lessons.
 Numbers marked (est.) are estimates, not measurements.
@@ -269,7 +269,7 @@ Interpretation: placement and footprint of already-found pedestrians is where th
 | OOM (WSL 11 GB) when two evaluations ran in parallel with a gate | restart | run fewer jobs in parallel; sequential evaluations |
 | `pkill -f` / `TaskStop` killed neighbouring jobs (P38 restarted, 6 min lost; earlier waiters matched their own command line) | minutes | kill by exact PID or script name; never pattern-match your own command |
 | PowerShell inline Python/ssh quoting failures; WSL launch timeouts | minutes each | every command lives in a script file; run with `wsl -e bash -lc "bash script.sh"` after `sed -i 's/\r$//'` |
-| Wrong environment for a script (no POT module for realism) | one failed run | the realism scripts need `PYTHONPATH=$HOME/projects/roadside-pilot/realism_deps` and the bdc2026-track-b env |
+| Wrong environment for a script (no POT module for realism) | one failed run | the realism scripts need `PYTHONPATH=${BDC_REALISM_DEPS}` and the bdc2026-track-b env |
 | A second AI (Codex) given the wrong config values earlier queued a wasted 12-epoch run | cancelled | read the actual config before describing it |
 | Stale logs: P35's first runs printed rounded one-decimal AP, hiding +0.1 effects | ambiguous gates | report two decimals (`coop/ped_ap2.py`) |
 | Asking for "everything on OSC" for CPU re-scoring tests | I advised against (setup 1-1.5 h vs 15 min saved) | OSC is for GPU training; CPU replay of cached predictions is faster on the laptop |

@@ -1,12 +1,13 @@
 """Diagnosis: systematic offsets of our vehicle / truck boxes vs real dev labels (radial, tangential, z, sizes, yaw).
 usage: class_offsets.py <predictions.json>"""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'
 gt = json.loads((KIT / 'ground_truth.json').read_text())
 ids = json.loads((KIT / 'detection_test_frame_ids.json').read_text())

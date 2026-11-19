@@ -4,6 +4,7 @@ above the local ground plane, ext = their vertical extent. Prints feature quanti
 top-5000, then the hedged pedestrian AP (all / half A / half B) for a pre-registered set of score rules:
     score *= m  when the feature is below a threshold  (m in {0.5, 0.25})
 usage: ped_pts_rank.py <set dir> <norule pred name> [rules: all | 'name,...']"""
+import os
 import importlib.util
 import json
 import sys
@@ -11,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec); spec.loader.exec_module(ev)
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))

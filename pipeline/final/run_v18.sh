@@ -3,8 +3,8 @@
 # Vehicle boxes stay byte-identical to v13/v17s, pedestrian boxes byte-identical to v17s. Declaration date corrected to 2026-11-15.
 # Also writes v17s_d15 (v17s with the corrected declaration only). Builds locally; nothing is submitted.
 set -uo pipefail
-F="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final"
-cd /mnt/c/Users/arnav/Downloads
+F="${BDC_ROOT}/experiments/claude_carla_overnight/final"
+cd ${BDC_OUT}
 sed -i 's/\r$//' "$F/build_v13.sh" "$F/build_candidate_v7.sh" "$F/run_splice.sh"
 # 1) v13 recipe + truck rule  -> v13t (only its vehicle/truck boxes are used)
 export TRUCK_MINPTS=1

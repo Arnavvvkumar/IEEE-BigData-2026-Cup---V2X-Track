@@ -2,8 +2,8 @@
 # P2: score the small-truck SECOND (second_twin_st_s1 ep12) in the ensemble, with averaged vehicle heading + truck de-duplication.
 # One eval at a time (WSL has 11 GB and trainings are running).
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 echo "P2_START $(date -Is)"
 bash "$base/final/run_infer_one.sh" second_twin_st_s1 second_canon_all_v1.yaml claude_canon_all_twin_st_v1 12
 cd "$base/coop"

@@ -3,6 +3,7 @@ a real truck ranked below many false boxes loses precision. For each score band:
 spots (A-E, found earlier by persistent_test.py) vs elsewhere, and whether a box came from the detectors' own truck class or was copied
 from a vehicle box by the truck size rule. No labels used.
 usage: truck_rank_diag.py"""
+import os
 import json
 import sys
 import zipfile
@@ -10,9 +11,9 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 F = W / 'experiments/claude_carla_overnight/final'
-p = json.loads(zipfile.ZipFile('/mnt/c/Users/arnav/Downloads/bdc2026_trackB_submission_v9.zip').read('predictions.json'))
+p = json.loads(zipfile.ZipFile(os.environ['BDC_OUT'] + '/bdc2026_trackB_submission_v9.zip').read('predictions.json'))
 fused = json.loads((F / 'candidate_v9_meta/fused.json').read_text())
 SPOTS = {'A': (-4.4, 26.1), 'B': (15.7, -24.6), 'C': (4.2, -24.2), 'D': (27.7, -23.6), 'E': (-30.6, -22.8)}
 key = lambda b: tuple(round(v, 5) for v in b)

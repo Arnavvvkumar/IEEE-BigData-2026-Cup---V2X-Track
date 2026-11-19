@@ -1,8 +1,8 @@
 #!/bin/bash
 # Resumable compressed upload of the synthetic training sets to OSC scratch (rsync -z, symlinks dereferenced, retries on drops).
 # Synthetic data only. usage: upload_rsync.sh  (runs twin first, then canonical)
-cd "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/osc"
-D="$HOME/projects/bdc2026-track-b/data"
+cd "${BDC_ROOT}/experiments/claude_carla_overnight/osc"
+D="${BDC_DATA}"
 R=/fs/scratch/<osc_project>/bdc/data
 SSHCMD="ssh -i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -c aes128-gcm@openssh.com"
 ssh -i "$HOME/.ssh/osc_ed25519" -o BatchMode=yes <osc_user>@ascend.osc.edu "mkdir -p $R" 2>/dev/null

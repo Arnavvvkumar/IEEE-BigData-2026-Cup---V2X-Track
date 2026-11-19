@@ -1,11 +1,12 @@
 """Read-only diagnostic: why do detections fail on the 50 public real dev frames? (centre offsets of nearest predictions)"""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 gt = json.loads((W / 'experiments/real_reference_audit/real_dev_cw1/ground_truth.json').read_text())
 pred = json.loads((W / sys.argv[1]).read_text())
 for c in ('vehicle', 'pedestrian', 'truck'):

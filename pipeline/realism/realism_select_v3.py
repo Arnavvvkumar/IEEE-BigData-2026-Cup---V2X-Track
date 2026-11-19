@@ -1,6 +1,7 @@
 """Choose 50 realism scans from the sensor-matched CARLA v3 capture (native tilted frame, untouched points).
 Greedy clip selection on a fast pooled proxy (CD + FPD + sliced Wasserstein), then the kit metric (chunked MMD, same maths)
 on the assembled 50-scan sets. Calibration against the public real reference only; the scans themselves are pure simulator output."""
+import os
 import json
 import sys
 from pathlib import Path
@@ -9,7 +10,7 @@ import numpy as np
 from scipy.spatial import cKDTree
 from scipy.spatial.distance import cdist
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'starting_kit/track_b/scoring_program'))
 import metrics as M  # noqa: E402
 

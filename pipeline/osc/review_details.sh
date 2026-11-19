@@ -1,6 +1,6 @@
 #!/bin/bash
 # READ-ONLY: why shards failed, why the OSC compile failed, and what the v3 validation produced.
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
 cd "$base/osc"
 echo "== shard failure reasons (last rsync error line per failed shard, unique)"
 for f in $(grep -l SHARD_FAILED upload_shard_*.log | head -n 40); do grep -E 'rsync: |rsync error|ssh_exchange|Connection|Too many|kex_exchange|banner' "$f" | tail -n 1 | cut -c1-140; done | sort | uniq -c | sort -rn | head -n 6
@@ -15,4 +15,4 @@ tail -n 18 "$base/final/queue_v3_infer.log" | cut -c1-170
 echo "== markers"
 cat "$base/final/dev150_v3_ok" "$base/final/dev350_v3_ok" 2>/dev/null; echo
 echo "== v3 package + zips"
-ls -la "$base/final/candidate_v3" 2>/dev/null | head -n 5; ls -la /mnt/c/Users/arnav/Downloads/*.zip 2>/dev/null | cut -c30-140
+ls -la "$base/final/candidate_v3" 2>/dev/null | head -n 5; ls -la ${BDC_OUT}/*.zip 2>/dev/null | cut -c30-140

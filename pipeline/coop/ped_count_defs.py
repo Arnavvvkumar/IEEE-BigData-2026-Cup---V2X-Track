@@ -4,6 +4,7 @@ C: which point count best mirrors the label rule (>= 5 sensor points in the GT b
    C1 non-ground, grow 0 | C2 all points, grow 0 | C3 all points, grow 0.1 | (v17 = non-ground, grow 0.1 is the base).
 S: primary box size scale UP: x1.03, x1.05, x1.10 (down-scaling x0.95 / 0.90 lost 0.3 / 3.1 AP on dev150, so check the other side).
 usage: ped_count_defs.py <set dir> <ped-only norule pred name> [workers]"""
+import os
 import importlib.util
 import json
 import sys
@@ -11,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

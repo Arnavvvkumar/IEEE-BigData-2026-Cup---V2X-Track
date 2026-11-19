@@ -1,10 +1,10 @@
 #!/bin/bash
 # Status after the pause: P11 (long-low truck scoring), seed 2 training, OSC job (read-only), Globus.
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
 date
 grep -E 'P11_|===|passes|a 0.5 base|Traceback|Errno|INFER' "$base/final/p11_eval_ll.log" | cut -c1-260
 echo "--- seed 2"
-grep -E 'Train:' ~/projects/detector-program/second_twin_ll_s2.log | tail -n 1 | sed -E 's/.*Train: +//' | cut -c1-110
+grep -E 'Train:' ${BDC_PROGRAM}/second_twin_ll_s2.log | tail -n 1 | sed -E 's/.*Train: +//' | cut -c1-110
 tail -n 5 "$base/canon/laneS2.log" | cut -c1-200
 pgrep -af 'train.py|eval150|infer_test|rule_retune' | cut -c1-90
 nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader; free -g | sed -n 2p

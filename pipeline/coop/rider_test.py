@@ -2,6 +2,7 @@
 predicted box is ~0.75 m. If the non-ground points around a pedestrian box clearly span more than `thr` m along their main
 horizontal axis (>= min_pts points), replace the box footprint by a rider box along that axis.
 usage: rider_test.py <set dir> <pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 import fuse_test as FT  # noqa: E402

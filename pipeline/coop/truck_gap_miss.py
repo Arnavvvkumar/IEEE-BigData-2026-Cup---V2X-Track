@@ -1,6 +1,7 @@
 """Truck gap step 3: for each Truck/Van/Bus GT (and non-static ones), what do we output there? best truck pred (IoU, score),
 best vehicle pred (IoU, score, size). Tells whether the miss is class confusion, box size, or no detection at all.
 usage: truck_gap_miss.py <set dir> <norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

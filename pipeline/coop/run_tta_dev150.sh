@@ -1,6 +1,6 @@
 #!/bin/bash
 # Shift/rotation passes of the pedestrian models on the 150 validation frames, then pedestrian comparison.
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
 cd "$base/coop"
 while pgrep -f 'infer_test.py' > /dev/null; do sleep 20; done
 sleep 30

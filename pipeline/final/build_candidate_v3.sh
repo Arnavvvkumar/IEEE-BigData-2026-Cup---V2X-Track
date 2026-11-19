@@ -2,9 +2,9 @@
 # Candidate v3 test predictions: j_ttaBothPed fusion, calibration, then the truck size rule.
 # Requires the two pedestrian TTA files in test_allpred/. Does not submit anything.
 set -euo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight/final"
-P="$HOME/projects/detector-program/env310/bin/python"
+P="${BDC_PYTHON}"
 T="$here/test_allpred"
 scans="$root/starting_kit/track_b/detection_test_frames"
 out="$here/candidate_v3"

@@ -1,6 +1,7 @@
 """Post-fusion duplicate removal test (CPU): within a class, drop a box whose BEV centre lies inside a higher-scored box of the
 same class (or 3D IoU >= thr). Also: drop a truck box sitting on a higher-scored vehicle box only if its score is below r * vehicle score.
 usage: dedupe_test.py <set dir> <pred json name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -8,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ev)

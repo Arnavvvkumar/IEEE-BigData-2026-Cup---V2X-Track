@@ -2,9 +2,9 @@
 # P29 (laptop GPU, idle until P4-P6 return): Codex rank-2 idea - test-time shift/rotation agreement for an existing PV-RCNN
 # pedestrian checkpoint (P1), exactly like the VoxelNeXt TTA passes already in the final list. Dev only; gate on top of v13 list.
 set -uo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 base="$root/experiments/claude_carla_overnight"; canon="$base/canon"
-program="$HOME/projects/detector-program"; repo="$program/OpenPCDet"; D="$HOME/projects/bdc2026-track-b/data"
+program="${BDC_PROGRAM}"; repo="$program/OpenPCDet"; D="${BDC_DATA}"
 P="$program/env310/bin/python"
 B="vnx010_all_s1234_ep10:pedestrian,vehicle vnx010_twin_s1_ep12:pedestrian,vehicle vnx010_pv_ft_ep5:vehicle vnx010_pv_ft2_ep5:vehicle vnx010_all_rs2_amp_ep12:pedestrian vnx010_twin_s1_tta_ep12:pedestrian vnx010_all_s1234_tta_ep10:pedestrian canon_all_s1234_ep12:vehicle,truck second_twin_s1_ep12:vehicle,truck canon_relabel_s1234_ep12:vehicle,truck second_twin_s2_ep12:vehicle,truck second_twin_st_s1_ep12:truck second_twin_pv_s1_ep14:truck vnx010_pv_ft4_ep4:vehicle pvrcnn_st_osc_ep6:pedestrian,vehicle,truck pvrcnn_st_osc_s2_ep4:pedestrian,vehicle pvrcnn_ped_P1_ep5:pedestrian pvrcnn_ped_P1_ep5:pedestrian pvrcnn_ped_P1_ep5:pedestrian pvrcnn_ped_P2_ep5:pedestrian pvrcnn_ped_P2_ep5:pedestrian pvrcnn_ped_P2_ep5:pedestrian pvrcnn_ped_P3_ep5:pedestrian pvrcnn_ped_P3_ep5:pedestrian pvrcnn_ped_P3_ep5:pedestrian"
 export FUSE_YAW_CIRC=vehicle FUSE_ONE_VOTE=vehicle

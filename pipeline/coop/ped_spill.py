@@ -3,6 +3,7 @@ Features per primary pedestrian box (after the v17 min-points rule): spill = 1 -
 box), off = |point-centroid - box centre| in BEV / box half-diagonal, fill = n(box) / n(box+0.1). Quantiles for TP vs loc-FP vs bg-FP
 among the top-5000; then pre-registered rules: score *= m when spill > t (t in {0.3, 0.5}) or off > t (t in {0.5, 0.8}), m in {0.7, 0.5}.
 usage: ped_spill.py <set dir> <ped-only norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

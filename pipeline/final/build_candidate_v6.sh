@@ -3,8 +3,8 @@
 # Made from build_candidate_v5.sh by dropping vnx010_twin_s2 (pedestrian-only) and using vnx010_pv_ft2 for vehicles only.
 # Then checks that the pedestrian boxes equal candidate_v3's (same boxes, scores differ only by the constant pass-count factor).
 set -euo pipefail
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final"
-P="$HOME/projects/detector-program/env310/bin/python"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/final"
+P="${BDC_PYTHON}"
 sed -e 's/candidate_v5/candidate_v6/g' -e 's/submission_v5/submission_v6/g' -e 's/CANDIDATE_V5_DONE/CANDIDATE_V6_DONE/' \
     -e 's/ vnx010_twin_s2_ep12:pedestrian / /' -e 's/vnx010_pv_ft2_ep5:pedestrian,vehicle/vnx010_pv_ft2_ep5:vehicle/' \
     "$here/build_candidate_v5.sh" > "$here/_build_v6_gen.sh"

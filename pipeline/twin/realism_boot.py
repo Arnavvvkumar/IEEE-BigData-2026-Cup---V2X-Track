@@ -3,6 +3,7 @@ unlabelled real dev pools (dev150 + dev350 scans, plus the cw1 dev frames) and r
 draw. Reports mean difference, sd, and P(B > A). Calibration case: v4 vs v3 (official: v4 0.9449 < v3 0.9507).
 The released test scans and the official reference are never read.
 usage: realism_boot.py <synthetic dir A> <synthetic dir B> <draws> <workers> [pool: all|dev150|dev350|cw1]"""
+import os
 import sys
 import time
 from pathlib import Path
@@ -13,7 +14,7 @@ HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE))
 import range_bg as T  # noqa: E402
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 COOP = W / 'experiments/claude_carla_overnight/coop'
 load = lambda d: [np.fromfile(f, dtype='<f4').reshape(-1, 3) for f in sorted(Path(d).glob('*.bin'))]
 A, B = load(sys.argv[1]), load(sys.argv[2])

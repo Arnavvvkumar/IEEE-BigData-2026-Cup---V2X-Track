@@ -4,6 +4,7 @@ Prints TP rate by score bin x range band, then (only if --rules) hedged AP for p
    s' = s * (1 - a * clip((r - 15) / 25, 0, 1)) for a in {0.2, 0.4}   (far discount)
    s' = s * (1 + a * clip((15 - r) / 15, 0, 1)) for a in {0.2, 0.4}   (near boost)
 usage: ped_range_calib.py <set dir> <ped-only norule pred name> [rules]"""
+import os
 import importlib.util
 import json
 import sys
@@ -11,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

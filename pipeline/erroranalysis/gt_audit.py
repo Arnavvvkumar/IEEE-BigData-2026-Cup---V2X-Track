@@ -1,6 +1,7 @@
 """Audit of our dev label conversion vs what the organizers' test labels look like (test: 470 vehicle / 953 pedestrian /
 124 truck boxes on 50 frames = 9.4 / 19.1 / 2.5 per frame). Counts raw V2X-Real objects in the 50 dev frames by type, by
 range band and by number of lidar points inside, to see which filtering rule reproduces the test counts."""
+import os
 import json
 import sys
 from collections import Counter
@@ -9,7 +10,7 @@ from pathlib import Path
 import numpy as np
 import yaml
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'V2X-Real'))
 from opencood.data_utils import SUPER_CLASS_MAP  # noqa: E402
 from opencood.utils.transformation_utils import x1_to_x2  # noqa: E402

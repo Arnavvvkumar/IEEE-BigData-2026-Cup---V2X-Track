@@ -1,6 +1,7 @@
 """General truck post-processing variants on the v8 ensemble (v7 + PV-RCNN), checked on dev for NO HARM (dev cannot show gains on
 the test clip's fixed long vehicles). Variants: long-box score boost (L >= 7 m), point-dense boost, truck clutter cut, truck hedging.
 usage: truck_variants.py <set dir> <norule pred name> [workers]"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 import fuse_test as FT  # noqa: E402

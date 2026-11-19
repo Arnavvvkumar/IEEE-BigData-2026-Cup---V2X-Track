@@ -2,12 +2,12 @@
 # P39 (Codex's idea): equivalent-box alignment of pedestrian cluster members before averaging, on the v16 base. Audit (how many members are
 # in the swapped description) + pedestrian AP (hedged), dev150 + dev350 + halves. Starts when the hedge re-tune has finished (RAM).
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 while pgrep -f "ped_retune.py" > /dev/null; do sleep 60; done
 "$P" - <<'EOF'
 import sys, numpy as np
-sys.path.insert(0, '/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final')
+sys.path.insert(0, __import__('os').environ['BDC_ROOT'] + '/experiments/claude_carla_overnight/final')
 import fuse_test as F
 g, k = F.align(np.array([[0, 0, 0, 1.0, 0.6, 1.7, 0.0], [0, 0, 0, 0.6, 1.0, 1.7, np.pi / 2], [0, 0, 0, 0.6, 1.0, 1.7, -np.pi / 2 + 0.1]]))
 print('align unit test:', np.round(g, 3).tolist(), 'rewritten', k)

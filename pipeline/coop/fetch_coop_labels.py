@@ -2,13 +2,14 @@
 V2X-Real training archives. Purpose: test whether the organizers' test labels are the cooperative (multi-agent) labels.
 Labels are used for validation only (allowed by the Nov 7 notice). No forbidden frame is touched.
 usage: fetch_coop_labels.py <out dir>"""
+import os
 import json
 import re
 import sys
 from pathlib import Path, PurePosixPath
 from zipfile import ZipFile
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/real_reference_audit'))
 from fetch_training_sample import ARCHIVES, RangeReader, exclusions  # noqa: E402
 

@@ -1,9 +1,9 @@
 #!/bin/bash
 # Candidate v1 test predictions: ensemble fuse_cw_d (dev 64.48 with pedestrian static down-weighting).
 set -euo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight/final"
-P="$HOME/projects/bdc2026-track-b/.env/bin/python"
+P="${BDC_PYTHON}"
 T="$here/test_allpred"
 VT="vehicle,truck"
 cd "$here"

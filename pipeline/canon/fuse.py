@@ -4,6 +4,7 @@ Per frame and class: greedy clustering by BEV centre distance in descending scor
 score-weighted mean of its members (yaw from the top member); its score is sum(member scores)/number of passes ('mean')
 or the top member's score ('max'). No labels are used by the fusion; labels are only used to score it.
 usage: fuse.py <out.json> <allpred.json>[:g1,g2,...] ..."""
+import os
 import importlib.util
 import json
 import sys
@@ -11,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)

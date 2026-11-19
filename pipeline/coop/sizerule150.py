@@ -2,6 +2,7 @@
 truck-like (at least K of: length >= L, width >= Wd, height >= H) is also emitted as a truck at score*a, and its vehicle copy
 is kept at score*b. Reports vehicle / truck AP and truck AP on genuine trucks only (fixed 'TrashCan' object removed).
 usage: sizerule150.py <set dir>"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ev)

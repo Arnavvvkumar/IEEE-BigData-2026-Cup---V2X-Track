@@ -1,10 +1,10 @@
 #!/bin/bash
 # Site-twin frames with size-varied pedestrians (and small trucks), then the merged set canon + twin + twin_st + twin_pv.
 set -euo pipefail
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/twin"
-D="$HOME/projects/bdc2026-track-b/data"
-P="$HOME/projects/bdc2026-track-b/.env/bin/python"
-export PYTHONPATH="$HOME/projects/roadside-pilot/realism_deps"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/twin"
+D="${BDC_DATA}"
+P="${BDC_PYTHON}"
+export PYTHONPATH="${BDC_REALISM_DEPS}"
 cd "$here"
 echo "PV_START $(date -Is)"
 PEDVARY=1 PREFIX=twinpv SEED0=500000 "$P" build_twin_st.py --src "$D/claude_canon_all_v1" --pred "$here/static_filter_cw_b_predictions.json" --out "$D/claude_twin_pv_v1" --n 5000 --workers 5 --keep-sensor 0 | tail -n 12

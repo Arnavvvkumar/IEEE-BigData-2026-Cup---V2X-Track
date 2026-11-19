@@ -1,10 +1,11 @@
 """Distribution of batch-1 vs batch-4 differences: share of boxes with an exact (<1e-3) counterpart, split by score band."""
+import os
 import json
 from pathlib import Path
 
 import numpy as np
 
-t = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/coop/batchcheck')
+t = Path(os.environ['BDC_ROOT'] + '/experiments/claude_carla_overnight/coop/batchcheck')
 a, b = json.loads((t / 'b1.json').read_text()), json.loads((t / 'b4.json').read_text())
 bands = {'score>=0.3': [0, 0], '0.1-0.3': [0, 0], '<0.1': [0, 0]}
 cls_exact = {}

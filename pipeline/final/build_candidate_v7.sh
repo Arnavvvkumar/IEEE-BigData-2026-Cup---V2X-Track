@@ -5,9 +5,9 @@
 # usage: build_candidate_v7.sh [name=candidate_v7] [zip=bdc2026_trackB_submission_v7.zip] [hedge=1]
 set -euo pipefail
 name=${1:-candidate_v7}; zip=${2:-bdc2026_trackB_submission_v7.zip}; export HEDGE=${3:-1}
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight/final"
-P="$HOME/projects/detector-program/env310/bin/python"
+P="${BDC_PYTHON}"
 T="${TESTPRED:-$here/test_allpred}"   # TESTPRED=$here/test_allpred_ps for the per-scan levelled (compliant) exports
 scans="$root/starting_kit/track_b/detection_test_frames"
 out="$here/$name"; meta="$here/${name}_meta"
@@ -55,7 +55,7 @@ echo "synthetic from ${SYNDIR:-$here/candidate_v3/synthetic}"
 "$P" "$here/check_candidate.py" "$out/predictions.json" | head -n 2
 echo "synthetic $(ls "$out/synthetic" | wc -l)"
 bash "$here/finish_zip.sh" "$name" "$zip" 2>/dev/null || true
-"$P" "$here/verify_zip.py" "/mnt/c/Users/arnav/Downloads/$zip" | tail -n 2
+"$P" "$here/verify_zip.py" "${BDC_OUT}/$zip" | tail -n 2
 "$P" - "$here" "$name" << 'PY'
 import json, sys
 from pathlib import Path

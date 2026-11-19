@@ -3,6 +3,7 @@ Cross-fitted: the static map applied to a frame is built from the OTHER half of 
 so no frame is filtered with a map that contains it.
 Variants: drop / down-weight detections sitting on static structure, and snap pedestrian boxes to their own points + ground.
 usage: static_filter.py <predictions.json (sensor frame)> <out.json>"""
+import os
 import importlib.util
 import json
 import sys
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/erroranalysis'))
 from groundplane import fit_ground, level_transform  # noqa: E402
 

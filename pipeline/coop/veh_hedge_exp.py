@@ -1,11 +1,12 @@
 """Vehicle box hedging (never tried before; pedestrian hedging gave +4 AP). Emit low-score size/position/yaw variants of each
 vehicle box, primary boxes unchanged. Four pre-registered variant sets, evaluated on dev150 and dev350 with halves.
 usage: veh_hedge_exp.py <set dir> <norule pred name>"""
+import os
 import importlib.util, json, sys
 import numpy as np
 from pathlib import Path
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

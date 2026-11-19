@@ -11,7 +11,7 @@ $log = "$O\runtime\capture_final.log"
 function Note($m) { $line = "$((Get-Date).ToUniversalTime().ToString('o')) $m"; Add-Content $log $line; Write-Output $line }
 function StopCarla { Get-Process | Where-Object { $_.Name -match '^CarlaUE4' } | Stop-Process -Force -Confirm:$false -ErrorAction SilentlyContinue; Start-Sleep 5 }
 
-$state = (wsl -e bash "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/tools/window_state.sh") -join ' '
+$state = (wsl -e bash "${BDC_ROOT}/experiments/claude_carla_overnight/tools/window_state.sh") -join ' '
 if ($state -ne 'READY') { Note "ABORT: window not ready: $state"; exit 3 }
 StopCarla
 Note 'launching CARLA DirectX offscreen on NVIDIA, Town02, low quality'
@@ -21,7 +21,7 @@ $p.Id | Out-File "$O\runtime\carla.pid" -Encoding ascii
 $wd = Start-Job -ArgumentList $p.Id -ScriptBlock {
   param($cid)
   while (Get-Process -Id $cid -ErrorAction SilentlyContinue) {
-    $s = (wsl -e bash "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/tools/busy_state.sh") -join ' '
+    $s = (wsl -e bash "${BDC_ROOT}/experiments/claude_carla_overnight/tools/busy_state.sh") -join ' '
     if ($s -match '^BUSY') { Get-Process | Where-Object { $_.Name -match '^CarlaUE4' } | Stop-Process -Force; "WATCHDOG KILL: $s"; return }
     Start-Sleep 10
   }

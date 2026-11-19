@@ -12,6 +12,6 @@ t=$(ls -t $(find $R/code/OpenPCDet/output -path '*pvrcnn_st_osc*' -name 'train_*
 [ -n "$t" ] && { echo "--- train log"; grep -E 'Train:' "$t" | tail -n 2 | sed -E 's/.*Train: +/Train: /' | cut -c1-200; grep -E 'Error|Traceback|out of memory' "$t" | tail -n 2; }
 EOF
 echo "=== laptop"
-cd "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
+cd "${BDC_ROOT}/experiments/claude_carla_overnight"
 grep -E '===|current|a 0.5 base|passes|P10_DONE' final/p10_vnx_truck.log | cut -c1-260
-echo "ft4: $(grep -E 'Train:' ~/projects/detector-program/vnx010_pv_ft4.log | tail -n 1 | sed -E 's/.*Train: +//' | cut -c1-100)"
+echo "ft4: $(grep -E 'Train:' ${BDC_PROGRAM}/vnx010_pv_ft4.log | tail -n 1 | sed -E 's/.*Train: +//' | cut -c1-100)"

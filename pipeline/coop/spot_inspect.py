@@ -1,13 +1,14 @@
 """Label-free inspection of the fixed truck-sized objects in the 50 test frames: at each spot, how many points are there,
 how large is the point cluster, and how do the truck vs vehicle predictions score there (final and per raw model pass)?
 usage: spot_inspect.py"""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 F = W / 'experiments/claude_carla_overnight/final'
 sys.path.insert(0, str(F))
 import calib  # noqa: E402

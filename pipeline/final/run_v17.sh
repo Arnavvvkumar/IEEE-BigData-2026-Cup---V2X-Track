@@ -1,15 +1,15 @@
 #!/bin/bash
 # v17 = v16 + pedestrian min-points rule (boxes with < 5 scan points inside -> score x 0.25). v17s = v13 vehicle/truck + v17 pedestrian.
 # Builds locally only; nothing is submitted.
-F="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final"
+F="${BDC_ROOT}/experiments/claude_carla_overnight/final"
 C="$F/../coop"
-P="$HOME/projects/detector-program/env310/bin/python"
+P="${BDC_PYTHON}"
 sed -i 's/\r$//' "$F/build_candidate_v7.sh" "$C/verify_minpts.py"
 (cd "$C" && "$P" verify_minpts.py dev150 px_base_norule && "$P" verify_minpts.py dev350 px_base_norule)
 export FUSE_YAW_CIRC_EXTRA=pedestrian PED_MINPTS=1
 EXTRA="pvrcnn_ped_P4_ep5:pedestrian" bash "$F/run_v14.sh" 17
 bash "$F/run_splice.sh" 17 17s
-cd /mnt/c/Users/arnav/Downloads
+cd ${BDC_OUT}
 python3 - <<'EOF'
 import zipfile, json
 a = json.loads(zipfile.ZipFile('bdc2026_trackB_submission_v16s.zip').read('predictions.json'))

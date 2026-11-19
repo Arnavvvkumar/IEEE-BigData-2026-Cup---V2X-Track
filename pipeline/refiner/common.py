@@ -3,12 +3,13 @@ The refiner sees the points around ONE box, expressed relative to the box centre
 sensor, and predicts how far the true box centre is from the given one (radial, tangential, vertical) and the height error.
 It is trained on synthetic site-twin frames only (synthetic boxes, deliberately jittered); real scans are only used at inference,
 after levelling with the same fixed ground plane the twin generator uses (canonical frame, ground z = -3.0)."""
+import os
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight')
+W = Path(os.environ['BDC_ROOT'] + '/experiments/claude_carla_overnight')
 sys.path.insert(0, str(W / 'erroranalysis'))
 from groundplane import level_transform  # noqa: E402
 

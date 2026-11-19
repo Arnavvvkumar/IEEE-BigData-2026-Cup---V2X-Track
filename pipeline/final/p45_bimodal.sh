@@ -1,8 +1,8 @@
 #!/bin/bash
 # P45: Codex idea 2 - bimodal pedestrian clusters. Fast ped-only path, v17 recipe, 3 decimals. REF = loc_ref (46.554 dev150 / 45.929 dev350).
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 S=${1:-dev150}
 B="vnx010_all_s1234_ep10 vnx010_twin_s1_ep12 vnx010_all_rs2_amp_ep12 vnx010_twin_s1_tta_ep12 vnx010_all_s1234_tta_ep10 pvrcnn_st_osc_ep6 pvrcnn_st_osc_s2_ep4"
 x3() { echo "$1:pedestrian $1:pedestrian $1:pedestrian"; }

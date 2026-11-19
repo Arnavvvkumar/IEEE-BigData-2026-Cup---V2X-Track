@@ -2,9 +2,9 @@
 # Lane N (pedestrians): fine-grid VoxelNeXt, initialised from our own synthetic-trained vnx010_twin_s1 (epoch 12), then trained
 # 5 epochs on canon + twin + small-truck twin + SIZE-VARIED pedestrian twin, so it learns to read pedestrian box size from the points.
 # Synthetic-only: the initial weights were trained on synthetic data only, and so is this run.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
-repo="$HOME/projects/detector-program/OpenPCDet"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
+repo="${BDC_PROGRAM}/OpenPCDet"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 init=$(find "$repo/output" -path "*/vnx010_twin_s1/ckpt/checkpoint_epoch_12.pth" -print -quit)

@@ -5,6 +5,7 @@ E1 density-normalised point count: n * (r/20)^2 < T  ->  score x m. (Beam geomet
 E2 primary size scale: l and w of every primary box x s (hedge variants are built from the scaled box). Real GT median 0.65 x 0.67,
    predicted 0.76 x 0.74.  s in {0.95, 0.9, 0.85}.
 usage: ped_density_size.py <set dir> <ped-only norule pred name> [workers]"""
+import os
 import importlib.util
 import json
 import sys
@@ -12,7 +13,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

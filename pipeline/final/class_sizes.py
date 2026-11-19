@@ -1,10 +1,11 @@
 """Box-size statistics per class in the real dev labels (allowed use: box-size statistics)."""
+import os
 import json
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 gt = json.loads((W / 'experiments/real_reference_audit/real_dev_cw1/ground_truth.json').read_text())
 by = {}
 for v in gt.values():

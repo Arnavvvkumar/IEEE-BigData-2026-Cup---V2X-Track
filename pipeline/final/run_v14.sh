@@ -1,8 +1,8 @@
 #!/bin/bash
 # v14 = v13 + P1 TTA x3 + P3 TTA x3 (+ EXTRA voters passed in env). v3 realism scans (same as v9/v13).
-F="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final"
+F="${BDC_ROOT}/experiments/claude_carla_overnight/final"
 name=${1:-14}
-cd /mnt/c/Users/arnav/Downloads
+cd ${BDC_OUT}
 sed -i 's/\r$//' "$F/build_v13.sh"
 x3() { echo "$1:pedestrian $1:pedestrian $1:pedestrian"; }
 ls -la "$F/test_allpred_ps1/" | grep -E 'P1_tta|P3_tta|P4|P5|P6'

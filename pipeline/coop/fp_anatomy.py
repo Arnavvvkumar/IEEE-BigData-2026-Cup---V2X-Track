@@ -1,6 +1,7 @@
 """What are the false positives? For each predicted box of a class (by score band): true positive, duplicate of an already-matched
 label, loose box on a same-class label, box on a label of another class, box on a label with < 5 points (not scored), or on nothing.
 usage: fp_anatomy.py <set dir> <pred json name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ev)

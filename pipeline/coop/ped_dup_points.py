@@ -3,6 +3,7 @@ Parents in descending score order; P_i = indices of non-ground points inside the
 higher-scored parent i (centre distance < 1 m) if |P_i & P_j| / |P_i | P_j| >= 0.8, both have >= 5 points, and 3D IoU(i, j) >= 0.5.
 Duplicate parents (and their hedge variants) get score * m, m in {0.5, 0.25}. Hedge eligibility is frozen from v17 (pre-suppression).
 usage: ped_dup_points.py <set dir> <ped-only norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

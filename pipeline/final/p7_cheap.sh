@@ -3,8 +3,8 @@
 #   1) calibrated predictions without the truck rule  2) truck-rule retune  3) rider-sized pedestrian boxes.
 # One job at a time (11 GB RAM). dev150 first (fast), then dev350.
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 cd "$base/coop"
 while pgrep -f truck_h_test.py > /dev/null; do sleep 20; done
 export FUSE_YAW_CIRC=vehicle

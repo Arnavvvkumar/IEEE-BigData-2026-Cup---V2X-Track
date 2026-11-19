@@ -1,10 +1,10 @@
 #!/bin/bash
 # GPU queue 3 (replaces queue 2): SECOND on the two CARLA-v3 sets first (fast, most informative), then VoxelNeXt and PV-RCNN.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-bx="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/boxsize"
-D="$HOME/projects/bdc2026-track-b/data"
-P="$HOME/projects/bdc2026-track-b/.env/bin/python"
-T="$HOME/projects/detector-program/OpenPCDet/tools/cfgs/custom_models"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+bx="${BDC_ROOT}/experiments/claude_carla_overnight/boxsize"
+D="${BDC_DATA}"
+P="${BDC_PYTHON}"
+T="${BDC_PROGRAM}/OpenPCDet/tools/cfgs/custom_models"
 G='-3.2 -3.0 -2.8'
 cd "$here"
 while ! grep -q SETS_DONE build_v3_sets.log 2>/dev/null; do sleep 30; done

@@ -7,6 +7,7 @@ Pre-registered variants (n = non-ground points in the box grown 0.1 m, flagged =
   C    flagged primary x0.25, hedge family for every originally-eligible parent at k x ORIGINAL score (variants of flagged boxes not penalised).
   NONE no rule (v16 reference).
 usage: ped_minpts_decomp.py <set dir> <ped-only norule pred name> [workers]"""
+import os
 import importlib.util
 import json
 import sys
@@ -14,7 +15,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

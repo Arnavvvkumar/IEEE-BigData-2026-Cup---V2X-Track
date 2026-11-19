@@ -1,10 +1,10 @@
 #!/bin/bash
 # GPU queue 2 (after queue 1): VoxelNeXt, then PV-RCNN, both on the ground-canonical relabelled 6k mix.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-bx="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/boxsize"
-D="$HOME/projects/bdc2026-track-b/data/claude_canon_relabel_mix6000_v1"
-P="$HOME/projects/bdc2026-track-b/.env/bin/python"
-T="$HOME/projects/detector-program/OpenPCDet/tools/cfgs/custom_models"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+bx="${BDC_ROOT}/experiments/claude_carla_overnight/boxsize"
+D="${BDC_DATA}/claude_canon_relabel_mix6000_v1"
+P="${BDC_PYTHON}"
+T="${BDC_PROGRAM}/OpenPCDet/tools/cfgs/custom_models"
 cd "$here"
 [ -f voxelnext_canon_v1.yaml ] || "$P" make_cfg.py "$T/voxelnext_v1.yaml" "$D" voxelnext_canon_v1.yaml score=0.05
 [ -f pvrcnn_canon_v1.yaml ] || "$P" make_cfg.py "$bx/pvrcnn_relabel_b1_v1.yaml" "$D" pvrcnn_canon_v1.yaml train_voxels=80000 test_voxels=80000

@@ -2,11 +2,11 @@
 # Site-twin frames with long, low truck-class objects, then the merged set canon + twin + twin_st + twin_ll, then Lane S:
 # SECOND trained on it (vehicle / truck voter). Synthetic-only, from scratch. Laptop only.
 set -euo pipefail
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/twin"
-canon="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
-P="$HOME/projects/bdc2026-track-b/.env/bin/python"
-export PYTHONPATH="$HOME/projects/roadside-pilot/realism_deps"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/twin"
+canon="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
+P="${BDC_PYTHON}"
+export PYTHONPATH="${BDC_REALISM_DEPS}"
 cd "$here"
 echo "LL_START $(date -Is)"
 if [ ! -f "$D/claude_twin_ll_v1/custom_infos_train.pkl" ]; then

@@ -2,8 +2,8 @@
 # Levelled real-dev scoring of a trained arm. usage: eval_arm.sh <tag> <cfg> <dataset> "<epochs>" "<grounds>"
 set -euo pipefail
 tag=$1; config=$2; dataset=$3; eps=$4; grounds=$5
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
-program="$HOME/projects/detector-program"
+root="${BDC_ROOT}"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
 res="$root/experiments/claude_carla_overnight/canon/results"
 mkdir -p "$res"

@@ -1,11 +1,12 @@
 """How many real points sit at/near the sensor origin, and does the kit's range mask keep them? (points only)"""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'starting_kit/track_b/scoring_program'))
 import metrics as M  # noqa: E402
 

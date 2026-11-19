@@ -2,12 +2,13 @@
 """Refuse a validation folder if any frame is one of the 100 forbidden frames.
 usage: check_forbidden.py <set dir with index.json> ...
 """
+import os
 import csv
 import json
 import sys
 from pathlib import Path
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 forbidden = set()
 with (W / 'experiments/real_reference_audit/v2x_real_forbidden_frames_mapping.csv').open(newline='') as handle:
     for row in csv.DictReader(handle):

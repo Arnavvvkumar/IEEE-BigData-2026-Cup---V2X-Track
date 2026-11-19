@@ -1,5 +1,6 @@
 """Score final/calib.py on the real dev frames (all classes; all / selection / confirmation).
 usage: check_calib_dev.py <dev predictions.json> [out predictions.json]"""
+import os
 import importlib.util
 import json
 import sys
@@ -10,7 +11,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).parent))
 import calib  # noqa: E402
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)

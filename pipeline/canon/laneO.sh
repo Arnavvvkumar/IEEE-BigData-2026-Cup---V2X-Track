@@ -1,8 +1,8 @@
 #!/bin/bash
 # Lane O (vehicles + trucks): SECOND on the full merged set canon + twin + small-truck twin + size-varied twin (23,800 frames),
 # 14 epochs, mixed precision. A second small-truck-aware SECOND member (different seed, more twin data) for the vehicle/truck ensemble.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 export WORKERS=3

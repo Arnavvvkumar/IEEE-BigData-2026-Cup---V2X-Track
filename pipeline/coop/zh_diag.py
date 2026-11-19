@@ -3,13 +3,14 @@ For each label (>=5 pts) matched to the nearest same-class prediction (centre wi
   error of predicted top / bottom vs label, and of two point-based estimates:
   top_pts = highest non-ground point in the predicted footprint (grown 0.15 m), bottom_gnd = fixed ground plane under the box centre.
 usage: zh_diag.py <set dir> <pred name>"""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 import fuse_test as FT  # noqa: E402

@@ -1,8 +1,8 @@
 #!/bin/bash
 # Lane G: second (random-seed) fine-grid VoxelNeXt with mixed precision. The first one tripled pedestrian AP over SECOND
 # (27-29 vs 12 at epoch 10), so a second member should steady the pedestrian class in the fusion.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 export WORKERS=3

@@ -1,6 +1,6 @@
 #!/bin/bash
 # READ-ONLY: build script tail, OSC data sizes, gcc modules, queue
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/osc"
+base="${BDC_ROOT}/experiments/claude_carla_overnight/osc"
 sed -n 60,140p "$base/remote_build_env.sh"
 echo "=========== OSC"
 ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=30 <osc_user>@ascend.osc.edu 'bash -s' 2>/dev/null << 'EOF' | grep -v -E 'authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$' | cut -c1-200

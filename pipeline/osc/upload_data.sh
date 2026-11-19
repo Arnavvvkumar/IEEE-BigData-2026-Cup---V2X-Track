@@ -3,7 +3,7 @@
 # usage: upload_data.sh <dataset name>
 set -uo pipefail
 ds=$1
-D="$HOME/projects/bdc2026-track-b/data"
+D="${BDC_DATA}"
 R=/fs/scratch/<osc_project>/bdc/data
 SSH="ssh -i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=30 <osc_user>@ascend.osc.edu"
 $SSH "mkdir -p $R" 2>/dev/null

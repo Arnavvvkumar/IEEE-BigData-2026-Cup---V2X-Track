@@ -2,8 +2,8 @@
 # P15 (laptop; OSC read-only): wait for job 2 (8560715, tag pvrcnn_st_osc_s2) to leave the queue, fetch its last checkpoint,
 # run inference, and score it on top of v8 as a pedestrian (with hedging) and vehicle voter. Waits for p12 so evals run one at a time.
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 K="-i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60"
 TAG=pvrcnn_st_osc_s2
 echo "P15_START $(date -Is)"

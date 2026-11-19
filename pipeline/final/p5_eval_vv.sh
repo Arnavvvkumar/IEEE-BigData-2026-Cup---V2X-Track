@@ -2,8 +2,8 @@
 # P5: after P4, test existing pedestrian-only VoxelNeXt models as extra VEHICLE voters (no new inference needed).
 # Baseline = pv_veh (dev150 69.17, dev350 68.63; vehicle 80.7 / 81.2).
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 until grep -q 'P4_DONE' "$base/final/p4_eval_o.log" 2>/dev/null; do sleep 60; done
 cd "$base/coop"
 export FUSE_YAW_CIRC=vehicle

@@ -1,6 +1,7 @@
 """Pedestrian hedge variants not tried yet, on the averaged-heading (FUSE_YAW_CIRC=vehicle,pedestrian) prediction:
 rotated copies (+90 / +-45 deg) and height / z copies, added on top of the current PED_HEDGE. Pedestrian AP only, halves reported.
 Pre-registered grid. usage: ped_yaw_hedge.py <set dir> <norule pred name> [workers]"""
+import os
 import importlib.util
 import json
 import sys
@@ -8,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

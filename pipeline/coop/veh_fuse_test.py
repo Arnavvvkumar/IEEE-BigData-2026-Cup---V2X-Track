@@ -1,6 +1,7 @@
 """Vehicle fusion variants (CPU, existing predictions): cluster radius, box weighting, heading choice. Vehicle AP only.
 Pipeline per variant: fuse (vehicle passes) -> calibrate -> AP on all / half A / half B.
 usage: veh_fuse_test.py <set dir>"""
+import os
 import importlib.util
 import json
 import sys
@@ -8,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 import fuse_test as FT  # noqa: E402

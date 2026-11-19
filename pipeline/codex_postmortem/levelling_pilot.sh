@@ -3,9 +3,9 @@
 set -euo pipefail
 this_dir="$(cd "$(dirname "$0")" && pwd)"
 experiment="$(dirname "$this_dir")"
-program="$HOME/projects/detector-program"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
-data="$HOME/projects/bdc2026-track-b/data/claude_canon_all_v1"
+data="${BDC_DATA}/claude_canon_all_v1"
 python="$program/env310/bin/python"
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
 

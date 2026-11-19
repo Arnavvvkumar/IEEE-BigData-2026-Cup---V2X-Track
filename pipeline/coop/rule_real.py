@@ -1,6 +1,7 @@
 """Truck rule retune on the REALISTIC truck metrics (non-parked trucks; Truck+Van types), plus all-truck and vehicle as guards.
 Pre-registered grid. Input: norule prediction (current v15s-equivalent list).
 usage: rule_real.py <set dir> <norule pred name> [workers]"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

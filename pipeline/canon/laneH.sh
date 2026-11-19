@@ -1,8 +1,8 @@
 #!/bin/bash
 # Lane H: SECOND on the merged set (canonical full set + site twin), mixed precision.
 # Waits for the merged dataset, then replaces the third old-data SECOND seed (low value now) with this run.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 while [ ! -f "$D/claude_canon_all_twin_v1/manifest.json" ]; do sleep 20; done

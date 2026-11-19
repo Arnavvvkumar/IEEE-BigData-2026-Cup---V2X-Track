@@ -3,6 +3,7 @@
  B) on dev (labels): per class, by range band and by label point count: share of labels with a tight box (IoU>=0.5),
     a loose box (0.1<=IoU<0.5) or none, and AP restricted to the range band.
 usage: gap_analysis.py <dev set dir> <norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -11,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 F = W / 'experiments/claude_carla_overnight/final'
 sys.path.insert(0, str(F))
 import calib  # noqa: E402

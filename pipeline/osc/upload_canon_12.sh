@@ -5,8 +5,8 @@ set -uo pipefail
 cd "$(dirname "$0")"
 N=12
 ds=claude_canon_all_v1
-D="$HOME/projects/bdc2026-track-b/data"
-STAGE="$HOME/projects/bdc2026-track-b/upload_stage"
+D="${BDC_DATA}"
+STAGE="${BDC_OUT}/upload_stage"
 log=upload_canon_12.log
 echo "STOP_SIX $(date -Is)" >> "$log"
 

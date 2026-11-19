@@ -1,7 +1,7 @@
 #!/bin/bash
 # READ-ONLY on OSC: find truncated .npy files (header shape vs file size) and missing label files in the three training sets.
 # Writes the bad list locally to osc/bad_files.txt (paths relative to data/).
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/osc"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/osc"
 ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=40 <osc_user>@ascend.osc.edu 'bash -s' 2>/dev/null << 'EOF' > "$here/bad_scan.out"
 R=/fs/scratch/<osc_project>/bdc
 source /etc/profile 2>/dev/null
@@ -41,4 +41,4 @@ EOF
 grep SUMMARY "$here/bad_scan.out"
 grep '^BAD ' "$here/bad_scan.out" | cut -d' ' -f2 | sort -u > "$here/bad_files.txt"
 echo "bad files: $(wc -l < "$here/bad_files.txt")"; head -n 5 "$here/bad_files.txt"
-cd ~/projects/bdc2026-track-b/data && echo "local size of bad files: $(xargs -a "$here/bad_files.txt" -r du -cL 2>/dev/null | tail -n 1)"
+cd ${BDC_DATA} && echo "local size of bad files: $(xargs -a "$here/bad_files.txt" -r du -cL 2>/dev/null | tail -n 1)"

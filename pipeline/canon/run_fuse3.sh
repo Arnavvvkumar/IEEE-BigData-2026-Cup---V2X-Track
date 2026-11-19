@@ -3,9 +3,9 @@
 # pedestrians from the fine-grid VoxelNeXt, trucks from SECOND, vehicles from both. $1 = VoxelNeXt epoch.
 set -uo pipefail
 e=${1:-10}
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
-P="$HOME/projects/detector-program/env310/bin/python"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
+P="${BDC_PYTHON}"
 G='-3.15 -3.075 -3.0 -2.925 -2.85 -2.775'
 cd "$here"
 F="$here/fusion"

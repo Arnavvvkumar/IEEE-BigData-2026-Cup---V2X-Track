@@ -3,8 +3,8 @@
 # (vehicle/truck passes kept as empty 'none' passes), v17 recipe (min-points rule + hedging), full precision.
 # usage: p42_ablate.sh <dev150|dev350> <parallel> [group ...]    (no groups = all 13)
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 S=$1; PAR=$2; shift 2
 declare -A G
 G[vnx_all]="vnx010_all_s1234_ep10"

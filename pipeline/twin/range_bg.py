@@ -4,13 +4,14 @@ For every (elevation 0.25 deg, azimuth 1024/rev) cell: the background range = th
 Sampling the model gives a synthetic background scan with the real site's layout and the real sensor's beam pattern.
 Honest check: build on the selection half, score realism against the confirmation half (and the reverse).
 Real-data use to disclose: unlabelled real training clouds (non-forbidden) for site/sensor calibration."""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 HERE = Path(__file__).parent
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/realism'))
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'

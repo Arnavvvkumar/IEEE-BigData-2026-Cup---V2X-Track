@@ -1,6 +1,6 @@
 #!/bin/bash
 # Stop P22 (and its child processes) once it finishes P2 scoring and starts its V1 half; P23 handles V1 faster in parallel.
-log="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final/p22_P2V1.log"
+log="${BDC_ROOT}/experiments/claude_carla_overnight/final/p22_P2V1.log"
 pid=$(pgrep -f "^bash p22_P2V1.sh" | head -n 1)
 echo "p22 pid $pid"
 [ -n "$pid" ] || exit 0

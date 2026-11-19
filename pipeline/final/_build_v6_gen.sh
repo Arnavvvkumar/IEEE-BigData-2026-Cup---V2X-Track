@@ -3,9 +3,9 @@
 # (a 0.5, base 0.1; coop/rule_retune.py). Validation: dev150 69.9 / dev350 68.93 (v4 69.43 / 68.73, v3 66.63 / 65.4).
 # Synthetic folder unchanged. Does not submit anything.
 set -euo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight/final"
-P="$HOME/projects/detector-program/env310/bin/python"
+P="${BDC_PYTHON}"
 T="$here/test_allpred"
 scans="$root/starting_kit/track_b/detection_test_frames"
 out="$here/candidate_v6"
@@ -41,5 +41,5 @@ cp "$here/candidate_v3/synthetic/"*.bin "$out/synthetic/"
 "$P" "$here/check_candidate.py" "$out/predictions.json"
 echo "synthetic $(ls "$out/synthetic" | wc -l)"
 bash "$here/finish_zip.sh" candidate_v6 bdc2026_trackB_submission_v6.zip || true
-"$P" "$here/verify_zip.py" "/mnt/c/Users/arnav/Downloads/bdc2026_trackB_submission_v6.zip"
+"$P" "$here/verify_zip.py" "${BDC_OUT}/bdc2026_trackB_submission_v6.zip"
 echo CANDIDATE_V6_DONE

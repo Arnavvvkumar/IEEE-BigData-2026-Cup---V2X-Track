@@ -1,11 +1,12 @@
 """End-to-end check that the function used in the build (calib.hedge_pedestrians) reproduces the validation gain.
 usage: verify_hedge_fn.py <set dir> <norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
 from pathlib import Path
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

@@ -1,8 +1,8 @@
 #!/bin/bash
 # 75-second laptop smoke test of the truck-only configs: does the model build, does the loss compute, do a few steps run?
-repo="$HOME/projects/detector-program/OpenPCDet"; P="$HOME/projects/detector-program/env310/bin/python"
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data/claude_canon_all_twin_ll_v1"
+repo="${BDC_PROGRAM}/OpenPCDet"; P="${BDC_PYTHON}"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}/claude_canon_all_twin_ll_v1"
 cd "$repo/tools"
 for c in second_truck pvrcnn_truck; do
   bs=2; [ $c = pvrcnn_truck ] && bs=1

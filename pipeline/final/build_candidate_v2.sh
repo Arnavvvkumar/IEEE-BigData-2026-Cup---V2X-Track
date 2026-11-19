@@ -1,9 +1,9 @@
 #!/bin/bash
 # Candidate v2 = candidate v1 ensemble (fuse_cw_d + pedestrian static down-weighting) + box calibration (final/calib.py).
 set -euo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight/final"
-P="$HOME/projects/detector-program/env310/bin/python"
+P="${BDC_PYTHON}"
 scans="$root/starting_kit/track_b/detection_test_frames"
 cd "$here"
 echo "== dev check"
@@ -11,6 +11,6 @@ echo "== dev check"
 echo "== test predictions"
 "$P" calib.py "$scans" "$here/candidate_v1/predictions.json" "$here/candidate_v2/predictions.json"
 mkdir -p candidate_v2/synthetic && cp candidate_v1/synthetic/*.bin candidate_v2/synthetic/
-"$HOME/projects/bdc2026-track-b/.env/bin/python" check_candidate.py "$here/candidate_v2/predictions.json"
+"${BDC_PYTHON}" check_candidate.py "$here/candidate_v2/predictions.json"
 ls candidate_v2 && ls candidate_v2/synthetic | wc -l
 echo CANDIDATE_V2_DONE

@@ -1,4 +1,5 @@
 """READ-ONLY inspection of a submission zip the way the scorer would see it. usage: inspect_zip.py <zip>"""
+import os
 import json
 import sys
 import zipfile
@@ -6,7 +7,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 z = zipfile.ZipFile(sys.argv[1])
 names = z.namelist()
 print('zip bytes', Path(sys.argv[1]).stat().st_size, '| entries', len(names), '| testzip (CRC):', z.testzip())
@@ -16,7 +17,7 @@ sizes = [z.getinfo(n).file_size for n in bins]
 print('scans', len(bins), '| names', bins[0], '...', bins[-1], '| max bytes', max(sizes), '(cap 1,500,000) | all multiple of 12:', all(s % 12 == 0 for s in sizes))
 arr = [np.frombuffer(z.read(n), dtype='<f4').reshape(-1, 3) for n in bins]
 print('finite', all(np.isfinite(a).all() for a in arr), '| points median', int(np.median([len(a) for a in arr])))
-v2 = zipfile.ZipFile('/mnt/c/Users/arnav/Downloads/bdc2026_trackB_submission_v2.zip')
+v2 = zipfile.ZipFile(os.environ['BDC_OUT'] + '/bdc2026_trackB_submission_v2.zip')
 same = all(v2.read(n) == z.read(n) for n in bins)
 print('scans identical to the submitted v2 scans (so realism unchanged):', same)
 pred = json.loads(z.read('predictions.json'))

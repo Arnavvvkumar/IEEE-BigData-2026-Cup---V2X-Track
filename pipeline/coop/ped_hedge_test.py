@@ -3,6 +3,7 @@ when the primary box is loose (IoU 0.1-0.5 with the label, 28-43% of pedestrians
 Prediction counts on the leaderboard suggest #1 emits about 720 pedestrian boxes per frame (36,010 on 50 frames).
 Scores pedestrian AP (all / half A / half B) and the number of pedestrian boxes per frame.
 usage: ped_hedge_test.py <set dir> <norule pred name> [workers]"""
+import os
 import importlib.util
 import json
 import sys
@@ -11,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ev)

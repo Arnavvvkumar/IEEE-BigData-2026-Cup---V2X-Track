@@ -1,6 +1,6 @@
 #!/bin/bash
 # OSC: copy the PV-RCNN job script, build the merged training folder (symlinks) if missing, submit a 12-minute test job.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/osc"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/osc"
 S="ssh -i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=40 <osc_user>@ascend.osc.edu"
 F='authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$'
 $S 'cat > /fs/scratch/<osc_project>/bdc/cfg/pvrcnn_train.sbatch' < "$here/pvrcnn_train.sbatch" 2>&1 | grep -v -E "$F"

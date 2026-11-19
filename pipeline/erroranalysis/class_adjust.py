@@ -1,6 +1,7 @@
 """Per-class box calibration on the real dev frames: size offsets (box-size statistics), vertical and radial shifts.
 Each class is scored alone (per-class AP is independent). Parameters are judged on the selection half and checked on the
 confirmation half. usage: class_adjust.py <predictions.json> <out.json> <class>"""
+import os
 import importlib.util
 import json
 import sys
@@ -8,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)

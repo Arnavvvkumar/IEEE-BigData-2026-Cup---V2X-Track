@@ -2,8 +2,8 @@
 # Combine the two gains: second pedestrian model (V2, pedestrians only) + twin-trained SECOND in place of the weaker old-data seed.
 # Then the static-map pedestrian down-weighting on the result.
 set -uo pipefail
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-P="$HOME/projects/detector-program/env310/bin/python"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+P="${BDC_PYTHON}"
 cd "$here"
 F="$here/fusion"
 A="$F/canon_all_s1234_ep12_allpred.json"; B="$F/canon_relabel_s1234_ep12_allpred.json"

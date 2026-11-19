@@ -2,7 +2,7 @@ import os
 import sys
 
 os.environ['CUDA_VISIBLE_DEVICES'] = ''
-sys.path.insert(0, os.path.expanduser('~/projects/detector-program/OpenPCDet'))
+sys.path.insert(0, os.path.join(os.environ['BDC_PROGRAM'], 'OpenPCDet'))
 import torch  # noqa: E402
 import spconv  # noqa: E402
 import pcdet  # noqa: E402

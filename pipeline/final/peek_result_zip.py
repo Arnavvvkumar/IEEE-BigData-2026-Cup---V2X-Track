@@ -1,9 +1,10 @@
 """List and print (as text, never executed) the contents of the Codabench result zip. Read-only."""
+import os
 import json
 import re
 import zipfile
 
-z = zipfile.ZipFile('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/prediction_result.zip')
+z = zipfile.ZipFile(os.environ['BDC_ROOT'] + '/prediction_result.zip')
 for i in z.infolist():
     print(f'{i.file_size:10d}  {i.filename}')
 for i in z.infolist():

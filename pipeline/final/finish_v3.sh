@@ -2,10 +2,10 @@
 # After dev350 predictions exist: score v2 (no truck rule) and v3. Package only if v3
 # is strictly better on every class on both halves. Does not submit the zip.
 set -euo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight/final"
 coop="$root/experiments/claude_carla_overnight/coop"
-P="$HOME/projects/detector-program/env310/bin/python"
+P="${BDC_PYTHON}"
 cd "$coop"
 V2="vnx010_all_s1234_ep10:pedestrian,vehicle vnx010_all_rs2_amp_ep12:pedestrian canon_all_s1234_ep12:vehicle,truck second_twin_s1_ep12:vehicle,truck canon_relabel_s1234_ep12:vehicle,truck"
 V3="vnx010_all_s1234_ep10:pedestrian,vehicle vnx010_all_rs2_amp_ep12:pedestrian vnx010_twin_s1_ep12:pedestrian,vehicle canon_all_s1234_ep12:vehicle,truck second_twin_s1_ep12:vehicle,truck canon_relabel_s1234_ep12:vehicle,truck vnx010_twin_s1_tta_ep12:pedestrian vnx010_all_s1234_tta_ep10:pedestrian"
@@ -23,7 +23,7 @@ done
 "$P" - << 'PY'
 import json
 from pathlib import Path
-summary = Path("/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/coop/dev350/eval_summary.txt").read_text().strip().splitlines()
+summary = Path(__import__('os').environ['BDC_ROOT'] + "/experiments/claude_carla_overnight/coop/dev350/eval_summary.txt").read_text().strip().splitlines()
 rows = {}
 for line in summary:
     name = line.split(" | ", 1)[0]
@@ -38,11 +38,11 @@ for c in ("vehicle", "pedestrian", "truck"):
         ok = False
         print("FAIL", c)
 print("mAP", v2["mAP"], v3["mAP"])
-Path("/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final/dev350_v3_ok").write_text("ok\n" if ok else "fail\n")
+Path(__import__('os').environ['BDC_ROOT'] + "/experiments/claude_carla_overnight/final/dev350_v3_ok").write_text("ok\n" if ok else "fail\n")
 raise SystemExit(0 if ok else 2)
 PY
 echo "dev350 v3 beats v2 on both halves"
 bash "$here/build_candidate_v3.sh"
 bash "$here/finish_zip.sh" candidate_v3 bdc2026_trackB_submission_v3.zip
-"$P" "$here/verify_zip.py" "/mnt/c/Users/arnav/Downloads/bdc2026_trackB_submission_v3.zip"
+"$P" "$here/verify_zip.py" "${BDC_OUT}/bdc2026_trackB_submission_v3.zip"
 echo V3_PACKAGED

@@ -8,4 +8,4 @@ for p in $(pgrep -f run_second_overnight.sh); do
 done
 pgrep -af '[p]ython.*(train\.py|evaluate_openpcdet\.py)' | cut -c1-200
 nvidia-smi --query-gpu=memory.used,utilization.gpu --format=csv,noheader
-tail -c 600 ~/projects/detector-program/second_overnight_control.log | tr '\r' '\n' | grep -E 'Train|Skipping|rror' | tail -1 | cut -c1-200
+tail -c 600 ${BDC_PROGRAM}/second_overnight_control.log | tr '\r' '\n' | grep -E 'Train|Skipping|rror' | tail -1 | cut -c1-200

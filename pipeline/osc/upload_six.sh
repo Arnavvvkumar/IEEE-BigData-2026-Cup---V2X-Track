@@ -3,8 +3,8 @@
 # rsync --size-only skips files already on OSC, so this only sends what is missing.
 cd "$(dirname "$0")"
 N=6
-D="$HOME/projects/bdc2026-track-b/data"
-STAGE="$HOME/projects/bdc2026-track-b/upload_stage"
+D="${BDC_DATA}"
+STAGE="${BDC_OUT}/upload_stage"
 mkdir -p "$STAGE"
 rm -f upload_shard_*.log
 for ds in claude_twin_v1 claude_canon_all_v1; do

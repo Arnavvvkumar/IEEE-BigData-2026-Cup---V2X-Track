@@ -1,8 +1,8 @@
 #!/bin/bash
 # Rebuild v7 with PV-RCNN epoch 2 as pedestrian + vehicle voter, then confirm the combined config on both validation sets.
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 cp "$base/final/candidate_v7/predictions.json" "$base/final/candidate_v7_meta/predictions_without_pvrcnn.json"
 EXTRA="pvrcnn_st_osc_ep2:pedestrian,vehicle" bash "$base/final/build_candidate_v7.sh" candidate_v7 bdc2026_trackB_submission_v7.zip 1
 cd "$base/coop"

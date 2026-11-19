@@ -1,7 +1,7 @@
 #!/bin/bash
 # Hedging round 2 (CPU): waits for round 1, then pedestrians, trucks, vehicles on dev150, then the same on dev350.
-cd "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/coop"
-P="$HOME/projects/detector-program/env310/bin/python"
+cd "${BDC_ROOT}/experiments/claude_carla_overnight/coop"
+P="${BDC_PYTHON}"
 while pgrep -f ped_hedge_test.py > /dev/null; do sleep 15; done
 for s in dev150 dev350; do
   for c in pedestrian truck vehicle; do

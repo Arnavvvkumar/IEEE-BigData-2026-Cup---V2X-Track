@@ -3,6 +3,7 @@ Needs predictions made with FUSE_KEEP_SF=1 (each pedestrian carries its static f
 point-flagged parents (n < 5 points): the static penalty is softened from 0.8 to 0.4 (S1) or removed (S2) before the x0.25 point factor:
   score' = score / (1 - 0.8 sf) * (1 - D2 sf) * 0.25.   REF = v17 as deployed (D2 = 0.8). Everything else fixed. Hedged, 3 decimals.
 usage: ped_static_double.py <set dir> <norule pred name with sf>"""
+import os
 import importlib.util
 import json
 import sys
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

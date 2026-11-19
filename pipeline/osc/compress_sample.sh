@@ -1,7 +1,7 @@
 #!/bin/bash
 # Compare compressors on a handful of twin point clouds. Local only.
 set -euo pipefail
-D="$HOME/projects/bdc2026-track-b/data/claude_twin_v1/points"
+D="${BDC_DATA}/claude_twin_v1/points"
 tmp=$(mktemp -d)
 i=0
 for f in $(ls -L "$D" | head -n 8); do

@@ -1,9 +1,9 @@
 #!/bin/bash
-P="$HOME/projects/detector-program/env310/bin/python"
+P="${BDC_PYTHON}"
 "$P" - << 'PY'
 import json
 from pathlib import Path
-p = Path("/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/coop/dev350/allpred")
+p = Path(__import__('os').environ['BDC_ROOT'] + "/experiments/claude_carla_overnight/coop/dev350/allpred")
 for f in sorted(p.glob('*.json')):
     d = json.loads(f.read_text())
     k = list(d)

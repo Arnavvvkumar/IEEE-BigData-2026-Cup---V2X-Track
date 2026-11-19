@@ -2,6 +2,7 @@
 ranges, for VALIDATION / unlabelled-cloud calibration only (Nov 7 organizer notice). They never enter detector training.
 Excludes the 100 forbidden frames and the 50 dev frames already held. Spread across scenes, evenly spaced within a scene.
 usage: fetch_more.py <out dir>"""
+import os
 import hashlib
 import json
 import re
@@ -11,7 +12,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path, PurePosixPath
 from zipfile import ZipFile
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/real_reference_audit'))
 from fetch_training_sample import ARCHIVES, RangeReader, exclusions  # noqa: E402
 

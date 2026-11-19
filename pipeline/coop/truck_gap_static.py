@@ -1,3 +1,4 @@
+import os
 ﻿"""Truck dev-vs-test gap, step 2: are dev trucks the same parked objects repeated across frames? And what is our truck AP
 when each physical object counts once / when only non-repeated trucks count / per truck type?
 usage: truck_gap_static.py <set dir> <norule pred name>   (truck rule a 0.5 base 0.1 + dedupe applied, as in the build)"""
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

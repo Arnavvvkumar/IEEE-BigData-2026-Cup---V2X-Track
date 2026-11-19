@@ -1,12 +1,13 @@
 """Pedestrian near-miss geometry on the real dev frames: is the centre error radial (towards the sensor), and how do the
 real pedestrian boxes relate to the points inside them? Statistics only. usage: ped_offsets.py <predictions.json>"""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'
 gt = json.loads((KIT / 'ground_truth.json').read_text())
 pred = json.loads(Path(sys.argv[1]).read_text())

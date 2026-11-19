@@ -1,7 +1,7 @@
 #!/bin/bash
 # Read-only completeness check of the code that landed on OSC. Does not touch the data upload.
 set -uo pipefail
-src="$HOME/projects/detector-program/OpenPCDet"
+src="${BDC_PROGRAM}/OpenPCDet"
 echo "=== local file count (rsync excludes) ==="
 find "$src" -type f \
   -not -path '*/output/*' \

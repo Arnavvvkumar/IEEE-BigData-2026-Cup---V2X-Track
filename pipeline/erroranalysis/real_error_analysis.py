@@ -2,6 +2,7 @@
 Usage: real_error_analysis.py <predictions.json> <out.json>
 Sections: scene geometry (ground plane, tilt, range mix), GT statistics (points per box, range, heading, counts),
 detection outcome per GT (hit / poor box / wrong class / missed) by range and point count, relaxed-metric APs, false positives."""
+import os
 import importlib.util
 import json
 import sys
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)

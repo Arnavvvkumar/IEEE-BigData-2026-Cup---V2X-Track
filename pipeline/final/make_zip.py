@@ -1,5 +1,6 @@
 """Zip a candidate folder for upload (files at the zip root: synthetic/*.bin, predictions.json, and declaration.txt/.pdf if
 present in the folder). Re-reads the zip and checks it the way the scorer does. usage: make_zip.py <candidate dir> <out.zip>"""
+import os
 import json
 import sys
 import zipfile
@@ -7,7 +8,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 src, out = Path(sys.argv[1]), Path(sys.argv[2])
 files = sorted((src / 'synthetic').glob('*.bin'))
 assert len(files) == 50

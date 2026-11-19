@@ -3,9 +3,9 @@
 #   candidate_v8 + bdc2026_trackB_submission_v8.zip = v7 + PV-RCNN epoch 2 (pedestrian, vehicle)   [new, not submitted]
 #   candidate_v7 + bdc2026_trackB_submission_v7.zip = exactly what was submitted at 23:33 (68,831 boxes)
 set -euo pipefail
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final"
-dl="/mnt/c/Users/arnav/Downloads"
-P="$HOME/projects/detector-program/env310/bin/python"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/final"
+dl="${BDC_OUT}"
+P="${BDC_PYTHON}"
 cd "$here"
 rm -rf candidate_v8 candidate_v8_meta
 cp -r candidate_v7 candidate_v8; cp -r candidate_v7_meta candidate_v8_meta

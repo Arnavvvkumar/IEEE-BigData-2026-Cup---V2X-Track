@@ -2,9 +2,9 @@
 # Lane P (pedestrians): second size-aware fine-grid VoxelNeXt. Same recipe as Lane N but initialised from our own
 # synthetic-trained vnx010_all_s1234 (epoch 10), so the two size-aware models differ and can be fused.
 # Synthetic-only: the initial weights were trained on synthetic data only, and so is this run.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
-repo="$HOME/projects/detector-program/OpenPCDet"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
+repo="${BDC_PROGRAM}/OpenPCDet"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 init=$(find "$repo/output" -path "*/vnx010_all_s1234/ckpt/checkpoint_epoch_10.pth" -print -quit)

@@ -1,6 +1,7 @@
 """Test: far objects get systematically lower scores (fewer passes agree), so near false positives outrank far true positives.
 Multiply the score of class c by 1 + k * clip((range - r0) / 20, 0, 1) and score AP (all / half A / half B).
 usage: range_boost.py <set dir> <norule pred name> [workers]"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

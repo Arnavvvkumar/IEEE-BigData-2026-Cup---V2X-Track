@@ -1,6 +1,7 @@
 """Cooperative dev labels: union (by object id) of every agent's labels for each dev frame, expressed in the roadside sensor
 (-1) frame, centre inside the kit range. Compares box counts with the organizers' test labels and scores a prediction file
 against both label sets. usage: build_coop_gt.py <labels dir> <out gt.json> [predictions.json]"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 import numpy as np
 import yaml
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'V2X-Real'))
 from opencood.data_utils import SUPER_CLASS_MAP  # noqa: E402
 from opencood.utils.transformation_utils import x1_to_x2  # noqa: E402

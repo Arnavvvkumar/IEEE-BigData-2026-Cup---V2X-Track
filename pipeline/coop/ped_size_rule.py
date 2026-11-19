@@ -2,6 +2,7 @@
 Takes a finished prediction file (after calibration), rewrites pedestrian L/W, and scores pedestrian AP (all / half A / half B).
 Rule: with n >= min_pts non-ground points inside the box grown by g, L' = (1-w)*L + w*clip(extent_x + c, lo, hi); same for W.
 usage: ped_size_rule.py <set dir> <pred name>"""
+import os
 import importlib.util
 import itertools
 import json
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 import fuse_test as FT  # noqa: E402

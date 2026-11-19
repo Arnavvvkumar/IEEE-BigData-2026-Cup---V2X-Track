@@ -1,9 +1,9 @@
 #!/bin/bash
 # P20 (laptop): score T1's epoch-2 checkpoint (partly trained PV-RCNN truck-only) as a truck voter x1 and x3 on top of v9 bundle B. After the cancel script has copied it.
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
-CK="$HOME/projects/detector-program/OpenPCDet/output/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon/pvrcnn_all/pvrcnn_truck_T1/ckpt/checkpoint_epoch_2.pth"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
+CK="${BDC_PROGRAM}/OpenPCDet/output${BDC_ROOT}/experiments/claude_carla_overnight/canon/pvrcnn_all/pvrcnn_truck_T1/ckpt/checkpoint_epoch_2.pth"
 while pgrep -f cancel_T1_after_ep2.sh > /dev/null; do sleep 30; done
 [ -s "$CK" ] || { echo "NO_T1_CKPT"; exit 1; }
 BATCH=1 bash "$base/final/run_infer_one.sh" pvrcnn_truck_T1 pvrcnn_truck.yaml claude_canon_all_twin_ll_v1 2

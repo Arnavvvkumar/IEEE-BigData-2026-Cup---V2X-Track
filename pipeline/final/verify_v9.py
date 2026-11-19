@@ -1,4 +1,5 @@
 """Final pre-upload audit of bdc2026_trackB_submission_v9.zip: format, scores, boxes, declaration, synthetic scans, and content vs v8."""
+import os
 import hashlib
 import json
 import zipfile
@@ -6,8 +7,8 @@ from pathlib import Path
 
 import numpy as np
 
-DL = Path('/mnt/c/Users/arnav/Downloads')
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+DL = Path(os.environ['BDC_OUT'])
+W = Path(os.environ['BDC_ROOT'])
 z = zipfile.ZipFile(DL / 'bdc2026_trackB_submission_v9.zip')
 names = z.namelist()
 print('entries', len(names), '| top-level', sorted({n.split('/')[0] for n in names}))

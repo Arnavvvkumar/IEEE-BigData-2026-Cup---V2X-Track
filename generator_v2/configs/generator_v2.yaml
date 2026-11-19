@@ -1,0 +1,107 @@
+# Procedural roadside LiDAR generator v2 (scripts/generate_synthetic_v2.py).
+#
+# Every value here is a hand-chosen procedural design parameter. None was fit to,
+# measured from, or tuned against real clouds, labels or leaderboard signals.
+# Ranges [a, b] are sampled uniformly per layout or per frame (see comments).
+version: 2
+
+output:
+  scenario_dir: synthetic_intersection   # single scenario folder (matches existing tooling); layout IDs live in frames.json
+  agent_id: -1                           # negative = infrastructure agent
+  range: [-40.0, -40.0, -8.0, 40.0, 40.0, 2.0]   # sensor-frame crop, x/y/z min then max
+  yaml_pose_mode: sensor     # sensor: lidar_pose = zeros and boxes in sensor frame (contract); world: experimental
+  intensity: zero            # zero (matches XYZ-only clouds) | return_strength (simple reflectivity model in [0, 1])
+  write_point_labels: true   # aux/point_labels/<split>/<frame>.npy, outside the loader tree
+
+splits:
+  frames_per_layout: 2       # frames sharing one static layout + sensor pose; never shared across splits
+  layout_id_offset: {train: 0, validate: 1000000}
+
+runtime:
+  workers: 1                 # hard cap 2 (WSL RAM / coexist with training)
+  raycast_threads: 2         # total Open3D thread budget, split across workers (2 workers -> 1 each)
+  cpu_limit: 2               # hard cap via CPU affinity (Linux); Embree BVH builds ignore the thread argument
+
+layout:
+  family_weights: {cross: 0.30, skewed_cross: 0.15, tee: 0.25, y: 0.10, straight: 0.20}
+  lanes_per_direction_weights: [0.40, 0.40, 0.20]   # 1, 2, 3 lanes per direction
+  lane_width_m: [3.0, 3.7]
+  median_prob: 0.35
+  median_width_m: [1.0, 4.0]
+  median_curb_prob: 0.7
+  parking_prob: 0.30         # curbside parking lane on both sides (roads with <= 2 lanes)
+  parking_width_m: [2.2, 2.6]
+  sidewalk_width_m: [1.8, 4.5]
+  curb_height_m: [0.12, 0.18]
+  arm_length_m: 95.0
+  angle_jitter_deg: 4.0
+  skew_range_deg: [15.0, 35.0]
+  side_arm_jitter_deg: 20.0
+  y_jitter_deg: 15.0
+
+background:
+  building_sector_prob: 0.80
+  buildings_per_sector: [0, 4]
+  building_height_m: [3.5, 25.0]
+  building_footprint_m: [6.0, 30.0]
+  building_setback_m: [0.5, 6.0]
+  parking_lot_sector_prob: 0.25
+  tree_side_prob: 0.60
+  tree_spacing_m: [7.0, 15.0]
+  light_pole_spacing_m: [25.0, 40.0]
+  signal_pole_prob: 0.80
+  fence_prob: 0.35
+  bush_prob: 0.30
+  furniture_per_100m: 4.0    # benches, hydrants, bollards, sign posts per sidewalk side
+  trash_bins: false          # upstream maps TrashCan to the truck superclass; keep unlabeled bins out by default
+  tree_crown_porosity: 0.55  # per-surface pass-through probability (re-cast behind the leaf surface)
+  bush_porosity: 0.35
+
+sensor:
+  height_m: [4.0, 6.0]       # per layout; ground is at z = -height in the sensor frame
+  roll_pitch_sigma_deg: 1.5  # per layout mount tilt (affects beams only; output frame stays level)
+  roll_pitch_max_deg: 4.0
+  placement_weights: {corner: 0.70, mast: 0.15, midblock: 0.15}
+  mount_pole: true           # the sensor's own pole/arm is part of the scene
+  min_range_m: 1.0
+  max_range_m: 120.0
+  elevation_jitter_deg: 0.05     # per-channel calibration error, per layout
+  azimuth_offset_jitter_deg: 0.05
+  beam_presets:              # chosen per layout by weight; generic patterns, not product calibrations
+    - {name: uniform64, weight: 0.35, pattern: uniform, channels: 64, elevation_deg: [-22.5, 22.5], azimuth_steps: 1024}
+    - {name: uniform32, weight: 0.20, pattern: uniform, channels: 32, elevation_deg: [-22.5, 22.5], azimuth_steps: 1024}
+    - {name: uniform128, weight: 0.15, pattern: uniform, channels: 128, elevation_deg: [-22.5, 22.5], azimuth_steps: 1024}
+    - {name: gradient64, weight: 0.20, pattern: gradient, channels: 64, elevation_deg: [-25.0, 15.0], center_deg: -1.0, power: 1.6, azimuth_steps: 1800}
+    - {name: gradient40_wide, weight: 0.10, pattern: gradient, channels: 40, elevation_deg: [-30.0, 10.0], center_deg: -2.0, power: 1.8, azimuth_steps: 1800}
+
+noise:
+  range_sigma_m: [0.005, 0.03]   # per frame
+  range_sigma_per_m: 0.0002      # added sigma per metre of range
+  angular_sigma_deg: 0.01        # per-ray beam direction jitter (applied before casting)
+
+dropout:
+  random_prob: [0.0, 0.08]       # per frame, i.i.d. per ray
+  dead_channel_prob: 0.01        # per channel per frame
+  return_model:                  # p(detect) = sigmoid(ln(s / threshold) / softness), s = refl*|cos(inc)|/(r/ref)^2
+    enabled: true
+    ref_range_m: 30.0
+    threshold: 0.003
+    softness: 0.45
+  max_passes: 3                  # porous-surface re-casts per ray
+
+traffic:
+  empty_scene_prob: 0.06         # no annotated road users at all
+  class_absent_prob: {vehicle: 0.08, pedestrian: 0.20, truck: 0.45}
+  count_range: {vehicle: [1, 26], pedestrian: [1, 20], truck: [1, 4]}
+  placement_radius_m: 50.0       # from the sensor, in BEV
+  max_attempts: 40
+  vehicle_kinds: {lane: 0.50, queue: 0.15, junction: 0.12, parking: 0.23}
+  truck_kinds: {lane: 0.60, queue: 0.15, junction: 0.10, parking: 0.15}
+  pedestrian_kinds: {sidewalk: 0.60, crosswalk: 0.22, corner: 0.18}
+  pedestrian_group_prob: 0.30
+  child_prob: 0.10
+  heading_jitter_deg: {lane: 1.5, parking: 2.5, pedestrian: 15.0}
+
+annotation:
+  min_points: 3                  # annotate only objects with >= this many returns after dropout/crop
+  min_corners_in_range: 2        # same rule as upstream mask_boxes_outside_range_numpy

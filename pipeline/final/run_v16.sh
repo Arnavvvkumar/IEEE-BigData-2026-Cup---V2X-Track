@@ -1,12 +1,12 @@
 #!/bin/bash
 # v16 = v15 recipe (P4 x1 extra) + averaged (circular-mean) pedestrian heading in fusion. Then v16s = v13 vehicle/truck + v16 pedestrian.
 # Builds locally only; nothing is submitted.
-F="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final"
+F="${BDC_ROOT}/experiments/claude_carla_overnight/final"
 sed -i 's/\r$//' "$F/run_v14.sh" "$F/run_splice.sh"
 export FUSE_YAW_CIRC_EXTRA=pedestrian
 EXTRA="pvrcnn_ped_P4_ep5:pedestrian" bash "$F/run_v14.sh" 16
 bash "$F/run_splice.sh" 16 16s
-cd /mnt/c/Users/arnav/Downloads
+cd ${BDC_OUT}
 python3 - <<'EOF'
 import zipfile, json, math
 a = json.loads(zipfile.ZipFile('bdc2026_trackB_submission_v15s.zip').read('predictions.json'))

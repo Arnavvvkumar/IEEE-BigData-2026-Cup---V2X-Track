@@ -5,9 +5,9 @@
 # Already-uploaded files are left in place. Synthetic data only.
 set -euo pipefail
 cd "$(dirname "$0")"
-D="$HOME/projects/bdc2026-track-b/data"
+D="${BDC_DATA}"
 R=/fs/scratch/<osc_project>/bdc/data
-STAGE="$HOME/projects/bdc2026-track-b/upload_stage"
+STAGE="${BDC_OUT}/upload_stage"
 LOG="$PWD/upload_fast.log"
 mkdir -p "$STAGE"
 exec > >(tee -a "$LOG") 2>&1

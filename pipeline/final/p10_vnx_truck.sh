@@ -2,8 +2,8 @@
 # P10 (laptop, CPU): add the fine-grid VoxelNeXt models as TRUCK voters (they were only used for pedestrians / vehicles).
 # On the test clip they find the large fixed vehicles with higher scores than several SECOND models. Base = v6 spec.
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 cd "$base/coop"
 export FUSE_YAW_CIRC=vehicle
 PED="vnx010_all_rs2_amp_ep12:pedestrian vnx010_twin_s1_tta_ep12:pedestrian vnx010_all_s1234_tta_ep10:pedestrian"

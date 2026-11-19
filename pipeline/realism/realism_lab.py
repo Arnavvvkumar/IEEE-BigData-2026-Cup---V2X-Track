@@ -3,6 +3,7 @@ Permitted use of the public reference: realism calibration of the simulator outp
 Steps: A level CARLA (as is)  B tilted to the real ground plane and sensor height  C + per-clip yaw search
        D + range-falloff thinning to the real radial point distribution.
 Synthetic scans are CARLA 64-channel captures (claude_carla64_town02_v1); real points are only compared, never copied."""
+import os
 import json
 import sys
 from pathlib import Path
@@ -10,7 +11,7 @@ from pathlib import Path
 import numpy as np
 from scipy.spatial import cKDTree
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'starting_kit/track_b/scoring_program'))
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/erroranalysis'))
 from metrics import compute_realism, compute_fpd  # noqa: E402

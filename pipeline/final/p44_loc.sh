@@ -2,10 +2,10 @@
 # P44: fetch the 2 approved LOC checkpoints (read-only scp, epoch 12), infer on dev150/dev350/test scans, then test them as pedestrian voters.
 # Variants (pre-registered): REF = current v17 ped ensemble; +L1; +L2; +L12 (both). v17 recipe, 3 decimals, hedged. Dev150 first; dev350 only if a variant wins on dev150 and its halves.
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 K="-i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60"
-repo="$HOME/projects/detector-program/OpenPCDet"
+repo="${BDC_PROGRAM}/OpenPCDet"
 echo "P44_START $(date -Is)"
 for n in 1 2; do
   tag=vnx_ped_loc_$n

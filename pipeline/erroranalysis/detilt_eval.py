@@ -4,6 +4,7 @@ shift it to a target ground height, run the detector, and map the boxes back to 
 Sweeps the target ground height. Scores all 50 / selection 25 / confirmation 25 with the official evaluator.
 --plane points : per-frame plane from points; --plane median : median of the per-frame point planes (static sensor);
 --plane none : no levelling (baseline check)."""
+import os
 import argparse
 import importlib.util
 import json
@@ -22,7 +23,7 @@ p.add_argument('--save-best', action='store_true')
 p.add_argument('--save-all', action='store_true')  # also write <out>_allpred.json {ground: predictions} for fusion
 a = p.parse_args()
 ALL = {}
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'
 sys.path.insert(0, str(a.repo))
 from pcdet.config import cfg, cfg_from_yaml_file  # noqa: E402

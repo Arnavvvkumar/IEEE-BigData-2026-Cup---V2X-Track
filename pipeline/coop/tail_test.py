@@ -2,6 +2,7 @@
 match or PR point (official scorer: per-frame greedy by score, global sort, interpolated R40), so AP can only stay or rise.
 Measure how much it can add on dev. Base = current build recipe (truck rule a.5 base.1 + dedupe + pedestrian hedging).
 usage: tail_test.py <set dir> <norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

@@ -7,6 +7,7 @@ overlapping box before its own score is corrected. Pre-registered variants, prod
 Also an upper-bound audit: in REF, boxes deleted by a higher-scored SPARSE (<30 pts) box while themselves having >= 30 pts.
 Metrics as truck_minpts.py: REAL (non-parked), Truck+Van, all-truck, each [full, half A, half B].
 usage: truck_order.py <set dir> <full norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -15,7 +16,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

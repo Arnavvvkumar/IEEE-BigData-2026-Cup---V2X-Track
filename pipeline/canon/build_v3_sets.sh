@@ -1,9 +1,9 @@
 #!/bin/bash
 # CPU: convert CARLA v3, check it, and build two ground-canonical training sets.
 set -euo pipefail
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-D="$HOME/projects/bdc2026-track-b/data"
-P="$HOME/projects/bdc2026-track-b/.env/bin/python"
+here="${BDC_ROOT}/experiments/claude_carla_overnight"
+D="${BDC_DATA}"
+P="${BDC_PYTHON}"
 cd "$here"
 [ -d "$D/claude_carla_v3" ] || "$P" convert_carla_v3.py --native native_v3_Town02 native_v3_Town01 native_v3_Town03 native_v3_Town05 --out "$D/claude_carla_v3"
 "$P" tools/check_v3.py "$D/claude_carla_v3" | cut -c1-330

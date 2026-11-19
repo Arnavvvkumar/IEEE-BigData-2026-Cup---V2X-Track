@@ -2,8 +2,8 @@
 # P36 (laptop; OSC read-only polling): when VR2 (8594089) and VR1 (8594088) leave the queue, fetch the last checkpoint, infer dev150/dev350
 # (batch 1), per-scan test export (batch 1, fixed seed), then gate pedestrian AP on top of the v16 list (v15 list + averaged pedestrian heading).
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 K="-i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60"
 CFG=voxelrcnn_ped.yaml
 JOBS=("8594089 vrcnn_ped_VR2 claude_canon_all_v1" "8594088 vrcnn_ped_VR1 claude_canon_all_twin_st_v1")

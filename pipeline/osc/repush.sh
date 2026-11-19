@@ -1,6 +1,6 @@
 #!/bin/bash
 # Re-run the (fixed) code push in the background and report upload state. Safe to repeat.
-cd "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/osc"
+cd "${BDC_ROOT}/experiments/claude_carla_overnight/osc"
 echo "uploader procs: $(pgrep -fc 'upload_rsync.sh')  rsync procs: $(pgrep -fc 'rsync -aL')"
 tail -n 3 upload_rsync.log | cut -c1-150
 nohup bash push_code.sh > push_code2.log 2>&1 &

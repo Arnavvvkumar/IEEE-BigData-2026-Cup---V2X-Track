@@ -3,6 +3,7 @@ A variant = (length scale, width scale, shift along the box's own length axis in
 bottom kept, f). For pedestrians the shifts are along world x / y (their heading is arbitrary).
 Reports AP all / half A / half B (and genuine-truck AP for trucks) and boxes per frame.
 usage: hedge2.py <set dir> <norule pred name> <class> [workers]"""
+import os
 import importlib.util
 import json
 import sys
@@ -11,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

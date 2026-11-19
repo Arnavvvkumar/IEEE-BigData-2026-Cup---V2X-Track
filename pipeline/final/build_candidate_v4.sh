@@ -4,9 +4,9 @@
 # averaged vehicle heading in fusion, calibration, truck size rule, truck de-duplication. Synthetic folder unchanged from v2/v3.
 # Does not submit anything.
 set -euo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 here="$root/experiments/claude_carla_overnight/final"
-P="$HOME/projects/detector-program/env310/bin/python"
+P="${BDC_PYTHON}"
 T="$here/test_allpred"
 scans="$root/starting_kit/track_b/detection_test_frames"
 out="$here/candidate_v4"
@@ -39,5 +39,5 @@ cp "$here/candidate_v3/synthetic/"*.bin "$out/synthetic/"
 "$P" "$here/check_candidate.py" "$out/predictions.json"
 echo "synthetic $(ls "$out/synthetic" | wc -l)"
 bash "$here/finish_zip.sh" candidate_v4 bdc2026_trackB_submission_v4.zip
-"$P" "$here/verify_zip.py" "/mnt/c/Users/arnav/Downloads/bdc2026_trackB_submission_v4.zip"
+"$P" "$here/verify_zip.py" "${BDC_OUT}/bdc2026_trackB_submission_v4.zip"
 echo CANDIDATE_V4_DONE

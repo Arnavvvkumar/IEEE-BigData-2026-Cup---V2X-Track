@@ -2,8 +2,8 @@
 # Dump levelled real-dev predictions at several ground heights for fusion. usage: dump_arm.sh <tag> <cfg> <dataset> <epoch> "<grounds>"
 set -euo pipefail
 tag=$1; config=$2; dataset=$3; e=$4; grounds=$5
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
-program="$HOME/projects/detector-program"
+root="${BDC_ROOT}"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
 res="$root/experiments/claude_carla_overnight/canon/fusion"
 mkdir -p "$res"

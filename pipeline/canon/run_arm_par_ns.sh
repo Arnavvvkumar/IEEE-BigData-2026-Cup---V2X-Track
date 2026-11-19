@@ -3,8 +3,8 @@
 # usage: [BS=2 WORKERS=4] run_arm_par_ns.sh <tag> <cfg yaml> <dataset dir> <epochs> <ground z list, quoted> [extra train args...]
 set -euo pipefail
 tag=$1; config=$2; dataset=$3; epochs=$4; grounds=$5; shift 5
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
-program="$HOME/projects/detector-program"
+root="${BDC_ROOT}"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
 python="$program/env310/bin/python"
 here="$root/experiments/claude_carla_overnight/canon"

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Approved by the user on 2026-11-13 ("Do it, I approve"): P1 = PV-RCNN pedestrian-only, 5 epochs, batch 4,
 # 1 A100, 8 cores, 32 GB, 6 h, nextgen, data claude_canon_all_twin_st_v1. Nothing else.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
+here="${BDC_ROOT}/experiments/claude_carla_overnight"
 K="-i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60"
 F='authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$'
 R=/fs/scratch/<osc_project>/bdc

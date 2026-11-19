@@ -3,6 +3,7 @@ checked on the confirmation half). Label-free at run time: uses only the predict
  * radial shift s: move the centre s metres along the sensor ray (negative = towards the sensor).
  * blend w: centre = w * shifted prediction + (1 - w) * (centroid of non-ground points in the box + c along the ray).
 usage: ped_refine.py <predictions.json> <out.json>"""
+import os
 import importlib.util
 import json
 import sys
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 KIT = W / 'experiments/real_reference_audit/real_dev_cw1'
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)

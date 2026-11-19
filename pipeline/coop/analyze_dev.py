@@ -1,6 +1,7 @@
 """Score the current ensemble (fuse_cw_d + pedestrian static down-weight + calibration) on a staged validation set and break
 the result down by raw object type. Labels: cooperative, >= 5 sensor points (closest proxy to the organizers' labels).
 usage: analyze_dev.py <set dir (scans/, gt_coop.json, allpred/)>"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 import fuse_test as FT  # noqa: E402

@@ -2,6 +2,7 @@
 final truck set) with < thr non-ground points inside (box grown 0.1 m) get score x m. thr in {10, 30, 100}, m in {0.5, 0.25}.
 Metrics as in truck_real.py: REAL (non-parked), Truck+Van, all-truck. Adoption would need all three up on BOTH dev sets.
 usage: truck_minpts.py <set dir> <full norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

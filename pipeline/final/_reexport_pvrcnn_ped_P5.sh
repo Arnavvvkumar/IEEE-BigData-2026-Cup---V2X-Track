@@ -3,9 +3,9 @@
 # each scan is levelled only with the plane fitted to its own points; no other test scan is used. Output: final/test_allpred_ps/.
 # The long-low truck voter (second_twin_ll_*) is excluded (its data recipe referenced test-clip objects).
 set -uo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 base="$root/experiments/claude_carla_overnight"; here="$base/final"; canon="$base/canon"
-program="$HOME/projects/detector-program"; repo="$program/OpenPCDet"; D="$HOME/projects/bdc2026-track-b/data"
+program="${BDC_PROGRAM}"; repo="$program/OpenPCDet"; D="${BDC_DATA}"
 scans="$root/starting_kit/track_b/detection_test_frames"; out="$here/test_allpred_ps1"
 G='-3.15 -3.075 -3.0 -2.925 -2.85 -2.775'
 export PLANE=scan

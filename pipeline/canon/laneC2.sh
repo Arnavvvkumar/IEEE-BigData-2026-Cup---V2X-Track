@@ -1,10 +1,10 @@
 #!/bin/bash
 # Parallel GPU lane C (v2): fine-grid VoxelNeXt (pedestrians) -> SECOND CARLA-only (resume) -> PV-RCNN. Lane B runs alongside.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-bx="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/boxsize"
-DD="$HOME/projects/bdc2026-track-b/data"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+bx="${BDC_ROOT}/experiments/claude_carla_overnight/boxsize"
+DD="${BDC_DATA}"
 D="$DD/claude_canon_all_v1"
-P="$HOME/projects/bdc2026-track-b/.env/bin/python"
+P="${BDC_PYTHON}"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 export WORKERS=3

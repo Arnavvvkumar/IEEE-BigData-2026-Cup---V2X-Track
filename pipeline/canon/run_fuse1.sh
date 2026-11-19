@@ -1,9 +1,9 @@
 #!/bin/bash
 # Dump multi-height predictions for the two best SECOND models, then score height fusion and model fusion.
 set -uo pipefail
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
-P="$HOME/projects/detector-program/env310/bin/python"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
+P="${BDC_PYTHON}"
 G='-3.15 -3.075 -3.0 -2.925 -2.85 -2.775'
 cd "$here"
 bash dump_arm.sh canon_all_s1234 "$here/second_canon_all_v1.yaml" "$D/claude_canon_all_v1" 12 "$G"

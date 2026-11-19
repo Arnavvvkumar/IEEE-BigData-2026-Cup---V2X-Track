@@ -1,11 +1,12 @@
 """Sensor calibration from the public real scans (points only): elevation-angle beam layout, azimuth resolution, range stats.
 Used to set the CARLA sensor profile (channels, upper/lower FOV, points per second)."""
+import os
 import json
 from pathlib import Path
 
 import numpy as np
 
-KIT = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/real_reference_audit/real_dev_cw1')
+KIT = Path(os.environ['BDC_ROOT'] + '/experiments/real_reference_audit/real_dev_cw1')
 ids = json.loads((KIT / 'detection_test_frame_ids.json').read_text())
 out = {}
 els, ns, rmax = [], [], []

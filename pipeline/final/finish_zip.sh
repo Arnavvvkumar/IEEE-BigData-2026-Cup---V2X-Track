@@ -2,9 +2,9 @@
 # Put the user's filled-in declaration into the candidate folder, rebuild the zip, and run the scorer's declaration check on it.
 # usage: finish_zip.sh <candidate dir name> <zip name in Downloads>
 set -euo pipefail
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final"
-dl="/mnt/c/Users/arnav/Downloads"
-P="$HOME/projects/bdc2026-track-b/.env/bin/python"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/final"
+dl="${BDC_OUT}"
+P="${BDC_PYTHON}"
 cd "$here"
 cp "$dl/declaration.txt" "$1/declaration.txt"
 rm -f "$dl/$2"

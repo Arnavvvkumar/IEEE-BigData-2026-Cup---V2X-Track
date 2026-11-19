@@ -3,11 +3,11 @@
 # evaluator as Codex's matched overnight runs (run_second_overnight.sh); only the dataset and the label-derived anchors differ.
 # Refuses to start if another OpenPCDet job is running. ~75 min train + ~5 min eval on the RTX 4070 laptop GPU.
 set -euo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
-program="$HOME/projects/detector-program"
+root="${BDC_ROOT}"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
 python="$program/env310/bin/python"
-data="$HOME/projects/bdc2026-track-b/data"
+data="${BDC_DATA}"
 config="$root/experiments/claude_carla_overnight/boxsize/second_relabel_v1.yaml"
 dataset="$data/claude_v2carla_relabel_mix6000_v1"
 tag=relabel_containers_seed1234
@@ -25,5 +25,5 @@ common=(--repo "$repo" --cfg "$config" --data "$dataset" --checkpoint "$ckpt" --
 "$python" "$root/experiments/detector_program/evaluate_openpcdet.py" "${common[@]}" --out "$out/${tag}_real" \
   --real-kit "$root/experiments/real_reference_audit/real_dev_cw1"
 cd "$root"
-~/projects/bdc2026-track-b/.env/bin/python experiments/claude_carla_overnight/boxsize/score_halves.py \
+${BDC_PYTHON} experiments/claude_carla_overnight/boxsize/score_halves.py \
   "$out/overnight_mix_seed1234_real/predictions.json" "$out/${tag}_real/predictions.json" | tee "$out/${tag}_halves.txt"

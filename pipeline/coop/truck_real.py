@@ -1,6 +1,7 @@
 """Realistic truck metric (dev trucks that are NOT the same parked object repeated within the scenario; parked repeats = do-not-care).
 Also reports all-truck (old gate), Truck+Van type AP, and vehicle AP (to check nothing else moves).
 usage: truck_real.py <set dir> <norule pred name> [...]"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

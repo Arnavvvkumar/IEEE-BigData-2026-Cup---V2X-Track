@@ -1,13 +1,14 @@
 """Diagnostic: do real pedestrian label sizes follow the visible point extent? (decides whether size can be read from points)
 For each labelled pedestrian (>=5 pts): points inside the label box grown by 0.15 m; extent along the label's length / width axes and height.
 usage: ped_extent.py <set dir>"""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import fuse_test as FT  # noqa: E402
 

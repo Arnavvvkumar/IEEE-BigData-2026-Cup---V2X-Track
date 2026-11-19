@@ -3,7 +3,7 @@ CLASS_NAMES:
 - vehicle
 DATA_CONFIG:
   DATASET: CustomDataset
-  DATA_PATH: /home/arnav/projects/bdc2026-track-b/data/claude_canon_all_v1
+  DATA_PATH: ${BDC_DATA}/claude_canon_all_v1
   POINT_CLOUD_RANGE:
   - -40.0
   - -40.0

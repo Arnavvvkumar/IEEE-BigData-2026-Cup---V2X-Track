@@ -8,7 +8,7 @@ CLASS_NAMES:
 - truck
 DATA_CONFIG:
   DATASET: CustomDataset
-  DATA_PATH: /home/arnav/projects/bdc2026-track-b/data/claude_v2carla_relabel_mix6000_v1
+  DATA_PATH: ${BDC_DATA}/claude_v2carla_relabel_mix6000_v1
   POINT_CLOUD_RANGE:
   - -40.0
   - -40.0

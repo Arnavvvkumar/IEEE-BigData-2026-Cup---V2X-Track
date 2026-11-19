@@ -2,12 +2,13 @@
 """AP@0.5 R40 on a coop validation set, same halves as coop/eval150.py.
 usage: score_coop.py <set dir> <predictions.json>
 """
+import os
 import importlib.util
 import json
 import sys
 from pathlib import Path
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ev)

@@ -11,4 +11,4 @@ find $R/code/OpenPCDet/output -path '*pvrcnn_st_osc*' -name 'checkpoint_epoch_*.
 echo "ll files on OSC: $(ls $R/data/claude_twin_ll_v1/points 2>/dev/null | wc -l)"
 EOF
 echo "--- laptop"
-tail -n 6 "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final/p12_combine.log" | cut -c1-220
+tail -n 6 "${BDC_ROOT}/experiments/claude_carla_overnight/final/p12_combine.log" | cut -c1-220

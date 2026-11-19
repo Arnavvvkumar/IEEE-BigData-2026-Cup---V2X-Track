@@ -10,6 +10,6 @@ done
 echo "epoch-2 checkpoint present: $n after $i checks $(date -Is)"
 [ "$n" = 1 ] || { echo "NOT_CANCELLED: epoch-2 checkpoint did not appear in time; T1 left running"; exit 1; }
 sleep 20   # let the file finish writing
-bash "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/osc/fetch_pv_ckpt.sh" 2 pvrcnn_truck_T1
+bash "${BDC_ROOT}/experiments/claude_carla_overnight/osc/fetch_pv_ckpt.sh" 2 pvrcnn_truck_T1
 ssh $K <osc_user>@ascend.osc.edu 'source /etc/profile 2>/dev/null; scancel 8563861; sleep 5; squeue -u <osc_user> -o "%i %j %T %M"; sacct -j 8563861 -X -n --format=JobID,State,Elapsed' 2>&1 | grep -v -E 'authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$'
 echo "T1 CANCELLED $(date -Is)"

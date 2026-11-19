@@ -1,12 +1,13 @@
 """Format + sanity check of test predictions against the kit's frame list, and comparison of detection statistics with the
 dev-frame output of the same ensemble (no labels involved). usage: check_candidate.py <predictions.json>"""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 pred = json.loads(Path(sys.argv[1]).read_text())
 ids = json.loads((W / 'starting_kit/track_b/detection_test_frame_ids.json').read_text())
 assert set(pred) == set(ids) and len(ids) == 50, (len(pred), len(ids))

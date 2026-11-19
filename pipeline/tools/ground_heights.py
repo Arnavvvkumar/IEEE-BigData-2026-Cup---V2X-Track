@@ -1,11 +1,12 @@
 """Ground height in the sensor frame: Generator V2 metadata + cloud percentile, real reference clouds, CARLA dry run."""
+import os
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 recs = json.loads((Path.home() / 'projects/bdc2026-track-b/data/claude_v2_scale5500_fix1/frames.json').read_text())
 h = np.array([r['sensor']['height_m'] for r in recs if r['split'] == 'train'])
 print('GenV2 sensor height_m p5/50/95', np.percentile(h, [5, 50, 95]).round(2), 'min/max', h.min().round(2), h.max().round(2))

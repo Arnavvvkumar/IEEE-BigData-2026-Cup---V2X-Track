@@ -1,10 +1,11 @@
 """Packaging equality only; no test-data diagnostics or candidate selection from content."""
+import os
 import hashlib
 import json
 import zipfile
 from pathlib import Path
 
-root = Path('/mnt/c/Users/arnav/Downloads')
+root = Path(os.environ['BDC_OUT'])
 versions = ['v15s', 'v17s_d15', 'v18s']
 pred, scans = {}, {}
 for version in versions:

@@ -1,6 +1,6 @@
 #!/bin/bash
-F="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final"
-cd /mnt/c/Users/arnav/Downloads
+F="${BDC_ROOT}/experiments/claude_carla_overnight/final"
+cd ${BDC_OUT}
 sed -i 's/\r$//' "$F/build_v13.sh"
 ADD='pvrcnn_ped_P2_ep5:pedestrian pvrcnn_ped_P2_ep5:pedestrian pvrcnn_ped_P2_ep5:pedestrian pvrcnn_ped_P3_ep5:pedestrian pvrcnn_ped_P3_ep5:pedestrian pvrcnn_ped_P3_ep5:pedestrian' bash "$F/build_v13.sh" 13
 # confirm predictions identical to v12 and synthetic identical to v9

@@ -1,6 +1,7 @@
 """Stage the extra non-forbidden real frames as a validation set: xyz scans + labels in the roadside sensor frame.
 Labels: union over agents by object id, centre inside the kit range, with raw type, source agent and number of sensor points.
 usage: stage_more.py <fetched dir> <out dir>"""
+import os
 import json
 import sys
 from pathlib import Path
@@ -8,7 +9,7 @@ from pathlib import Path
 import numpy as np
 import yaml
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'V2X-Real'))
 from opencood.data_utils import SUPER_CLASS_MAP  # noqa: E402
 from opencood.utils.transformation_utils import x1_to_x2  # noqa: E402

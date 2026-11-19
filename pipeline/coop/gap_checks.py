@@ -4,6 +4,7 @@
     dev truck AP under each assumption about the hidden test labels (can counted as truck / can not labelled),
     with our can boxes kept or removed.
 usage: gap_checks.py <dev set dir> <norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -11,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 F = W / 'experiments/claude_carla_overnight/final'
 sys.path.insert(0, str(F))
 import calib  # noqa: E402

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Start both dataset uploads in the background and report the remote size after a minute.
-cd "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/osc"
-D="$HOME/projects/bdc2026-track-b/data"
+cd "${BDC_ROOT}/experiments/claude_carla_overnight/osc"
+D="${BDC_DATA}"
 echo "local files: canon $(find -L $D/claude_canon_all_v1 -type f | wc -l)  twin $(find -L $D/claude_twin_v1 -type f | wc -l)"
 nohup bash upload_data.sh claude_canon_all_v1 > upload_canon.log 2>&1 &
 sleep 2

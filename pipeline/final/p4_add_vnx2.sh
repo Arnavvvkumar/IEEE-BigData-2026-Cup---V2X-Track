@@ -2,8 +2,8 @@
 # P4: add vnx010_twin_s2 (fine-grid VoxelNeXt, second seed, merged twin set) to the ensemble for pedestrians/vehicles.
 # Inference is frame-by-frame (BATCH=1) because batched pedestrian boxes differ slightly from batch-1. Shares the GPU with training (small).
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 echo "P4_START $(date -Is)"
 BATCH=1 bash "$base/final/run_infer_one.sh" vnx010_twin_s2 vnx010_all.yaml claude_canon_all_twin_v1 12
 cd "$base/coop"

@@ -1,6 +1,7 @@
 """Score an ensemble spec on a staged validation set: fusion -> pedestrian static down-weight -> calibration -> truck size rule.
 Labels: cooperative, >= 5 sensor points. Reports AP all / half A / half B per class, and truck AP on genuine trucks.
 usage: eval150.py <set dir> <name> <tag_epN>:<classes> [...]   (classes comma-separated; add 'norule' as last arg to skip the truck rule)"""
+import os
 import importlib.util
 import json
 import sys
@@ -8,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 import fuse_test as FT  # noqa: E402

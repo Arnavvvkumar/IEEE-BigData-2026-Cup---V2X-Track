@@ -6,7 +6,7 @@
 #   P6 = both ideas together: augmentation + claude_canon_all_v1   (three jobs in total)
 K="-i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60"
 F='authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$'
-scp $K "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon/pvrcnn_ped_aug.yaml" <osc_user>@ascend.osc.edu:/fs/scratch/<osc_project>/bdc/cfg/ 2>&1 | grep -v -E "$F"
+scp $K "${BDC_ROOT}/experiments/claude_carla_overnight/canon/pvrcnn_ped_aug.yaml" <osc_user>@ascend.osc.edu:/fs/scratch/<osc_project>/bdc/cfg/ 2>&1 | grep -v -E "$F"
 ssh $K <osc_user>@ascend.osc.edu 'bash -s' 2>&1 << 'EOF' | grep -v -E "$F" | cut -c1-200
 R=/fs/scratch/<osc_project>/bdc
 source /etc/profile 2>/dev/null

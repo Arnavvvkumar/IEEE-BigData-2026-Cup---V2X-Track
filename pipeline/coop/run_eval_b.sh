@@ -1,7 +1,7 @@
 #!/bin/bash
 # Pedestrian test-time shift/rotation passes added to the best ensemble (e_addVT) on the 150 validation frames.
-cd "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/coop"
-P="$HOME/projects/detector-program/env310/bin/python"
+cd "${BDC_ROOT}/experiments/claude_carla_overnight/coop"
+P="${BDC_PYTHON}"
 V=vnx010_all_s1234_ep10; V2=vnx010_all_rs2_amp_ep12; VT=vnx010_twin_s1_ep12
 A=canon_all_s1234_ep12; T=second_twin_s1_ep12; B=canon_relabel_s1234_ep12
 TV=vnx010_all_s1234_tta_ep10; TT=vnx010_twin_s1_tta_ep12

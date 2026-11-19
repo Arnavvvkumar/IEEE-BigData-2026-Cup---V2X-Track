@@ -3,10 +3,10 @@
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
 exp="$(dirname "$here")"
-program="$HOME/projects/detector-program"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
 python="$program/env310/bin/python"
-data="$HOME/projects/bdc2026-track-b/data/claude_canon_all_twin_st_v1"
+data="${BDC_DATA}/claude_canon_all_twin_st_v1"
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
 
 size="${1:?use 150 or 350}"

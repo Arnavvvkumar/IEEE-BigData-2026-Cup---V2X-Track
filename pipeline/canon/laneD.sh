@@ -1,8 +1,8 @@
 #!/bin/bash
 # Parallel GPU lane D: second (random-seed) run of the current best recipe (SECOND, ground-canonical relabel mix).
 # Purpose: seed-variance check on the 47% result and a second ensemble member.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 export WORKERS=2

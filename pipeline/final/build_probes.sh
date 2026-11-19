@@ -5,7 +5,7 @@
 # Motivation (label-free, test frames): vehicle-copy truck boxes with scores 0.15-0.30 outrank the large fixed vehicles (scores 0.24-0.31).
 # Validation cannot judge trucks, so these are meant as leaderboard probes. Both build from the generated v10r script.
 set -euo pipefail
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/final"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/final"
 bash "$here/build_v10r.sh" > /dev/null 2>&1 || true   # regenerates _build_v10r_gen.sh (with the env-driven truck rule)
 for p in "t1 10t1 TRUCKBOOST=2.0" "t2 10t2 TRUCK_A=0.3"; do
   set -- $p; k=$1; name=$2; envset=$3
@@ -14,5 +14,5 @@ for p in "t1 10t1 TRUCKBOOST=2.0" "t2 10t2 TRUCK_A=0.3"; do
   sed -i "s/^export FUSE_ONE_VOTE=vehicle/export FUSE_ONE_VOTE=vehicle; export $envset/" "$here/_build_${name}_gen.sh"
   grep -c "$envset" "$here/_build_${name}_gen.sh"
   bash "$here/_build_${name}_gen.sh" 2>&1 | grep -E 'rule|format|zip |scorer|uncompressed|PROBE_BUILT|Traceback|Error|missing' | cut -c1-230
-  SYN=final_synthetic_v4 ~/projects/detector-program/env310/bin/python "$here/verify_zip_any.py" "bdc2026_trackB_submission_v$name.zip" bdc2026_trackB_submission_v10r.zip | grep -E 'detections|truck|vehicle|pedestrian|declaration|identical'
+  SYN=final_synthetic_v4 ${BDC_PYTHON} "$here/verify_zip_any.py" "bdc2026_trackB_submission_v$name.zip" bdc2026_trackB_submission_v10r.zip | grep -E 'detections|truck|vehicle|pedestrian|declaration|identical'
 done

@@ -1,9 +1,10 @@
 """Pedestrian hedge with HEIGHT variants (current PED_HEDGE only scales length/width). Pre-registered sets, dev150/dev350 with halves.
 usage: ped_hhedge_exp.py <set dir> <norule pred name>"""
+import os
 import importlib.util, json, sys
 from pathlib import Path
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

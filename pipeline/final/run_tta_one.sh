@@ -3,11 +3,11 @@
 # usage: run_tta_one.sh <tag> <cfg name in canon/> <dataset name> <epoch> <scans dir> <out dir>
 set -uo pipefail
 tag=$1; cfg=$2; ds=$3; e=$4; scans=$5; outdir=$6
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 base="$root/experiments/claude_carla_overnight"
-program="$HOME/projects/detector-program"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
-D="$HOME/projects/bdc2026-track-b/data"
+D="${BDC_DATA}"
 ckdir=$(dirname "$(find "$repo/output" -path "*/$tag/ckpt/checkpoint_epoch_*.pth" -print -quit)")
 out="$outdir/${tag}_tta_ep${e}_allpred.json"
 [ -f "$out" ] && { echo "skip $out"; exit 0; }

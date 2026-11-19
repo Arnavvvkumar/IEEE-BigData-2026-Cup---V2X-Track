@@ -1,6 +1,6 @@
 #!/bin/bash
 # Prints READY when the GPU-window conditions in event claude_carla_gpu_window_plan hold; otherwise prints why not.
-W="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+W="${BDC_ROOT}"
 Q="$W/experiments/detector_program/overnight_accuracy_queue.log"
 reasons=()
 grep -q "Waiting for Claude's audited mixed dataset" "$Q" 2>/dev/null || reasons+=("runner_not_waiting")

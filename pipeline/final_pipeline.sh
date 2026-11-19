@@ -2,9 +2,9 @@
 # Post-capture CPU pipeline: refinement table -> conversion -> CARLA audit -> tests -> mix build -> mix audit -> Codex verifier.
 # Does NOT write SECOND_MIX_READY.json (done by hand after reviewing every audit).
 set -euo pipefail
-H="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-D=~/projects/bdc2026-track-b/data
-E=~/projects/bdc2026-track-b/.env/bin/python
+H="${BDC_ROOT}/experiments/claude_carla_overnight"
+D=${BDC_DATA}
+E=${BDC_PYTHON}
 CONV=$D/claude_carla64_town02_v1
 MIX=$D/claude_v2carla_mix6000_v1
 cd "$H"

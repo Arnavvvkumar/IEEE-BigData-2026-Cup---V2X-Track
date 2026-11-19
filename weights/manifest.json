@@ -1,0 +1,164 @@
+[
+ {
+  "file": "vnx010_all_s1234_ep10.pth",
+  "config": "vnx010_all.yaml",
+  "dataset": "claude_canon_all_v1",
+  "classes": "pedestrian, vehicle",
+  "epoch": 10,
+  "size_mb": 29.931326,
+  "sha256": "2f3a6392fb68fc7e4011f4dd95d0976cddb143c0996883e59c7d19bf13f69923"
+ },
+ {
+  "file": "vnx010_twin_s1_ep12.pth",
+  "config": "vnx010_all.yaml",
+  "dataset": "claude_canon_all_twin_v1",
+  "classes": "pedestrian, vehicle",
+  "epoch": 12,
+  "size_mb": 29.930792,
+  "sha256": "51b7f8adcd1466b896468703eff1a3717460462b324ec1b2767e5a0c29f32352"
+ },
+ {
+  "file": "vnx010_all_rs2_amp_ep12.pth",
+  "config": "vnx010_all.yaml",
+  "dataset": "claude_canon_all_v1",
+  "classes": "pedestrian",
+  "epoch": 12,
+  "size_mb": 29.931924,
+  "sha256": "cbe168b7b426be25673ac6d8264e93b2f888bb4472463d49367746a825025fe7"
+ },
+ {
+  "file": "vnx010_pv_ft_ep5.pth",
+  "config": "vnx010_all.yaml",
+  "dataset": "claude_canon_all_twin_pv_v1",
+  "classes": "vehicle",
+  "epoch": 5,
+  "size_mb": 29.929991,
+  "sha256": "edb14cdee69a055951c1c2aa59bd152a2898f1afdfc4c431026264e75350ea76"
+ },
+ {
+  "file": "vnx010_pv_ft2_ep5.pth",
+  "config": "vnx010_all.yaml",
+  "dataset": "claude_canon_all_twin_pv_v1",
+  "classes": "vehicle",
+  "epoch": 5,
+  "size_mb": 29.930258,
+  "sha256": "b159f0f3b97f1e0290d77efd91198cf683c939ae28c7a9caca104476e72aadfe"
+ },
+ {
+  "file": "vnx010_pv_ft4_ep4.pth",
+  "config": "vnx010_all.yaml",
+  "dataset": "claude_canon_all_twin_pv_v1",
+  "classes": "vehicle",
+  "epoch": 4,
+  "size_mb": 29.930258,
+  "sha256": "f5522b6eb423a37ddb07a549dbead82c4784d881547a657632ae05fc9cb59a48"
+ },
+ {
+  "file": "canon_all_s1234_ep12.pth",
+  "config": "second_canon_all_v1.yaml",
+  "dataset": "claude_canon_all_v1",
+  "classes": "vehicle, truck",
+  "epoch": 12,
+  "size_mb": 21.385447,
+  "sha256": "25e09e764d615f6bdd3991060ecfb5011704c4454750426d36b6fc828c9097e2"
+ },
+ {
+  "file": "second_twin_s1_ep12.pth",
+  "config": "second_canon_all_v1.yaml",
+  "dataset": "claude_canon_all_twin_v1",
+  "classes": "vehicle, truck",
+  "epoch": 12,
+  "size_mb": 21.38528,
+  "sha256": "306b50a0660d4bab715956fcbf44bc8ea8640e0e6da2f0e1a7ad9dcd8d17510e"
+ },
+ {
+  "file": "second_twin_s2_ep12.pth",
+  "config": "second_canon_all_v1.yaml",
+  "dataset": "claude_canon_all_twin_v1",
+  "classes": "vehicle, truck",
+  "epoch": 12,
+  "size_mb": 21.38528,
+  "sha256": "961ef344270eadd838cb3b2fdd6d64db6d26d3dc310d2d225c92bfdf2d26c89a"
+ },
+ {
+  "file": "canon_relabel_s1234_ep12.pth",
+  "config": "second_canon_v1.yaml",
+  "dataset": "claude_canon_relabel_mix6000_v1",
+  "classes": "vehicle, truck",
+  "epoch": 12,
+  "size_mb": 21.386243,
+  "sha256": "91896abf39b44cf1d73657e2f5a28b3f6182c6b1950d6b9f9eadffbbe48938a7"
+ },
+ {
+  "file": "second_twin_st_s1_ep12.pth",
+  "config": "second_canon_all_v1.yaml",
+  "dataset": "claude_canon_all_twin_st_v1",
+  "classes": "truck",
+  "epoch": 12,
+  "size_mb": 21.385845,
+  "sha256": "535dbf254ef8251719c5ea802c38401e097750e468e7a85c9d6f84ee2ac2bb58"
+ },
+ {
+  "file": "second_twin_pv_s1_ep14.pth",
+  "config": "second_canon_all_v1.yaml",
+  "dataset": "claude_canon_all_twin_pv_v1",
+  "classes": "truck",
+  "epoch": 14,
+  "size_mb": 21.385845,
+  "sha256": "8686f2f6fb411942a6c2182e779637b8875efca48f47e78635e85720970fabfd"
+ },
+ {
+  "file": "pvrcnn_st_osc_ep6.pth",
+  "config": "pvrcnn_all.yaml",
+  "dataset": "claude_canon_all_twin_st_v1",
+  "classes": "pedestrian, vehicle, truck",
+  "epoch": 6,
+  "size_mb": 52.456274,
+  "sha256": "85f3c843da796300b83394aaece6394d077ad0c13c200247aa6056b9393669ff"
+ },
+ {
+  "file": "pvrcnn_st_osc_s2_ep4.pth",
+  "config": "pvrcnn_all.yaml",
+  "dataset": "claude_canon_all_twin_st_v1",
+  "classes": "pedestrian, vehicle",
+  "epoch": 4,
+  "size_mb": 52.457243,
+  "sha256": "ee6d7497e5534e913f42525b20e5daee32774a045d3adbc69be6586d91876def"
+ },
+ {
+  "file": "pvrcnn_ped_P1_ep5.pth",
+  "config": "pvrcnn_ped.yaml",
+  "dataset": "claude_canon_all_twin_st_v1",
+  "classes": "pedestrian",
+  "epoch": 5,
+  "size_mb": 52.34965,
+  "sha256": "a859d43e9fd5e737bebbbb1b56e8ca6f776096bd2abc99c3f6ddad61f12f1197"
+ },
+ {
+  "file": "pvrcnn_ped_P2_ep5.pth",
+  "config": "pvrcnn_ped.yaml",
+  "dataset": "claude_canon_all_twin_st_v1",
+  "classes": "pedestrian",
+  "epoch": 5,
+  "size_mb": 52.34965,
+  "sha256": "2264a74980855207d809efa74c62eefd73242639744b3ea9776ac5aec3463e70"
+ },
+ {
+  "file": "pvrcnn_ped_P3_ep5.pth",
+  "config": "pvrcnn_ped.yaml",
+  "dataset": "claude_canon_all_twin_st_v1",
+  "classes": "pedestrian",
+  "epoch": 5,
+  "size_mb": 52.34965,
+  "sha256": "18307e61dcc739728784e1bdecda477878d0b7c8c37b4e2e94479f65ddc7100d"
+ },
+ {
+  "file": "pvrcnn_ped_P4_ep5.pth",
+  "config": "pvrcnn_ped_aug.yaml",
+  "dataset": "claude_canon_all_twin_st_v1",
+  "classes": "pedestrian",
+  "epoch": 5,
+  "size_mb": 52.34965,
+  "sha256": "43a7b940fd2b03def7ce3da44e0d1871dd2d122153e1d7a4b9e2d54adc2ba302"
+ }
+]

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Read-only status: OSC jobs, laptop scoring runs, Codex, GPU, memory.
-b="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments"
+b="${BDC_ROOT}/experiments"
 date +%H:%M
 echo "--- laptop processes"
 for p in p19_T1P1 p20_T1ep2 eval150 infer_test 'codex_final' realism; do echo "$p: $(pgrep -fc "$p")"; done

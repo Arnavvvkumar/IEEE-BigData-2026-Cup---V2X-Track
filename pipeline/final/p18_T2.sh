@@ -2,8 +2,8 @@
 # P18 (laptop; OSC read-only): when T2 (8563862, SECOND truck-only) leaves the queue, fetch its last checkpoint, infer, and score it on top
 # of v9 (bundle B) as a truck voter with weight 1, 3 and 6 (the same pass listed several times = more votes), both dev sets.
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 K="-i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60"
 TAG=second_truck_T2
 echo "P18_START $(date -Is)"

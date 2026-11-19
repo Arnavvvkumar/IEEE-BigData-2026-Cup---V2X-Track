@@ -2,6 +2,7 @@
  - pedestrian box size fixed to the real median size (box-size statistics from the SELECTION half labels only)
  - box bottom placed on the fitted ground plane plus an offset (pedestrian / vehicle)
 usage: post2.py <predictions.json> <out.json>"""
+import os
 import importlib.util
 import json
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/erroranalysis'))
 from groundplane import fit_ground, level_transform  # noqa: E402
 

@@ -6,6 +6,7 @@ Pre-registered variants:
   S1/S2: swap - if the 0.8x0.8 variant keeps >= 95% / >= 90% of the primary's points, it takes the primary's score and the primary
          becomes a variant at 0.2x.
 usage: ped_var_points.py <set dir> <ped-only norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -13,7 +14,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import calib  # noqa: E402
 

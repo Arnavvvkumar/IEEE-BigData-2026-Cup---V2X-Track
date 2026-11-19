@@ -3,6 +3,7 @@ which box component is limiting? Oracle per component (copy that component from 
 Also signed errors (pred - GT): radial / tangential centre, bottom z, top z, height, length, width, |yaw| mod 90.
 And the bottom z relative to the local ground (median z of ground points within 1.5 m), pred vs GT.
 usage: ped_loc_diag.py <set dir> <norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 spec = importlib.util.spec_from_file_location('ev', W / 'starting_kit/track_b/scoring_program/detection_eval.py')
 ev = importlib.util.module_from_spec(spec); spec.loader.exec_module(ev)
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))

@@ -6,7 +6,7 @@ list=$2
 id=$3
 host=${4:-ascend.osc.edu}
 here="$(cd "$(dirname "$0")" && pwd)"
-D="$HOME/projects/bdc2026-track-b/data"
+D="${BDC_DATA}"
 R=/fs/scratch/<osc_project>/bdc/data
 LOG="$here/upload_shard_${ds}_${id}.log"
 SSHCMD="ssh -i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -c aes128-gcm@openssh.com -o IPQoS=throughput"

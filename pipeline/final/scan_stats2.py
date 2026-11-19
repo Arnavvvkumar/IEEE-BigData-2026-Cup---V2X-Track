@@ -1,10 +1,11 @@
 """Are the released test scans the dev-style scans cropped to the kit range? Plane comparison (points only)."""
+import os
 import sys
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/erroranalysis'))
 from groundplane import fit_ground  # noqa: E402
 

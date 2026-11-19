@@ -2,8 +2,8 @@
 # P4: (1) size-aware pedestrian model used as a VEHICLE voter only; (2) wait for Lane O (SECOND on the full merged set), infer, score.
 # Baseline = st_truckonly (dev150 69.0, dev350 68.23). One eval at a time (11 GB RAM).
 set -uo pipefail
-base="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-P="$HOME/projects/detector-program/env310/bin/python"
+base="${BDC_ROOT}/experiments/claude_carla_overnight"
+P="${BDC_PYTHON}"
 cd "$base/coop"
 export FUSE_YAW_CIRC=vehicle
 V3="vnx010_all_s1234_ep10:pedestrian,vehicle vnx010_all_rs2_amp_ep12:pedestrian vnx010_twin_s1_ep12:pedestrian,vehicle vnx010_twin_s1_tta_ep12:pedestrian vnx010_all_s1234_tta_ep10:pedestrian vnx010_twin_s2_ep12:pedestrian"

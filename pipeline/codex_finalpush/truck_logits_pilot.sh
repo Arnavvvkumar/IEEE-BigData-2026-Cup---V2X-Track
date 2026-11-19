@@ -3,7 +3,7 @@
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
 exp="$(dirname "$here")"
-program="$HOME/projects/detector-program"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
 python="$program/env310/bin/python"
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
@@ -25,7 +25,7 @@ for size in 150 350; do
         (( used < 2048 ))
         TRUCK_LOGIT_MODE="$mode" "$python" -B "$here/truck_logits_export.py" \
             --repo "$repo" --cfg "$exp/canon/second_canon_all_v1.yaml" \
-            --data "$HOME/projects/bdc2026-track-b/data/claude_canon_all_twin_st_v1" \
+            --data "${BDC_DATA}/claude_canon_all_twin_st_v1" \
             --checkpoint "$checkpoint" --scans "$exp/coop/dev$size/scans" \
             --out "$out/$mode.json" --ground -3.0 --limit "$limit" --workers 1 > "$out/$mode.log" 2>&1
     done

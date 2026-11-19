@@ -1,10 +1,10 @@
 #!/bin/bash
 # Parallel GPU lane C: fine-grid (0.1 m) VoxelNeXt on the full canonical set (pedestrians), then PV-RCNN.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-bx="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/boxsize"
-D="$HOME/projects/bdc2026-track-b/data/claude_canon_all_v1"
-P="$HOME/projects/bdc2026-track-b/.env/bin/python"
-T="$HOME/projects/detector-program/OpenPCDet/tools/cfgs/custom_models"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+bx="${BDC_ROOT}/experiments/claude_carla_overnight/boxsize"
+D="${BDC_DATA}/claude_canon_all_v1"
+P="${BDC_PYTHON}"
+T="${BDC_PROGRAM}/OpenPCDet/tools/cfgs/custom_models"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 [ -f vnx010_all.yaml ] || "$P" make_cfg.py "$T/voxelnext_xy010_v1.yaml" "$D" vnx010_all.yaml score=0.05 train_voxels=60000 test_voxels=80000

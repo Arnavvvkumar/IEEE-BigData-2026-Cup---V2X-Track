@@ -3,9 +3,9 @@
 # 1) test export of P1 TTA (per-scan, batch 1, fixed seed);  2) dev TTA for P2, P3;  3) gate cumulatively on top of v13 + P1tta x3;
 # 4) test export of P2/P3 TTA.  Same variants as the VoxelNeXt TTA passes.
 set -uo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 base="$root/experiments/claude_carla_overnight"; canon="$base/canon"
-program="$HOME/projects/detector-program"; repo="$program/OpenPCDet"; D="$HOME/projects/bdc2026-track-b/data"
+program="${BDC_PROGRAM}"; repo="$program/OpenPCDet"; D="${BDC_DATA}"
 P="$program/env310/bin/python"; scans="$root/starting_kit/track_b/detection_test_frames"; out="$base/final/test_allpred_ps1"
 B="vnx010_all_s1234_ep10:pedestrian,vehicle vnx010_twin_s1_ep12:pedestrian,vehicle vnx010_pv_ft_ep5:vehicle vnx010_pv_ft2_ep5:vehicle vnx010_all_rs2_amp_ep12:pedestrian vnx010_twin_s1_tta_ep12:pedestrian vnx010_all_s1234_tta_ep10:pedestrian canon_all_s1234_ep12:vehicle,truck second_twin_s1_ep12:vehicle,truck canon_relabel_s1234_ep12:vehicle,truck second_twin_s2_ep12:vehicle,truck second_twin_st_s1_ep12:truck second_twin_pv_s1_ep14:truck vnx010_pv_ft4_ep4:vehicle pvrcnn_st_osc_ep6:pedestrian,vehicle,truck pvrcnn_st_osc_s2_ep4:pedestrian,vehicle pvrcnn_ped_P1_ep5:pedestrian pvrcnn_ped_P1_ep5:pedestrian pvrcnn_ped_P1_ep5:pedestrian pvrcnn_ped_P2_ep5:pedestrian pvrcnn_ped_P2_ep5:pedestrian pvrcnn_ped_P2_ep5:pedestrian pvrcnn_ped_P3_ep5:pedestrian pvrcnn_ped_P3_ep5:pedestrian pvrcnn_ped_P3_ep5:pedestrian"
 x3() { echo "$1:pedestrian $1:pedestrian $1:pedestrian"; }

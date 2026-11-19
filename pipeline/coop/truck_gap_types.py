@@ -1,5 +1,6 @@
 """Truck dev-vs-test gap, step 1: what is a 'truck' in the dev labels? Types, sizes, point counts, range; and V2X-Real class map.
 usage: truck_gap_types.py   (reads dev150 and dev350 gt_coop.json; no test labels exist locally)"""
+import os
 import json
 import sys
 from collections import Counter
@@ -7,7 +8,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'V2X-Real'))
 from opencood.data_utils import SUPER_CLASS_MAP  # noqa: E402
 

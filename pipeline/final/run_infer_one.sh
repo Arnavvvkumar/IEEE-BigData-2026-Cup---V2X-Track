@@ -3,11 +3,11 @@
 # usage: run_infer_one.sh <tag> <cfg name in canon/> <dataset name> <epoch>
 set -uo pipefail
 tag=$1; cfg=$2; ds=$3; e=$4
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 base="$root/experiments/claude_carla_overnight"
-program="$HOME/projects/detector-program"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
-D="$HOME/projects/bdc2026-track-b/data"
+D="${BDC_DATA}"
 G='-3.15 -3.075 -3.0 -2.925 -2.85 -2.775'
 ckdir=$(dirname "$(find "$repo/output" -path "*/$tag/ckpt/checkpoint_epoch_*.pth" -print -quit)")
 for pair in "$base/coop/dev150/scans|$base/coop/dev150/allpred" "$root/starting_kit/track_b/detection_test_frames|$base/final/test_allpred" \

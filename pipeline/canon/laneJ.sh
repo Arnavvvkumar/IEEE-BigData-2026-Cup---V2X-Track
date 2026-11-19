@@ -1,7 +1,7 @@
 #!/bin/bash
 # Lane J: third fine-grid VoxelNeXt seed on the canonical full set (old data), mixed precision. Pedestrian ensemble member.
-here="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/canon"
-D="$HOME/projects/bdc2026-track-b/data"
+here="${BDC_ROOT}/experiments/claude_carla_overnight/canon"
+D="${BDC_DATA}"
 G='-3.15 -3.0 -2.85 -2.7'
 cd "$here"
 while pgrep -f 'detilt_eval.py' > /dev/null; do sleep 20; done

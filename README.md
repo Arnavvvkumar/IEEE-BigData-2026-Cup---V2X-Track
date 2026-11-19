@@ -17,6 +17,11 @@ All detectors are trained **from scratch on synthetic data only**. Real data is 
 
 | Path | Contents |
 |---|---|
+| `submission/` | **The exact scored files of submission 1054222**: `predictions.json` and the 50 synthetic scans |
+| `weights/` | **Trained weights of all 18 models in the final ensemble** (release assets) with configs, training sets and SHA-256 hashes |
+| `generator_v2/` | **Generator V2 code** (byte-identical to the version that produced its training frames) and its OpenPCDet converter |
+| `pipeline/env.sh` | **The one path configuration** (`BDC_ROOT`) used by every script |
+| `LICENSE` | MIT License |
 | `report/` | Final report (PDF) and LaTeX source |
 | `pipeline/carla_gen_v3.py`, `convert_carla_v3.py`, `build_mix.py` | CARLA roadside capture, conversion to OpenPCDet format, Generator V2 + CARLA training mix |
 | `pipeline/canon/` | Ground-canonical datasets (`build_canon.py`) and all OpenPCDet detector configs (`*.yaml`) |
@@ -36,13 +41,17 @@ All detectors are trained **from scratch on synthetic data only**. Real data is 
 - The organizers' starting kit (`starting_kit/track_b`: scorer, 50 test scans, forbidden-frame list) and the V2X-Real infrastructure scans.
 - Hardware used: one RTX 4070 laptop GPU and A100 40 GB jobs on OSC; about 110 + 47 GPU hours in total.
 
-**Paths.** The scripts contain the absolute paths of our machine. Before running anything, replace them with your own:
+**Paths.** No script contains a machine-specific path. Everything is derived from **one configurable root, `BDC_ROOT`**, set in [`pipeline/env.sh`](pipeline/env.sh):
 
 ```bash
-grep -rl "/mnt/c/Users/arnav/Downloads/BIG DATA IEEE" pipeline | xargs sed -i 's#/mnt/c/Users/arnav/Downloads/BIG DATA IEEE#/path/to/workdir#g'
+export BDC_ROOT=/path/to/workdir                                   # the only path to set (avoid spaces)
+bash pipeline/setup_workdir.sh /path/to/starting_kit/track_b      # one-time: creates the expected layout via links
+source pipeline/env.sh                                             # in every new shell
 ```
 
-The layout the scripts expect under `/path/to/workdir`: `experiments/claude_carla_overnight/` = this repo's `pipeline/`, and `starting_kit/track_b/` = the organizers' kit. Datasets go to `$HOME/projects/bdc2026-track-b/data/`, OpenPCDet to `$HOME/projects/detector-program/OpenPCDet`.
+`env.sh` derives `BDC_DATA` (synthetic datasets), `BDC_PROGRAM` (contains `OpenPCDet/`), `BDC_PYTHON`, `BDC_OUT` (zips) and `BDC_REALISM_DEPS` from `BDC_ROOT`; each can be overridden. Shell scripts use `${BDC_ROOT}` etc., Python scripts `os.environ['BDC_ROOT']`.
+
+**Shortcut without retraining:** download the trained weights (`bash weights/download_weights.sh`) and start at Step 3, or compare against the exact scored files in `submission/`.
 
 ---
 
@@ -59,7 +68,12 @@ The layout the scripts expect under `/path/to/workdir`: `experiments/claude_carl
    ```bash
    python pipeline/canon/build_canon.py --help
    ```
-   The Generator V2 frames (`codex_openpcdet_custom_v1`, 5,000 + 500 val) came from our earlier synthetic generator and are used unchanged.
+   The Generator V2 frames (`codex_openpcdet_custom_v1`, 5,000 + 500 val) are produced by [`generator_v2/`](generator_v2/) (procedural meshes ray cast with Open3D, no real data):
+   ```bash
+   python generator_v2/scripts/generate_synthetic_v2.py --config generator_v2/configs/generator_v2.yaml \
+     --output "$BDC_DATA/claude_v2_scale5500_fix1" --train 5000 --validate 500 --seed 2026 --workers 8
+   python generator_v2/prepare_openpcdet_data.py --out "$BDC_DATA/codex_openpcdet_custom_v1"
+   ```
 3. **Site-calibrated twin sets.** These need **unlabelled** real development clouds only (never the forbidden frames, never labels):
    ```bash
    python pipeline/twin/static_map.py      # static voxel map (used for pedestrian down-weighting)
@@ -78,9 +92,9 @@ The layout the scripts expect under `/path/to/workdir`: `experiments/claude_carl
 Every model is a standard OpenPCDet training run from scratch, for example:
 
 ```bash
-cd $HOME/projects/detector-program/OpenPCDet/tools
-python train.py --cfg_file /path/to/pipeline/canon/pvrcnn_ped.yaml --batch_size 4 --epochs 5 \
-  --extra_tag pvrcnn_ped_P1 --set DATA_CONFIG.DATA_PATH $HOME/projects/bdc2026-track-b/data/claude_canon_all_twin_st_v1
+cd "$BDC_PROGRAM/OpenPCDet/tools"
+"$BDC_PYTHON" train.py --cfg_file "$BDC_ROOT/experiments/claude_carla_overnight/canon/pvrcnn_ped.yaml" --batch_size 4 --epochs 5 \
+  --extra_tag pvrcnn_ped_P1 --set DATA_CONFIG.DATA_PATH "$BDC_DATA/claude_canon_all_twin_st_v1"
 ```
 
 On a Slurm cluster, `pipeline/osc/pvrcnn_train.sbatch` runs the same command (set `TAG`, `CFG`, `DATA`, `EPOCHS`, `BS`). Random seeds are not fixed; the `_s1`, `_s2`, `_P1`… suffixes are repeated runs.
@@ -152,8 +166,9 @@ Expected contents: 50 frames with 21,892 vehicle, 33,173 pedestrian and 17,783 t
 
 ## Not included
 
-- **Data**: V2X-Real scans and labels, the forbidden-frame list, our synthetic datasets and the submitted scans (licence and size).
-- **Model weights, predictions, logs and submission zips** (tens of GB).
+- **Real data**: V2X-Real scans and labels and the organizers' forbidden-frame list (their licence).
+- **Our synthetic training sets** (tens of GB); they are regenerated by the scripts in Step 1 and `generator_v2/`.
+- **Intermediate predictions and logs.** The final weights (`weights/`) and the final submission files (`submission/`) are included.
 
 ---
 

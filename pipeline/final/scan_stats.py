@@ -1,10 +1,11 @@
 """Point statistics: released test scans vs dev frames (points only)."""
+import os
 import json
 from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 for name, d in (('dev', W / 'experiments/real_reference_audit/real_dev_cw1/detection_test_frames'),
                 ('test', W / 'starting_kit/track_b/detection_test_frames')):
     rows = []

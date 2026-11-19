@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
-H="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight"
-E=~/projects/bdc2026-track-b/.env/bin/python
-CONV=~/projects/bdc2026-track-b/data/claude_carla64_town02_v2c
+H="${BDC_ROOT}/experiments/claude_carla_overnight"
+E=${BDC_PYTHON}
+CONV=${BDC_DATA}/claude_carla64_town02_v2c
 cd "$H"
 nice -n 10 taskset -c 4-13 $E convert_carla.py --native native_v1 --out $CONV --containers-seed 4242
 nice -n 10 taskset -c 4-13 $E audit_carla.py --native native_v1 --converted $CONV --out audit_carla_v2c.json

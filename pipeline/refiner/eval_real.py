@@ -1,6 +1,7 @@
 """Apply the synthetic-trained refiner to the pedestrian boxes of a finished prediction file on a validation set and score
 pedestrian AP (all / half A / half B) for several ways of using its output. Labels are only used for scoring.
 usage: eval_real.py <set dir> <pred name> <refiner .pt>"""
+import os
 import importlib.util
 import json
 import sys
@@ -13,7 +14,7 @@ import torch
 sys.path.insert(0, str(Path(__file__).parent))
 import common as C  # noqa: E402
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 sys.path.insert(0, str(W / 'experiments/claude_carla_overnight/final'))
 import fuse_test as FT  # noqa: E402
 

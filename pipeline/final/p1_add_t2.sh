@@ -3,13 +3,13 @@
 # Step 0 checks that the batched inference (Cursor's batched_forward) equals batch-1 inference on the same frames.
 # Step 1 runs the model on dev150, the 50 test scans and dev350 (no labels). Step 2 scores ensembles on dev150 and dev350.
 set -uo pipefail
-root="/mnt/c/Users/arnav/Downloads/BIG DATA IEEE"
+root="${BDC_ROOT}"
 base="$root/experiments/claude_carla_overnight"
 here="$base/final"
-program="$HOME/projects/detector-program"
+program="${BDC_PROGRAM}"
 repo="$program/OpenPCDet"
 P="$program/env310/bin/python"
-D="$HOME/projects/bdc2026-track-b/data"
+D="${BDC_DATA}"
 tmp="$base/coop/batchcheck"
 mkdir -p "$tmp"
 echo "P1_START $(date -Is)"
@@ -23,7 +23,7 @@ done
 "$P" - << 'PY'
 import json
 from pathlib import Path
-t = Path("/mnt/c/Users/arnav/Downloads/BIG DATA IEEE/experiments/claude_carla_overnight/coop/batchcheck")
+t = Path(__import__('os').environ['BDC_ROOT'] + "/experiments/claude_carla_overnight/coop/batchcheck")
 a, b = json.loads((t / "b1.json").read_text()), json.loads((t / "b4.json").read_text())
 worst, ndiff = 0.0, 0
 for g in a:

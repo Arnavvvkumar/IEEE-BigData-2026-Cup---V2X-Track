@@ -3,6 +3,7 @@ With 124 truck labels in 50 frames, a few fixed objects handled badly in every f
 Clusters box centres on a 2 m grid across frames; prints clusters present in >= 60% of frames.
 Also prints the same table for a validation set, where each cluster can be compared with the labels at that place.
 usage: persistent_test.py <dev set dir> <dev norule pred name>"""
+import os
 import importlib.util
 import json
 import sys
@@ -11,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-W = Path('/mnt/c/Users/arnav/Downloads/BIG DATA IEEE')
+W = Path(os.environ['BDC_ROOT'])
 F = W / 'experiments/claude_carla_overnight/final'
 sys.path.insert(0, str(F))
 import calib  # noqa: E402
