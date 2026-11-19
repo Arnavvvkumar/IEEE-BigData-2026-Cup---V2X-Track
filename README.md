@@ -180,6 +180,10 @@ Expected contents: 50 frames with 21,892 vehicle, 33,173 pedestrian and 17,783 t
 - No frame from the organizers' forbidden-frame list was used at any stage (`pipeline/final/check_forbidden.py`).
 - Each test scan is processed independently; no pseudo-labels, self-training or tuning on test scans.
 
+## License
+
+[MIT](LICENSE). It covers the code, configuration files, the released model weights and the submission files in this repository. The detectors are built with OpenPCDet (Apache License 2.0), which is not included here; the V2X-Real data and the organizers' starting kit are not distributed and remain under their own terms.
+
 ## Citation
 
 If you use this code, please cite our report (see `report/`) and the challenge papers by Shahbaz and Agarwal (IEEE T-ITS 2026; IEEE OJ-ITS 2026).
