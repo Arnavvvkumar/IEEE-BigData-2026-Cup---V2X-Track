@@ -4,6 +4,7 @@
  2. pedestrian score *= (1 - 0.8 * static fraction), static map = 0.25 m voxels occupied in >= 30% of the UNLABELLED dev frames
     (levelled, non-ground points); twin/static_filter.py variant ped_scale0.8_f0.3. The map never contains the scored scans.
 usage: fuse_test.py <scans dir> <out predictions.json> <pass spec> ..."""
+import os
 import json
 import sys
 from pathlib import Path
@@ -222,17 +223,28 @@ def in_box(p, c, d, yaw):
 
 
 def static_down(pred, clouds, exclude=()):
-    dev = load(DEV)
-    planes = np.array([fit_ground(dev[f], np.random.default_rng(i)) for i, f in enumerate(dev)])
-    R, t = level_transform(np.median(planes, 0), GZ)
-
+    # The static map can be loaded from a file (FUSE_STATIC_MAP=static_map.npz: voxel keys + median dev ground plane), so the
+    # final predictions can be rebuilt without the unlabelled real development clouds. FUSE_STATIC_MAP_SAVE writes that file.
+    if os.environ.get('FUSE_STATIC_MAP'):
+        z = np.load(os.environ['FUSE_STATIC_MAP'])
+        S, plane, n_frames = z['S'], z['plane'], int(z['map_frames'])
+        R, t = level_transform(plane, GZ)
+    else:
+        dev = load(DEV)
+        planes = np.array([fit_ground(dev[f], np.random.default_rng(i)) for i, f in enumerate(dev)])
+        plane = np.median(planes, 0)
+        R, t = level_transform(plane, GZ)
     def nonground(p):
         q = p @ R.T + t
         return q[q[:, 2] > GZ + GCUT]
-    frames = [f for f in dev if f not in exclude]
-    allk = np.concatenate([np.unique(vkey(nonground(dev[f]))) for f in frames])
-    u, cnt = np.unique(allk, return_counts=True)
-    S = u[cnt >= FRAC * len(frames)]
+    if not os.environ.get('FUSE_STATIC_MAP'):
+        frames = [f for f in dev if f not in exclude]
+        n_frames = len(frames)
+        allk = np.concatenate([np.unique(vkey(nonground(dev[f]))) for f in frames])
+        u, cnt = np.unique(allk, return_counts=True)
+        S = u[cnt >= FRAC * len(frames)]
+        if os.environ.get('FUSE_STATIC_MAP_SAVE'):
+            np.savez_compressed(os.environ['FUSE_STATIC_MAP_SAVE'], S=S, plane=plane, map_frames=n_frames)
     out, changed = {}, 0
     for f, dets in pred.items():
         p = nonground(clouds[f])
@@ -251,7 +263,7 @@ def static_down(pred, clouds, exclude=()):
                 d['score'] = d['score'] * (1 - DOWN * sf)
             new.append(d)
         out[f] = new
-    return out, {'static_voxels': int(len(S)), 'map_frames': len(frames), 'pedestrians_downweighted': int(changed)}
+    return out, {'static_voxels': int(len(S)), 'map_frames': n_frames, 'pedestrians_downweighted': int(changed)}
 
 
 if __name__ == '__main__':

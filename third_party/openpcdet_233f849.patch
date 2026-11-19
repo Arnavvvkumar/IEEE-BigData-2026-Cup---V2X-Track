@@ -1,0 +1,87 @@
+diff --git a/pcdet/datasets/__init__.py b/pcdet/datasets/__init__.py
+index 47c3900..03381a7 100644
+--- a/pcdet/datasets/__init__.py
++++ b/pcdet/datasets/__init__.py
+@@ -12,7 +12,12 @@ from .waymo.waymo_dataset import WaymoDataset
+ from .pandaset.pandaset_dataset import PandasetDataset
+ from .lyft.lyft_dataset import LyftDataset
+ from .once.once_dataset import ONCEDataset
+-from .argo2.argo2_dataset import Argo2Dataset
++try:
++    from .argo2.argo2_dataset import Argo2Dataset
++except ModuleNotFoundError as exc:
++    if exc.name != 'av2':
++        raise
++    Argo2Dataset = None
+ from .custom.custom_dataset import CustomDataset
+ 
+ __all__ = {
+diff --git a/pcdet/datasets/custom/custom_dataset.py b/pcdet/datasets/custom/custom_dataset.py
+index 3715210..a64be1f 100644
+--- a/pcdet/datasets/custom/custom_dataset.py
++++ b/pcdet/datasets/custom/custom_dataset.py
+@@ -60,7 +60,7 @@ class CustomDataset(DatasetTemplate):
+             gt_boxes.append(line_list[:-1])
+             gt_names.append(line_list[-1])
+ 
+-        return np.array(gt_boxes, dtype=np.float32), np.array(gt_names)
++        return np.array(gt_boxes, dtype=np.float32).reshape(-1, 7), np.array(gt_names)
+ 
+     def get_lidar(self, idx):
+         lidar_file = self.root_path / 'points' / ('%s.npy' % idx)
+diff --git a/pcdet/datasets/dataset.py b/pcdet/datasets/dataset.py
+index c1a7f6b..f8a333e 100644
+--- a/pcdet/datasets/dataset.py
++++ b/pcdet/datasets/dataset.py
+@@ -209,9 +209,7 @@ class DatasetTemplate(torch_data.Dataset):
+             data_dict=data_dict
+         )
+ 
+-        if self.training and len(data_dict['gt_boxes']) == 0:
+-            new_index = np.random.randint(self.__len__())
+-            return self.__getitem__(new_index)
++        # Retain empty frames: they provide negative training examples.
+ 
+         data_dict.pop('gt_names', None)
+ 
+diff --git a/tools/train.py b/tools/train.py
+index 7aed737..93fd3fc 100644
+--- a/tools/train.py
++++ b/tools/train.py
+@@ -43,6 +43,7 @@ def parse_config():
+     parser.add_argument('--start_epoch', type=int, default=0, help='')
+     parser.add_argument('--num_epochs_to_eval', type=int, default=0, help='number of checkpoints to be evaluated')
+     parser.add_argument('--save_to_file', action='store_true', default=False, help='')
++    parser.add_argument('--skip_builtin_eval', action='store_true', help='Use the Track B evaluator separately')
+     
+     parser.add_argument('--use_tqdm_to_record', action='store_true', default=False, help='if True, the intermediate losses will not be logged to file, only tqdm will be used')
+     parser.add_argument('--logger_iter_interval', type=int, default=50, help='')
+@@ -88,7 +89,7 @@ def main():
+     args.epochs = cfg.OPTIMIZATION.NUM_EPOCHS if args.epochs is None else args.epochs
+ 
+     if args.fix_random_seed:
+-        common_utils.set_random_seed(666 + cfg.LOCAL_RANK)
++        common_utils.set_random_seed(1234 + cfg.LOCAL_RANK)
+ 
+     output_dir = cfg.ROOT_DIR / 'output' / cfg.EXP_GROUP_PATH / cfg.TAG / args.extra_tag
+     ckpt_dir = output_dir / 'ckpt'
+@@ -126,7 +127,7 @@ def main():
+         training=True,
+         merge_all_iters_to_one_epoch=args.merge_all_iters_to_one_epoch,
+         total_epochs=args.epochs,
+-        seed=666 if args.fix_random_seed else None
++        seed=1234 if args.fix_random_seed else None
+     )
+ 
+     model = build_network(model_cfg=cfg.MODEL, num_class=len(cfg.CLASS_NAMES), dataset=train_set)
+@@ -208,6 +209,10 @@ def main():
+     logger.info('**********************End training %s/%s(%s)**********************\n\n\n'
+                 % (cfg.EXP_GROUP_PATH, cfg.TAG, args.extra_tag))
+ 
++    if args.skip_builtin_eval:
++        logger.info('Skipping built-in evaluation; use the Track B evaluator.')
++        return
++
+     logger.info('**********************Start evaluation %s/%s(%s)**********************' %
+                 (cfg.EXP_GROUP_PATH, cfg.TAG, args.extra_tag))
+     test_set, test_loader, sampler = build_dataloader(

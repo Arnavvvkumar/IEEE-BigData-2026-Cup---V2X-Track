@@ -21,6 +21,9 @@ All detectors are trained **from scratch on synthetic data only**. Real data is 
 | `weights/` | **Trained weights of all 18 models in the final ensemble** (release assets) with configs, training sets and SHA-256 hashes |
 | `generator_v2/` | **Generator V2 code** (byte-identical to the version that produced its training frames) and its OpenPCDet converter |
 | `pipeline/env.sh` | **The one path configuration** (`BDC_ROOT`) used by every script |
+| `ENVIRONMENT.md` | Exact software versions, including the OpenPCDet commit |
+| `third_party/openpcdet_233f849.patch` | Our 4 small changes to OpenPCDet (apply before training) |
+| `pipeline/final/reproduce_v18s.sh` | Rebuilds the final `predictions.json` on a CPU from the raw per-model predictions and checks it against `submission/` |
 | `LICENSE` | MIT License |
 | `report/` | Final report (PDF) and LaTeX source |
 | `pipeline/carla_gen_v3.py`, `convert_carla_v3.py`, `build_mix.py` | CARLA roadside capture, conversion to OpenPCDet format, Generator V2 + CARLA training mix |
@@ -51,7 +54,21 @@ source pipeline/env.sh                                             # in every ne
 
 `env.sh` derives `BDC_DATA` (synthetic datasets), `BDC_PROGRAM` (contains `OpenPCDet/`), `BDC_PYTHON`, `BDC_OUT` (zips) and `BDC_REALISM_DEPS` from `BDC_ROOT`; each can be overridden. Shell scripts use `${BDC_ROOT}` etc., Python scripts `os.environ['BDC_ROOT']`.
 
-**Shortcut without retraining:** download the trained weights (`bash weights/download_weights.sh`) and start at Step 3, or compare against the exact scored files in `submission/`.
+### Quick check without a GPU (a few minutes)
+
+The release also contains `raw_test_predictions.zip`: the per-model detections on the 50 test scans (per-scan levelled, six ground heights) from the 22 passes of the final ensemble. From them, fusion and post-processing rebuild the scored file exactly:
+
+```bash
+source pipeline/env.sh
+curl -fLO https://github.com/Arnavvvkumar/IEEE-BigData-2026-Cup---V2X-Track/releases/download/v1.0/raw_test_predictions.zip
+unzip -q raw_test_predictions.zip -d "$BDC_ROOT"
+RAW="$BDC_ROOT/raw_test_predictions" bash pipeline/final/reproduce_v18s.sh
+# -> reproduced {...} | identical to submission/predictions.json: True
+```
+
+The pedestrian static-structure map is read from `pipeline/final/static_map.npz` (voxel map and ground plane derived from the unlabelled development clouds), so no real data is needed for this check.
+
+**Shortcut without retraining:** download the trained weights (`bash weights/download_weights.sh`) and start at Step 3. Install OpenPCDet as described in [ENVIRONMENT.md](ENVIRONMENT.md) (commit `233f849` plus our patch).
 
 ---
 

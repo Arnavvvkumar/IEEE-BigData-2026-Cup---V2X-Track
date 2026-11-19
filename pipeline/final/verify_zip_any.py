@@ -1,4 +1,5 @@
 """Pre-upload audit of a submission zip against the v9 zip. usage: verify_zip_any.py <zip name in Downloads> [reference zip]"""
+import os
 import hashlib
 import json
 import sys
