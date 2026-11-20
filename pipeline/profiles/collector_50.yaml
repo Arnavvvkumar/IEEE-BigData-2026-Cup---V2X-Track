@@ -1,0 +1,70 @@
+recording:
+  frame_total: 50
+  frame_step: 1
+  map: Town02
+  weather: ClearNoon
+spectator:
+  x: 100.0
+  y: -150.0
+  z: 150.0
+  roll: 0.0
+  pitch: 60.0
+  yaw: -90.0
+world_settings:
+  synchronous_mode: true
+  fixed_delta_seconds: 0.1
+  substepping: true
+  max_substep_delta_time: 0.01
+  max_substeps: 16
+traffic_lights:
+  red_time: 2.0
+  green_time: 2.0
+  yellow_time: 0.01
+sensor_templates:
+  rgb_camera_template:
+    type: sensor.camera.rgb
+    image_size_x: 800
+    image_size_y: 600
+    fov: 90.0
+  semantic_camera_template:
+    type: sensor.camera.semantic_segmentation
+    image_size_x: 800
+    image_size_y: 600
+    fov: 90.0
+  lidar_template:
+    type: sensor.lidar.ray_cast
+    range: 50
+    channels: 80
+    points_per_second: 2300000
+    upper_fov: 15
+    lower_fov: -25
+    rotation_frequency: 20
+    noise_stddev: 0.0
+actors:
+- type: infrastructure
+  name: infra_t_junction
+  spawn_point:
+    x: 41
+    y: -240
+    z: 3.2
+  sensors:
+  - type: sensor.lidar.ray_cast
+    name: roadside_lidar
+    spawn_point:
+      x: 0
+      y: 0
+      z: 0
+      roll: 0
+      pitch: 0
+      yaw: 0
+    range: 120
+    channels: 64
+    rotation_frequency: 10
+    points_per_second: 655360
+    lower_fov: -22.5
+    upper_fov: 22.5
+    horizontal_fov: 360
+    noise_stddev: 0.02
+    dropoff_general_rate: 0.05
+other_vehicles:
+  count: 30

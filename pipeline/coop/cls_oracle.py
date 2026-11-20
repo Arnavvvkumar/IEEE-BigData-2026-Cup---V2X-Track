@@ -1,5 +1,5 @@
 import os
-﻿"""Pedestrian error decomposition on a staged validation set (diagnostic only; nothing here is submitted).
+"""Pedestrian error decomposition on a staged validation set (diagnostic only; nothing here is submitted).
 For every predicted pedestrian box with a labelled pedestrian within 1 m (BEV), replace ONE component of the box by the label's
 (size / z+height / xy centre / yaw / all) and re-score. The AP gain of each oracle says which part of the box costs the AP.
 Also: recall ceiling, offsets of matched boxes, label vs predicted size statistics, breakdown by range and point count.

@@ -22,10 +22,11 @@ All detectors are trained **from scratch on synthetic data only**. Real data is 
 | `generator_v2/` | **Generator V2 code** (byte-identical to the version that produced its training frames) and its OpenPCDet converter |
 | `pipeline/env.sh` | **The one path configuration** (`BDC_ROOT`) used by every script |
 | `ENVIRONMENT.md` | Exact software versions, including the OpenPCDet commit |
-| `third_party/openpcdet_233f849.patch` | Our 4 small changes to OpenPCDet (apply before training) |
+| `third_party/openpcdet_233f849.patch` | Our 5 small changes to OpenPCDet (apply before training) |
+| `pipeline/base_configs/`, `pipeline/detector_program/`, `pipeline/profiles/` | The base configs the final VoxelNeXt/SECOND configs are derived from, the training/evaluation helpers they use, and the CARLA sensor profile |
 | `pipeline/final/reproduce_v18s.sh` | Rebuilds the final `predictions.json` on a CPU from the raw per-model predictions and checks it against `submission/` |
 | `LICENSE` | MIT License |
-| `report/` | Final report (PDF) and LaTeX source |
+| `report/` | The final paper (camera-ready PDF, as checked with IEEE PDF eXpress) and the LaTeX source of the report |
 | `pipeline/carla_gen_v3.py`, `convert_carla_v3.py`, `build_mix.py` | CARLA roadside capture, conversion to OpenPCDet format, Generator V2 + CARLA training mix |
 | `pipeline/canon/` | Ground-canonical datasets (`build_canon.py`) and all OpenPCDet detector configs (`*.yaml`) |
 | `pipeline/twin/` | Site-calibrated twin: static map, range-image background, twin scene sets, submitted realism scans |
@@ -99,7 +100,7 @@ The pedestrian static-structure map is read from `pipeline/final/static_map.npz`
    bash pipeline/twin/run_twin_st.sh       # claude_twin_st_v1 (3,000, small trucks) -> claude_canon_all_twin_st_v1 (18,800)
    bash pipeline/twin/run_twin_pv.sh       # claude_twin_pv_v1 (5,000, size-varied pedestrians) -> claude_canon_all_twin_pv_v1
    ```
-4. **Submitted realism scans** (`twin/final_synthetic_v3`, 50 scans, no-return points trimmed to the real fraction):
+4. **Submitted realism scans** (`twin/final_synthetic_v3`, 50 scans, no-return points trimmed to the real fraction). The result is exactly the scans in [`submission/synthetic/`](submission/synthetic/); to run the build scripts of Step 4 without regenerating them, copy that folder to `pipeline/twin/final_synthetic_v3/synthetic/`:
    ```bash
    python pipeline/twin/make_synthetic_v3.py
    ```

@@ -20,19 +20,23 @@ The exact software used for the final submission (1054222).
 
 The checkpoints in release `v1.0` report `pcdet+0.6.0` as their training version.
 
-### OpenPCDet patch (4 small changes)
+### OpenPCDet patch (5 small changes) and base configs
 
 ```bash
+source pipeline/env.sh
 git clone https://github.com/open-mmlab/OpenPCDet.git "$BDC_PROGRAM/OpenPCDet"
 cd "$BDC_PROGRAM/OpenPCDet" && git checkout 233f849
 git apply /path/to/this/repo/third_party/openpcdet_233f849.patch
 python setup.py develop
+# the two VoxelNeXt base configs that canon/make_cfg.py derives the final vnx010_*/vnx020_* configs from:
+cp /path/to/this/repo/pipeline/base_configs/*.yaml tools/cfgs/custom_models/
 ```
 
 1. `pcdet/datasets/dataset.py`: frames without objects are **kept** during training as negative examples (stock OpenPCDet re-samples them). This affects training.
 2. `pcdet/datasets/custom/custom_dataset.py`: empty label files load as a `(0, 7)` box array instead of failing.
 3. `tools/train.py`: adds `--skip_builtin_eval` (used by our training commands; evaluation is done with the challenge scorer) and changes the fixed seed from 666 to 1234. The seed applies only to runs started with `--fix_random_seed`, i.e. the models tagged `_s1234`; all other runs are unseeded, so retraining them gives similar but not bit-identical weights (use the released weights for exact results).
 4. `pcdet/datasets/__init__.py`: the Argoverse 2 dataset is imported only if its package (`av2`) is installed.
+5. `pcdet/config.py`: `${VAR}` in string values of a config is expanded when the yaml is loaded, so the configs in `pipeline/` use `DATA_PATH: ${BDC_DATA}/<dataset>` (set by `pipeline/env.sh`). Without this change, pass the dataset path explicitly (`--set DATA_CONFIG.DATA_PATH ...`, or `--data` for the inference scripts).
 
 ## Synthetic data generation
 

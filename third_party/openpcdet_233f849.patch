@@ -1,3 +1,42 @@
+diff --git a/pcdet/config.py b/pcdet/config.py
+index 02e5daf..f0a428e 100644
+--- a/pcdet/config.py
++++ b/pcdet/config.py
+@@ -1,3 +1,4 @@
++import os
+ from pathlib import Path
+ 
+ import yaml
+@@ -68,6 +69,21 @@ def merge_new_config(config, new_config):
+     return config
+ 
+ 
++def expand_env_in_config(cfg):
++    """Expand ${VAR} (e.g. ${BDC_DATA}) in the string values of a config, so the yaml files can use one configurable data root."""
++    for key, val in list(cfg.items()):
++        if isinstance(val, str) and '$' in val:
++            cfg[key] = os.path.expandvars(val)
++        elif isinstance(val, dict):
++            expand_env_in_config(val)
++        elif isinstance(val, list):
++            cfg[key] = [os.path.expandvars(v) if isinstance(v, str) and '$' in v else v for v in val]
++            for v in cfg[key]:
++                if isinstance(v, dict):
++                    expand_env_in_config(v)
++    return cfg
++
++
+ def cfg_from_yaml_file(cfg_file, config):
+     with open(cfg_file, 'r') as f:
+         try:
+@@ -77,6 +93,7 @@ def cfg_from_yaml_file(cfg_file, config):
+ 
+         merge_new_config(config=config, new_config=new_config)
+ 
++    expand_env_in_config(config)
+     return config
+ 
+ 
 diff --git a/pcdet/datasets/__init__.py b/pcdet/datasets/__init__.py
 index 47c3900..03381a7 100644
 --- a/pcdet/datasets/__init__.py
