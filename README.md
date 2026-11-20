@@ -69,6 +69,8 @@ RAW="$BDC_ROOT/raw_test_predictions" bash pipeline/final/reproduce_v18s.sh
 
 The pedestrian static-structure map is read from `pipeline/final/static_map.npz` (voxel map and ground plane derived from the unlabelled development clouds), so no real data is needed for this check.
 
+**Ohio Supercomputer Center scripts.** The scripts in `pipeline/osc/` (job submission, upload, monitoring) are specific to OSC. They use `OSC_USER` and `OSC_PROJECT` (defaults in `pipeline/env.sh`; export your own before running them). They are not needed to reproduce the results: the training command is a plain OpenPCDet call, as shown below.
+
 **Shortcut without retraining:** download the trained weights (`bash weights/download_weights.sh`) and start at Step 3. Install OpenPCDet as described in [ENVIRONMENT.md](ENVIRONMENT.md) (commit `233f849` plus our patch).
 
 ---
@@ -92,7 +94,7 @@ The pedestrian static-structure map is read from `pipeline/final/static_map.npz`
      --output "$BDC_DATA/claude_v2_scale5500_fix1" --train 5000 --validate 500 --seed 2026 --workers 8
    python generator_v2/prepare_openpcdet_data.py --out "$BDC_DATA/codex_openpcdet_custom_v1"
    ```
-3. **Site-calibrated twin sets.** These need **unlabelled** real development clouds only (never the forbidden frames, never labels):
+3. **Site-calibrated twin sets.** These need **unlabelled** real development clouds only (never the forbidden frames, never labels). Put the 50 clouds of the calibration set (V2X-Real infrastructure scans, `float32 x y z`, one `<id>.bin` per frame) into `$BDC_ROOT/experiments/real_reference_audit/real_dev_cw1/detection_test_frames/`; `pipeline/real_reference_audit/fetch_training_sample.py` is the helper we used to fetch them, excluding the forbidden frames:
    ```bash
    python pipeline/twin/static_map.py      # static voxel map (used for pedestrian down-weighting)
    python pipeline/twin/range_bg.py        # range-image background model of the fixed sensor

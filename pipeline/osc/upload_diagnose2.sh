@@ -4,7 +4,7 @@ set -uo pipefail
 echo "=== ifaces before ==="
 awk 'NR>2 {print $1, $2, $10}' /proc/net/dev
 echo "=== remote load and compile ==="
-ssh -i "$HOME/.ssh/osc_ed25519" -o BatchMode=yes -o ConnectTimeout=40 <osc_user>@ascend.osc.edu \
+ssh -i "$HOME/.ssh/osc_ed25519" -o BatchMode=yes -o ConnectTimeout=40 ${OSC_USER}@ascend.osc.edu \
   'uptime; ps -eo pcpu,pmem,comm --sort=-pcpu | head -n 8' \
   2>/dev/null | grep -v -E '^\*|authorized users|this computer|authority|subject to|and recorded|activities of|expressly|improperly|monitoring|personnel|officials|^$'
 echo "=== tcp to the rsync ssh ==="

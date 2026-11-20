@@ -6,7 +6,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 D="${BDC_DATA}"
-R=/fs/scratch/<osc_project>/bdc/data
+R=/fs/scratch/${OSC_PROJECT}/bdc/data
 STAGE="${BDC_OUT}/upload_stage"
 LOG="$PWD/upload_fast.log"
 mkdir -p "$STAGE"

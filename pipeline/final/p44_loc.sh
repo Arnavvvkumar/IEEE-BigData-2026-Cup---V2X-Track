@@ -10,7 +10,7 @@ echo "P44_START $(date -Is)"
 for n in 1 2; do
   tag=vnx_ped_loc_$n
   dst="$repo/output/loc/$tag/ckpt"; mkdir -p "$dst"
-  [ -f "$dst/checkpoint_epoch_12.pth" ] || timeout 600 scp -o ServerAliveInterval=15 -o ServerAliveCountMax=4 $K "<osc_user>@ascend.osc.edu:/fs/scratch/<osc_project>/bdc/code/OpenPCDet/output/fs/scratch/<osc_project>/bdc/cfg/vnx010_ped_loc/$tag/ckpt/checkpoint_epoch_12.pth" "$dst/" 2>/dev/null
+  [ -f "$dst/checkpoint_epoch_12.pth" ] || timeout 600 scp -o ServerAliveInterval=15 -o ServerAliveCountMax=4 $K "${OSC_USER}@ascend.osc.edu:/fs/scratch/${OSC_PROJECT}/bdc/code/OpenPCDet/output/fs/scratch/${OSC_PROJECT}/bdc/cfg/vnx010_ped_loc/$tag/ckpt/checkpoint_epoch_12.pth" "$dst/" 2>/dev/null
   ls -la "$dst/checkpoint_epoch_12.pth"
   BATCH=1 bash "$base/final/run_infer_one.sh" $tag vnx010_ped_loc.yaml claude_canon_all_v1 12
 done

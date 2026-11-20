@@ -1,11 +1,11 @@
 #!/bin/bash
 # READ-ONLY: OSC PV-RCNN job state + training progress, then the laptop truck-voter test and the fourth fine-tune.
 F='authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$'
-ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=40 <osc_user>@ascend.osc.edu 'bash -s' 2>&1 << 'EOF' | grep -v -E "$F" | cut -c1-230
+ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=40 ${OSC_USER}@ascend.osc.edu "OSC_USER=${OSC_USER} OSC_PROJECT=${OSC_PROJECT} bash -s" 2>&1 << 'EOF' | grep -v -E "$F" | cut -c1-230
 source /etc/profile 2>/dev/null
-squeue -u <osc_user> -o "%i %P %T %M %l %R"
+squeue -u ${OSC_USER} -o "%i %P %T %M %l %R"
 squeue -j 8548278 --start 2>/dev/null | tail -n 1
-R=/fs/scratch/<osc_project>/bdc
+R=/fs/scratch/${OSC_PROJECT}/bdc
 o=$(ls -t $R/logs/pvfull_*.out 2>/dev/null | head -n 1)
 [ -n "$o" ] && { echo "--- $o"; grep -v -E 'it/s\]|s/it\]' "$o" | tail -n 3; }
 t=$(ls -t $(find $R/code/OpenPCDet/output -path '*pvrcnn_st_osc*' -name 'train_*.log' 2>/dev/null) 2>/dev/null | head -n 1)

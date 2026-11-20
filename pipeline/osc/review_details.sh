@@ -9,7 +9,7 @@ grep -l SHARD_DONE upload_shard_*.log | sed 's/upload_shard_//;s/.log//' | tr '\
 echo "== ssh connection limits seen on OSC? (MaxStartups / refused)"
 grep -h -i -E 'refused|reset|closed by|too many|maxstartups|exchange' upload_shard_*.log | sort | uniq -c | sort -rn | head -n 5
 echo "== OSC build error lines"
-ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=30 <osc_user>@ascend.osc.edu 'R=/fs/scratch/<osc_project>/bdc; grep -n -i -E "error|killed|cannot|nvcc fatal|Terminated|No space|signal" $R/logs/build_env.log | tail -n 14; echo "--- ENV_DONE/BUILD markers"; grep -n -E "ENV_DONE|BUILD_START|BUILD_DONE|numpy |torch |spconv_import_ok" $R/logs/build_env.log | tail -n 8; echo "--- disk"; df -h $R | tail -n 1; ls $R/code/OpenPCDet | head -n 5' 2>/dev/null | grep -v -E '^\*|^\s*$|authorized users|this computer|authority|subject to|and recorded|activities of|expressly|improperly|monitoring|personnel|officials' | cut -c1-200
+ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=30 ${OSC_USER}@ascend.osc.edu 'R=/fs/scratch/${OSC_PROJECT}/bdc; grep -n -i -E "error|killed|cannot|nvcc fatal|Terminated|No space|signal" $R/logs/build_env.log | tail -n 14; echo "--- ENV_DONE/BUILD markers"; grep -n -E "ENV_DONE|BUILD_START|BUILD_DONE|numpy |torch |spconv_import_ok" $R/logs/build_env.log | tail -n 8; echo "--- disk"; df -h $R | tail -n 1; ls $R/code/OpenPCDet | head -n 5' 2>/dev/null | grep -v -E '^\*|^\s*$|authorized users|this computer|authority|subject to|and recorded|activities of|expressly|improperly|monitoring|personnel|officials' | cut -c1-200
 echo "== v3 queue log tail"
 tail -n 18 "$base/final/queue_v3_infer.log" | cut -c1-170
 echo "== markers"

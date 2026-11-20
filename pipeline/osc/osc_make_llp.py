@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 
-D = Path('/fs/scratch/<osc_project>/bdc/data')
+D = Path('/fs/scratch/' + os.environ['OSC_PROJECT'] + '/bdc/data')
 src, out = D / 'claude_twin_ll_v1', D / 'claude_twin_ll_v1p'
 
 

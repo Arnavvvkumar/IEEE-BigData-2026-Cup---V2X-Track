@@ -12,6 +12,10 @@ export BDC_PYTHON="${BDC_PYTHON:-python3}"                         # Python with
 export BDC_OUT="${BDC_OUT:-$BDC_ROOT/out}"                         # submission zips and staging files
 export BDC_REALISM_DEPS="${BDC_REALISM_DEPS:-$BDC_ROOT/realism_deps}"  # optional: extra packages for the realism metrics (POT)
 
+# Only for the scripts in pipeline/osc (Ohio Supercomputer Center): your OSC login and project account
+export OSC_USER="${OSC_USER:-your_osc_username}"
+export OSC_PROJECT="${OSC_PROJECT:-your_osc_project}"
+
 # Expected layout under BDC_ROOT (created by pipeline/setup_workdir.sh):
 #   $BDC_ROOT/experiments/claude_carla_overnight  -> this repository's pipeline/ folder
 #   $BDC_ROOT/starting_kit/track_b                -> the organizers' starting kit (scorer, 50 test scans)

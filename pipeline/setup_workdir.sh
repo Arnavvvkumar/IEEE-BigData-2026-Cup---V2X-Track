@@ -8,6 +8,8 @@ KIT="${1:?usage: setup_workdir.sh /path/to/starting_kit/track_b}"
 mkdir -p "$BDC_ROOT/experiments" "$BDC_ROOT/starting_kit" "$BDC_DATA" "$BDC_PROGRAM" "$BDC_OUT"
 ln -sfn "$REPO/pipeline" "$BDC_ROOT/experiments/claude_carla_overnight"
 ln -sfn "$REPO/pipeline/detector_program" "$BDC_ROOT/experiments/detector_program"
+mkdir -p "$BDC_ROOT/experiments/real_reference_audit"   # also where the unlabelled development clouds go (see README, Step 1.3)
+for f in fetch_training_sample.py score_detector_kit.py; do ln -sfn "$REPO/pipeline/real_reference_audit/$f" "$BDC_ROOT/experiments/real_reference_audit/$f"; done
 ln -sfn "$REPO/generator_v2/scripts" "$BDC_ROOT/scripts"
 ln -sfn "$REPO/generator_v2/configs" "$BDC_ROOT/configs"
 ln -sfn "$(cd "$KIT" && pwd)" "$BDC_ROOT/starting_kit/track_b"

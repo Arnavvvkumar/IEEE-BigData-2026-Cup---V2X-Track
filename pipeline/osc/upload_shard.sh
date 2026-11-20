@@ -7,7 +7,7 @@ id=$3
 host=${4:-ascend.osc.edu}
 here="$(cd "$(dirname "$0")" && pwd)"
 D="${BDC_DATA}"
-R=/fs/scratch/<osc_project>/bdc/data
+R=/fs/scratch/${OSC_PROJECT}/bdc/data
 LOG="$here/upload_shard_${ds}_${id}.log"
 SSHCMD="ssh -i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -c aes128-gcm@openssh.com -o IPQoS=throughput"
 exec >> "$LOG" 2>&1
@@ -17,7 +17,7 @@ for try in $(seq 1 20); do
   echo "try $try $(date -Is)"
   rsync -aL --partial --size-only --files-from="$list" -z --compress-level=1 --info=stats1 \
     -e "$SSHCMD" \
-    "$D/$ds/" "<osc_user>@${host}:$R/$ds/"
+    "$D/$ds/" "${OSC_USER}@${host}:$R/$ds/"
   rc=$?
   echo "rsync_exit $rc $(date -Is)"
   if [ "$rc" = "0" ]; then

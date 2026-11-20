@@ -4,8 +4,8 @@
 set -uo pipefail
 ds=$1
 D="${BDC_DATA}"
-R=/fs/scratch/<osc_project>/bdc/data
-SSH="ssh -i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=30 <osc_user>@ascend.osc.edu"
+R=/fs/scratch/${OSC_PROJECT}/bdc/data
+SSH="ssh -i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=30 ${OSC_USER}@ascend.osc.edu"
 $SSH "mkdir -p $R" 2>/dev/null
 start=$(date +%s)
 tar -C "$D" -chf - "$ds" | $SSH "tar -C $R -xf -"

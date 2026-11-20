@@ -6,6 +6,6 @@ for h in sftp.osc.edu ascend.osc.edu transfer.osc.edu; do
   done
 done
 echo "--- sftp.osc.edu ssh banner test"
-timeout 25 ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=15 <osc_user>@sftp.osc.edu 'echo hello' 2>&1 | grep -v -E '^\*|authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials' | head -n 3
+timeout 25 ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=15 ${OSC_USER}@sftp.osc.edu 'echo hello' 2>&1 | grep -v -E '^\*|authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials' | head -n 3
 echo "--- local ssh config / tools"
 which globusconnectpersonal globus 2>/dev/null || echo "no globus cli in WSL"

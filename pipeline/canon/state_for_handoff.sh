@@ -10,5 +10,5 @@ echo "--- candidate dirs"; ls -d final/candidate_v*/ | tr '\n' ' '; echo
 echo "--- checkpoints (tags)"; ls ${BDC_PROGRAM}/OpenPCDet/output${BDC_OUT}/'BIG DATA IEEE'/experiments/claude_carla_overnight/canon/*/ 2>/dev/null | grep -v -E '^$|:$' | tr '\n' ' ' | cut -c1-1500; echo
 echo "--- datasets"; ls ${BDC_DATA} | tr '\n' ' '; echo
 echo "--- key outputs"; ls coop/dev150/pred_v5_norule.json coop/dev350/pred_v5_norule.json refiner/*.log twin/run_twin_ll.log 2>&1 | tr '\n' ' '; echo
-echo "--- OSC"; ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=40 <osc_user>@ascend.osc.edu 'source /etc/profile 2>/dev/null; squeue -u <osc_user> -o "%i %P %T %M %l %R"; squeue -j 8548278 --start -o "%i %S" | tail -n 1' 2>&1 | grep -v -E 'authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$' | cut -c1-160
+echo "--- OSC"; ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=40 ${OSC_USER}@ascend.osc.edu 'source /etc/profile 2>/dev/null; squeue -u ${OSC_USER} -o "%i %P %T %M %l %R"; squeue -j 8548278 --start -o "%i %S" | tail -n 1' 2>&1 | grep -v -E 'authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$' | cut -c1-160
 echo "--- Globus transfer"; ~/gcp/globusconnectpersonal -status 2>/dev/null | tr '\n' ' '; echo

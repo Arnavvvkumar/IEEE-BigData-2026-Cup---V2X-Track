@@ -21,8 +21,8 @@ sleep 2
 host=ascend.osc.edu
 n=8
 if ssh -i "$HOME/.ssh/osc_ed25519" -o BatchMode=yes -o ConnectTimeout=20 \
-     -o StrictHostKeyChecking=accept-new <osc_user>@sftp.osc.edu \
-     'test -d /fs/scratch/<osc_project>/bdc/data && echo SCRATCH_OK'; then
+     -o StrictHostKeyChecking=accept-new ${OSC_USER}@sftp.osc.edu \
+     'test -d /fs/scratch/${OSC_PROJECT}/bdc/data && echo SCRATCH_OK'; then
   host=sftp.osc.edu
   n=6
   echo "USE_SFTP $(date -Is)" >> "$log"

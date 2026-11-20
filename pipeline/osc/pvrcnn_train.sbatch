@@ -10,7 +10,7 @@ if ! type module >/dev/null 2>&1; then
   source /etc/profile
 fi
 module load python/3.10 cuda/11.8.0
-R=/fs/scratch/<osc_project>/bdc
+R=/fs/scratch/${OSC_PROJECT}/bdc
 source $R/env/bin/activate
 cd $R/code/OpenPCDet/tools
 export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1

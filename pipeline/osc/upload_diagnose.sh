@@ -3,7 +3,7 @@
 set -uo pipefail
 echo "=== rsync versions ==="
 rsync --version | head -n 2
-ssh -i "$HOME/.ssh/osc_ed25519" -o BatchMode=yes -o ConnectTimeout=40 <osc_user>@ascend.osc.edu 'rsync --version | head -n 2' 2>/dev/null | grep -v -E '^\*|authorized users|this computer|authority|subject to|and recorded|activities of|expressly|improperly|monitoring|personnel|officials|^$'
+ssh -i "$HOME/.ssh/osc_ed25519" -o BatchMode=yes -o ConnectTimeout=40 ${OSC_USER}@ascend.osc.edu 'rsync --version | head -n 2' 2>/dev/null | grep -v -E '^\*|authorized users|this computer|authority|subject to|and recorded|activities of|expressly|improperly|monitoring|personnel|officials|^$'
 echo "=== compress choices ==="
 rsync --help 2>/dev/null | grep -E -i 'compress-choice|zstd' || echo "no local zstd choice"
 echo "=== process ==="

@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-ROOT = Path("/fs/scratch/<osc_project>/bdc")
+ROOT = Path("/fs/scratch/" + os.environ["OSC_PROJECT"] + "/bdc")
 TWIN = ROOT / "data" / "claude_twin_v1"
 TINY = ROOT / "data" / "smoke_tiny"
 CFG = ROOT / "cfg" / "vnx010_all.yaml"

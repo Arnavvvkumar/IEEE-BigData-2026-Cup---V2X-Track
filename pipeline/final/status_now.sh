@@ -9,10 +9,10 @@ echo "--- P19 (waits for P1)"; tail -n 2 "$b/claude_carla_overnight/final/p19_T1
 echo "--- Codex ped TTA"; grep -E 'pass |v9|ped_tta|score' "$b/codex_final/ped_tta.log" | tail -n 3 | cut -c1-180
 echo "--- GPU / memory"; nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader; free -g | sed -n 2p
 echo "--- OSC (read-only)"
-ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60 <osc_user>@ascend.osc.edu 'bash -s' 2>&1 << 'EOF' | grep -v -E 'authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$' | cut -c1-200
+ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60 ${OSC_USER}@ascend.osc.edu 'bash -s' 2>&1 << 'EOF' | grep -v -E 'authorized|computer|authority|subject to|recorded|activities|expressly|improperly|monitoring|personnel|officials|^\*|^\s*$' | cut -c1-200
 source /etc/profile 2>/dev/null
-R=/fs/scratch/<osc_project>/bdc
-squeue -u <osc_user> -o "%i %j %T %M %l"
+R=/fs/scratch/${OSC_PROJECT}/bdc
+squeue -u ${OSC_USER} -o "%i %j %T %M %l"
 l=$(ls -t $(find $R/code/OpenPCDet/output -path '*/pvrcnn_ped_P1/*' -name 'train_*.log' 2>/dev/null) 2>/dev/null | head -n 1)
 echo "P1: $(grep -E 'Train:' "$l" 2>/dev/null | tail -n 1 | sed -E 's/.*Train: +//' | cut -c1-120)"
 EOF

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Read-only discovery on the OSC login node.
 echo "== host"; hostname; echo "HOME=$HOME"; df -h "$HOME" | tail -n 1
-echo "== project / scratch"; ls -ld /fs/scratch/<osc_project>; ls /fs/scratch/<osc_project> | head; echo "files in scratch: $(find /fs/scratch/<osc_project> -maxdepth 1 | wc -l)"
+echo "== project / scratch"; ls -ld /fs/scratch/${OSC_PROJECT}; ls /fs/scratch/${OSC_PROJECT} | head; echo "files in scratch: $(find /fs/scratch/${OSC_PROJECT} -maxdepth 1 | wc -l)"
 echo "== groups"; id
 echo "== slurm"; which sbatch squeue sinfo sacctmgr 2>&1 | head -n 5
 echo "== partitions"; sinfo -o '%P %a %l %D %G %c %m' 2>&1 | head -n 20

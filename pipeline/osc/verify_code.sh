@@ -15,9 +15,9 @@ for f in setup.py tools/train.py pcdet/__init__.py pcdet/ops/iou3d_nms/src/iou3d
   if [ -f "$src/$f" ]; then echo "local ok $f"; else echo "local MISSING $f"; fi
 done
 echo "=== remote ==="
-ssh -i "$HOME/.ssh/osc_ed25519" -o BatchMode=yes -o ConnectTimeout=40 <osc_user>@ascend.osc.edu 'bash -s' << 'REMOTE' 2>/dev/null | grep -v -E '^\*|authorized users|this computer|authority|subject to|and recorded|activities of|expressly|improperly|monitoring|personnel|officials|^$'
+ssh -i "$HOME/.ssh/osc_ed25519" -o BatchMode=yes -o ConnectTimeout=40 ${OSC_USER}@ascend.osc.edu "OSC_USER=${OSC_USER} OSC_PROJECT=${OSC_PROJECT} bash -s" << 'REMOTE' 2>/dev/null | grep -v -E '^\*|authorized users|this computer|authority|subject to|and recorded|activities of|expressly|improperly|monitoring|personnel|officials|^$'
 set -uo pipefail
-R=/fs/scratch/<osc_project>/bdc
+R=/fs/scratch/${OSC_PROJECT}/bdc
 echo "remote file count:"
 find "$R/code/OpenPCDet" -type f | wc -l
 echo "remote bytes:"

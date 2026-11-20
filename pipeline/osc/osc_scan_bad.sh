@@ -2,8 +2,8 @@
 # READ-ONLY on OSC: find truncated .npy files (header shape vs file size) and missing label files in the three training sets.
 # Writes the bad list locally to osc/bad_files.txt (paths relative to data/).
 here="${BDC_ROOT}/experiments/claude_carla_overnight/osc"
-ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=40 <osc_user>@ascend.osc.edu 'bash -s' 2>/dev/null << 'EOF' > "$here/bad_scan.out"
-R=/fs/scratch/<osc_project>/bdc
+ssh -i ~/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=40 ${OSC_USER}@ascend.osc.edu "OSC_USER=${OSC_USER} OSC_PROJECT=${OSC_PROJECT} bash -s" 2>/dev/null << 'EOF' > "$here/bad_scan.out"
+R=/fs/scratch/${OSC_PROJECT}/bdc
 source /etc/profile 2>/dev/null
 module load python/3.10 2>/dev/null
 source $R/env/bin/activate
@@ -12,7 +12,7 @@ import os
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import numpy as np
-D = Path('/fs/scratch/<osc_project>/bdc/data')
+D = Path('/fs/scratch/${OSC_PROJECT}/bdc/data')
 def check(p):
     try:
         with open(p, 'rb') as f:

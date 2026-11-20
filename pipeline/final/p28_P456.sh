@@ -12,8 +12,8 @@ echo "P28_START $(date -Is)"
 done_tags=""
 for job in "${JOBS[@]}"; do
   set -- $job; jid=$1; tag=$2; cfg=$3; ds=$4
-  while ssh $K <osc_user>@ascend.osc.edu "source /etc/profile 2>/dev/null; squeue -h -j $jid 2>/dev/null" 2>/dev/null | grep -q "$jid"; do sleep 300; done
-  last=$(ssh $K <osc_user>@ascend.osc.edu "find /fs/scratch/<osc_project>/bdc/code/OpenPCDet/output -path '*/$tag/ckpt/checkpoint_epoch_*.pth'" 2>/dev/null | sed -E 's/.*epoch_([0-9]+).pth/\1/' | sort -n | tail -n 1)
+  while ssh $K ${OSC_USER}@ascend.osc.edu "source /etc/profile 2>/dev/null; squeue -h -j $jid 2>/dev/null" 2>/dev/null | grep -q "$jid"; do sleep 300; done
+  last=$(ssh $K ${OSC_USER}@ascend.osc.edu "find /fs/scratch/${OSC_PROJECT}/bdc/code/OpenPCDet/output -path '*/$tag/ckpt/checkpoint_epoch_*.pth'" 2>/dev/null | sed -E 's/.*epoch_([0-9]+).pth/\1/' | sort -n | tail -n 1)
   echo "$tag left queue; last epoch '$last' $(date -Is)"
   [ -n "$last" ] || { echo "NO_CKPT $tag"; continue; }
   bash "$base/osc/fetch_pv_ckpt.sh" "$last" "$tag" | tail -n 1

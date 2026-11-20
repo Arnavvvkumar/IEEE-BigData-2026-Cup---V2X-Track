@@ -7,8 +7,8 @@ P="${BDC_PYTHON}"
 K="-i $HOME/.ssh/osc_ed25519 -o BatchMode=yes -o ConnectTimeout=60"
 TAG=pvrcnn_st_osc_s2
 echo "P15_START $(date -Is)"
-while ssh $K <osc_user>@ascend.osc.edu 'source /etc/profile 2>/dev/null; squeue -h -j 8560715 2>/dev/null' 2>/dev/null | grep -q 8560715; do sleep 300; done
-last=$(ssh $K <osc_user>@ascend.osc.edu "find /fs/scratch/<osc_project>/bdc/code/OpenPCDet/output -path '*/$TAG/ckpt/checkpoint_epoch_*.pth'" 2>/dev/null | sed -E 's/.*epoch_([0-9]+).pth/\1/' | sort -n | tail -n 1)
+while ssh $K ${OSC_USER}@ascend.osc.edu 'source /etc/profile 2>/dev/null; squeue -h -j 8560715 2>/dev/null' 2>/dev/null | grep -q 8560715; do sleep 300; done
+last=$(ssh $K ${OSC_USER}@ascend.osc.edu "find /fs/scratch/${OSC_PROJECT}/bdc/code/OpenPCDet/output -path '*/$TAG/ckpt/checkpoint_epoch_*.pth'" 2>/dev/null | sed -E 's/.*epoch_([0-9]+).pth/\1/' | sort -n | tail -n 1)
 echo "job 2 finished; last checkpoint epoch $last $(date -Is)"
 [ -n "$last" ] || { echo NO_CKPT; exit 1; }
 bash "$base/osc/fetch_pv_ckpt.sh" "$last" "$TAG"

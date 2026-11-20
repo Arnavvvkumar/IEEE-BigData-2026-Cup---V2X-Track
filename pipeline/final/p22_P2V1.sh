@@ -11,8 +11,8 @@ export FUSE_YAW_CIRC=vehicle FUSE_ONE_VOTE=vehicle
 echo "P22_START $(date -Is)"
 for job in "8571774 pvrcnn_ped_P2 pvrcnn_ped.yaml pedestrian" "8571775 pvrcnn_veh_V1 pvrcnn_veh.yaml vehicle"; do
   set -- $job; jid=$1; tag=$2; cfg=$3; cls=$4
-  while ssh $K <osc_user>@ascend.osc.edu "source /etc/profile 2>/dev/null; squeue -h -j $jid 2>/dev/null" 2>/dev/null | grep -q "$jid"; do sleep 300; done
-  last=$(ssh $K <osc_user>@ascend.osc.edu "find /fs/scratch/<osc_project>/bdc/code/OpenPCDet/output -path '*/$tag/ckpt/checkpoint_epoch_*.pth'" 2>/dev/null | sed -E 's/.*epoch_([0-9]+).pth/\1/' | sort -n | tail -n 1)
+  while ssh $K ${OSC_USER}@ascend.osc.edu "source /etc/profile 2>/dev/null; squeue -h -j $jid 2>/dev/null" 2>/dev/null | grep -q "$jid"; do sleep 300; done
+  last=$(ssh $K ${OSC_USER}@ascend.osc.edu "find /fs/scratch/${OSC_PROJECT}/bdc/code/OpenPCDet/output -path '*/$tag/ckpt/checkpoint_epoch_*.pth'" 2>/dev/null | sed -E 's/.*epoch_([0-9]+).pth/\1/' | sort -n | tail -n 1)
   echo "$tag finished; last epoch $last $(date -Is)"
   [ -n "$last" ] || { echo "NO_CKPT $tag"; continue; }
   bash "$base/osc/fetch_pv_ckpt.sh" "$last" "$tag"

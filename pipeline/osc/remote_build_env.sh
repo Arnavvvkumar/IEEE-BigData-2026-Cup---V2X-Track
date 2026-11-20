@@ -2,7 +2,7 @@
 # Build the Track B training env on ASCEND scratch, then compile OpenPCDet for A100 (sm_80).
 # Runs on OSC. Uses OSC's outbound network only. Does not touch the laptop data upload.
 set -euo pipefail
-ROOT=/fs/scratch/<osc_project>/bdc
+ROOT=/fs/scratch/${OSC_PROJECT}/bdc
 LOG=$ROOT/logs/build_env.log
 mkdir -p "$ROOT/logs" "$ROOT/tmp" "$ROOT/.pip-cache" "$ROOT/out"
 if [ -f "$ROOT/logs/build_env.pid" ]; then
@@ -114,7 +114,7 @@ echo "=== submit debug-nextgen smoke ==="
 submit_with() {
   # $1 is extra sbatch gpu arguments, unquoted words
   # shellcheck disable=SC2086
-  sbatch --test-only --account=<osc_project> --partition=debug-nextgen --nodes=1 --ntasks=1 \
+  sbatch --test-only --account=${OSC_PROJECT} --partition=debug-nextgen --nodes=1 --ntasks=1 \
     --cpus-per-task=4 --mem=32G --time=00:20:00 \
     --job-name=bdc_smoke \
     --output=$ROOT/logs/smoke_%j.out --error=$ROOT/logs/smoke_%j.err \
@@ -134,11 +134,11 @@ else
 fi
 echo "GPU_ARGS $GPU_ARGS"
 # shellcheck disable=SC2086
-sbatch --account=<osc_project> --partition=debug-nextgen --nodes=1 --ntasks=1 \
+sbatch --account=${OSC_PROJECT} --partition=debug-nextgen --nodes=1 --ntasks=1 \
   --cpus-per-task=4 --mem=32G --time=00:20:00 \
   --job-name=bdc_smoke \
   --output=$ROOT/logs/smoke_%j.out --error=$ROOT/logs/smoke_%j.err \
   $GPU_ARGS \
   "$ROOT/cfg/smoke_debug.sbatch"
 echo "SUBMIT_DONE $(date -Is)"
-squeue -u <osc_user> || true
+squeue -u ${OSC_USER} || true
